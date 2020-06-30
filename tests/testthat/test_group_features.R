@@ -145,7 +145,7 @@ test_that(".group_correlation_matrix works", {
     expect_equal(res, c(3, 2, 2, 1, 1))
 
     ## Real data
-    load(system.file("extdata/cors.RData", package = "CompMetaboTools"))
+    load(system.file("extdata/cors.RData", package = "MsFeatures"))
     res <- .group_correlation_matrix(cors, threshold = 0.9)
     expect_equal(res, c(3, 2, 2, 1, 1, 4, 1))
 
