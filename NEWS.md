@@ -2,7 +2,7 @@
 
 ## MsFeatures 0.0.2
 
-- Add `SimilarRtimeParam` object and retention time-based feature grouping.
+- Add `groupDiagonalMatrix` function, remove `groupByCorrelation`.
 
 
 ## MsFeatures 0.0.1

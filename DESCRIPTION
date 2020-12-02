@@ -11,23 +11,15 @@ Authors@R: c(person(given = "RforMassSpectrometry Package Maintainer",
              person(given = "Johannes", family = "Rainer",
                     email = "Johannes.Rainer@eurac.edu",
                     comment = c(ORCID = "0000-0002-6977-7147"),
-                    role = "aut"),
-             person(given = "Mar", family = "Garcia-Aloy",
-                    email = "mar.garcia@eurac.edu",
-                    role = c("ctb"),
-                    comment = c(ORCID = "0000-0001-7406-4443")))
+                    role = "aut"))
 Depends:
     R (>= 3.6.0)
 Imports:
     stats,
-    MsCoreUtils,
-    MSnbase,
-    xcms,
-    SummarizedExperiment
+    MsCoreUtils
 Suggests:
     testthat,
-    roxygen2,
-    faahKO
+    roxygen2
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: yes
@@ -39,6 +31,4 @@ Roxygen: list(markdown=TRUE)
 Collate:
     'hidden_aliases.R'
     'AllGenerics.R'
-    'SimilarRtimeParam.R'
-    'group_features.R'
-    'xdata.R'
+    'grouping-functions.R'
