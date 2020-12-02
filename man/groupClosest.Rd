@@ -53,7 +53,8 @@ one.
 x <- c(1.1, 1.9, 2.2)
 groupClosest(x)
 
-x <- c(1.1, 1.5, 1.7, 2.3, 2.7, 4.3, 4.4, 4.9, 5.2, 5.4, 5.8, 6, 7, 9, 9.5, 15)
+x <- c(1.1, 1.5, 1.7, 2.3, 2.7, 4.3, 4.4, 4.9, 5.2, 5.4, 5.8, 6, 7,
+    9, 9.5, 15)
 
 groupClosest(x)
 ## value 5.2 was initially grouped with 4.3 (because their difference is

@@ -9,7 +9,14 @@
 \usage{
 groupFeatures(object, param, ...)
 }
+\value{
+Not applicable
+}
 \description{
 Internal page for hidden aliases
+}
+\examples{
+
+NULL
 }
 \keyword{internal}
