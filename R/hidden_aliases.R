@@ -6,4 +6,9 @@
 #' @format NULL
 #' @keywords internal
 #' @docType methods
+#' @return Not applicable
+#'
+#' @examples
+#'
+#' NULL
 hidden_aliases <- NULL

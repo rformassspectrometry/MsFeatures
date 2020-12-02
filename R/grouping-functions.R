@@ -52,7 +52,8 @@
 #' x <- c(1.1, 1.9, 2.2)
 #' groupClosest(x)
 #'
-#' x <- c(1.1, 1.5, 1.7, 2.3, 2.7, 4.3, 4.4, 4.9, 5.2, 5.4, 5.8, 6, 7, 9, 9.5, 15)
+#' x <- c(1.1, 1.5, 1.7, 2.3, 2.7, 4.3, 4.4, 4.9, 5.2, 5.4, 5.8, 6, 7,
+#'     9, 9.5, 15)
 #'
 #' groupClosest(x)
 #' ## value 5.2 was initially grouped with 4.3 (because their difference is
@@ -190,7 +191,8 @@ groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE) {
     res <- rep(NA_integer_, nr)
     x[cbind(1:nr, 1:nr)] <- NA
     idx_pairs <- which(x >= threshold, arr.ind = TRUE)
-    idx_pairs <- idx_pairs[order(x[idx_pairs], decreasing = TRUE), , drop = FALSE]
+    idx_pairs <- idx_pairs[order(x[idx_pairs], decreasing = TRUE), ,
+                           drop = FALSE]
     grp_id <- 1
     the_other <- c(2, 1)
     for (i in seq_len(nrow(idx_pairs))) {
@@ -211,7 +213,8 @@ groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE) {
                     cor_to_grp <- x[idx, idx_grp]
                     if (full)
                         cor_to_grp <- c(cor_to_grp, x[idx_grp, idx])
-                    if (!(any(is.na(cor_to_grp)) || any(cor_to_grp < threshold)))
+                    if (!(any(is.na(cor_to_grp)) ||
+                          any(cor_to_grp < threshold)))
                         mean_cor_to_grp[grp] <- mean(cor_to_grp)
                 }
                 mean_cor_to_grp <- mean_cor_to_grp[mean_cor_to_grp > 0]
