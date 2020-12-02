@@ -5,16 +5,17 @@
 [![codecov.io](http://codecov.io/github/rformassspectrometry/MsFeatures/coverage.svg?branch=master)](http://codecov.io/github/rformassspectrometry/MsFeatures?branch=master)
 [![license](https://img.shields.io/badge/license-Artistic--2.0-brightgreen.svg)](https://opensource.org/licenses/Artistic-2.0)
 
-Functionality for Mass Spectrometry Features. An MS feature is characterized by
-its specific m/z and retention time range and its abundance in a set of samples
-is supposed to represent the concentration of the same ion species of a specific
-compound in each of these samples.
+The `MsFeatures` package defines functionality for Mass Spectrometry (MS)
+features. These features are characterized by their specific mass-to-charge
+ration m/z and eventually a retention time rt (for LC-MS features).
 
-This package defines basic concepts and functions to work with MS features such
-as grouping of features based on their properties. Provided functions are for
-base data types and core MS data representations (such as `Chromatogram` objects
-from the [`MSnbase`](https://github.com/lgatto/MSnbase) package). Implementation
-of feature grouping methods for more specific data objects, such as LC-MS
+This package defines thus basic concepts and functions for such MS features
+which includes grouping of (LC-MS) features based on their properties, such as
+retention time (coeluting compounds), or correlation of signals across samples.
+Provided functions are for base data types and core MS data representations
+(such as `Chromatogram` objects from the
+[`MSnbase`](https://github.com/lgatto/MSnbase) package). Implementation of
+feature grouping methods for more specific data objects, such as LC-MS
 preprocessing results stored in `XCMSnExp` objects from the
 [`xcms`](https://github.com/sneumann/xcms) package are implemented in the
 respective packages.
