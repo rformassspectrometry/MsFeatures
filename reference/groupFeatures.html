@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • MsFeatures</title>
+<title>General Feature Grouping Concept — groupFeatures • MsFeatures</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,14 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="General Feature Grouping Concept — groupFeatures" />
+<meta property="og:description" content="This documentation describes the general concepts of feature grouping, which
+can be achieved by the different approaches described further below.
+The main function for the stepwise feature grouping is groupFeatures. The
+selection of the actual grouping algorithm (along with the definition of its
+parameters) is done by passing the respective parameter object, along with
+the object containing the input data and optional additional arguments,
+to the groupFeatures method." />
 
 
 
@@ -58,7 +65,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -104,36 +111,86 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/RforMassSpectrometry/MsFeatures/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>General Feature Grouping Concept</h1>
+    <small class="dont-index">Source: <a href='https://github.com/RforMassSpectrometry/MsFeatures/blob/master/R/AllGenerics.R'><code>R/AllGenerics.R</code></a></small>
+    <div class="hidden name"><code>groupFeatures.Rd</code></div>
     </div>
 
-    <div id="msfeatures-00" class="section level1">
-<h1 class="page-header" data-toc-text="0.0">
-<a href="#msfeatures-00" class="anchor"></a>MsFeatures 0.0</h1>
-<div id="msfeatures-002" class="section level2">
-<h2 class="hasAnchor">
-<a href="#msfeatures-002" class="anchor"></a>MsFeatures 0.0.2</h2>
-<ul>
-<li>Add <code>groupDiagonalMatrix</code> function, remove <code>groupByCorrelation</code>.</li>
-</ul>
-</div>
-<div id="msfeatures-001" class="section level2">
-<h2 class="hasAnchor">
-<a href="#msfeatures-001" class="anchor"></a>MsFeatures 0.0.1</h2>
-<ul>
-<li>Add <code>groupClosest</code> and <code>groupByCorrelation</code> functions.</li>
-</ul>
-</div>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>This documentation describes the general concepts of feature grouping, which
+can be achieved by the different approaches described further below.</p>
+<p>The main function for the stepwise feature grouping is <code>groupFeatures</code>. The
+selection of the actual grouping algorithm (along with the definition of its
+parameters) is done by passing the respective <em>parameter</em> object, along with
+the object containing the input data and optional additional arguments,
+to the <code>groupFeatures</code> method.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>groupFeatures</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>param</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>object</th>
+      <td><p>input data object on which (with which data) the feature
+grouping should be performed.</p></td>
+    </tr>
+    <tr>
+      <th>param</th>
+      <td><p>parameter object which type defines the selection of the
+grouping algorithm.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments to be passed to the grouping algorithm.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="single-step-feature-grouping"><a class="anchor" href="#single-step-feature-grouping"></a>Single-step Feature Grouping</h2>
+
+    
+
+
+<p>Each feature grouping algorithm can be applied individually as a single-step
+approach, e.g. by grouping features only on a single feature property, such
+as the retention time. Additional feature grouping approaches might also be
+implemented that consider combination of different MS feature properties in
+a single clustering process.</p>
+    <h2 class="hasAnchor" id="stepwise-feature-grouping-refinement"><a class="anchor" href="#stepwise-feature-grouping-refinement"></a>Stepwise Feature Grouping Refinement</h2>
+
+    
+
+
+<p>Stepwise feature grouping evaluates a single property of MS features (such
+as their retention time or abundances) at a time to define the feature
+groups. Each subsequent grouping step <em>builds</em> on the previous one by
+eventually sub-grouping each feature group, if needed. Thus, feature groups
+get refined in each step. As an example, grouping of features based on a
+similar retention time would loosely group features from all compounds
+eluting at about the same time from a e.g. liquid chromatography run. This
+obviously would also group features representing ions from different
+co-eluting compounds. Thus, calling <code>groupFeatures</code> on the previous feature
+grouping result with a different parameter object would <em>refine</em> these
+initial feature groups, splitting them based on another property of the
+features (such as correlation of feature abundances across samples).</p>
+<p>The advantage of the stepwise approach is that results can be evaluated
+after each grouping step and parameters adapted if needed. Also, it provides
+flexibility by allowing to change the order of grouping approaches, or skip
+individual steps if not suitable for the available data or the
+experimental setup.</p>
+<p>The major disadvantage is that a wrong group assignment in one of the initial
+steps can not be <em>corrected</em> for in later steps.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Johannes Rainer</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 
