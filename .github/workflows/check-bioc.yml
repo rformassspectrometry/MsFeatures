@@ -35,8 +35,8 @@ name: R-CMD-check-bioc
 ## "/nocache" in the commit message.
 env:
   has_testthat: 'true'
-  run_covr: 'false'
-  run_pkgdown: 'false'
+  run_covr: 'true'
+  run_pkgdown: 'true'
   has_RUnit: 'false'
   has_BiocCheck: 'false'
   cache-version: 'cache-v1'
@@ -53,8 +53,8 @@ jobs:
       matrix:
         config:
           - { os: ubuntu-latest, r: '4.0', bioc: 'devel', cont: "bioconductor/bioconductor_docker:devel", rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest" }
-          - { os: macOS-latest, r: '4.0', bioc: 'devel'}
-          - { os: windows-latest, r: '4.0', bioc: 'devel'}
+          - { os: macOS-latest, r: '4.0', bioc: '3.12'}
+          - { os: windows-latest, r: '4.0', bioc: '3.12'}
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
@@ -136,7 +136,7 @@ jobs:
           brew install harfbuzz fribidi
 
           ## Helps compile RCurl from source
-          brew uninstall curl
+          ## brew uninstall curl
 
       - name: Install Windows system dependencies
         if: runner.os == 'Windows'
