@@ -149,7 +149,7 @@ groupClosest <- function(x, maxDiff = 1) {
 #'
 #' @author Johannes Rainer
 #'
-#' @export
+#' @export groupSimilarityMatrix
 #'
 #' @examples
 #'

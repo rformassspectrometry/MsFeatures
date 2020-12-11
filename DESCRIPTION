@@ -23,8 +23,7 @@ Authors@R: c(person(given = "RforMassSpectrometry Package Maintainer",
 Depends:
     R (>= 3.6.0)
 Imports:
-    stats,
-    MsCoreUtils
+    methods
 Suggests:
     testthat,
     roxygen2
