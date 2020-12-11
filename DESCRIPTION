@@ -25,7 +25,8 @@ Depends:
 Imports:
     methods,
     ProtGenerics (>= 1.23.5),
-    MsCoreUtils
+    MsCoreUtils,
+    SummarizedExperiment
 Suggests:
     testthat,
     roxygen2
@@ -42,3 +43,5 @@ Collate:
     'AllGenerics.R'
     'grouping-functions.R'
     'SimilarRtimeParam.R'
+    'featureGroups.R'
+    'se.R'
