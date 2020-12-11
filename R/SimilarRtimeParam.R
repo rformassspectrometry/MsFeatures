@@ -1,112 +1,125 @@
-## #' @title Group features based on approximate retention times
-## #'
-## #' @name groupFeatures-approximate-rtime
-## #'
-## #' @description
-## #'
-## #' Group features based on similar retention time. This method is supposed to be
-## #' used as an initial *crude* grouping of features based on the median retention
-## #' time of all their chromatographic peaks. All features with a difference in
-## #' their retention time which is `<=` parameter `diffRt` of the parameter object
-## #' are grouped together. If a column `"feature_group"` is found in
-## #' [xcms::featureDefinitions()] this is further sub-grouped by this method.
-## #'
-## #' Two different grouping methods are available:
-## #'
-## #' - `method = "greedy"`: this approach consecutively groups elements together
-## #'   if their difference in retention time is smaller than `diffRt`. If two
-## #'   features are grouped into one group, also all other features with a
-## #'   retention time within the defined window to any of the two features are
-## #'   also included into the feature group. This grouping is recursively
-## #'   expanded which can lead, depending on `diffRt` to very large feature
-## #'   groups spanning a large retention time window.
-## #'
-## #' - `method = "groupClosest"`: this approach uses the [groupClosest()] function
-## #'   that groups values together if their difference is smaller than `diffRt`.
-## #'   If the difference of a feature to more than one group is smaller `diffRt`
-## #'   it is assigned to the group to which its retention time is closest (most
-## #'   similar) to the mean retention time of that group. This leads to smaller
-## #'   group sizes. See [groupClosest()] for details and examples.
-## #'
-## #' @param diffRt `numeric(1)` defining the retention time window within which
-## #'     features should be grouped. All features with a rtime difference
-## #'     smaller or equal than `diffRt` are grouped.
-## #'
-## #' @param method `character(1)` defining which grouping approach should be
-## #'     taken. Allowed values are `method = "groupClosest"` (the default) and
-## #'     `method = "greedy"`. See description for details.
-## #'
-## #' @param msLevel `integer(1)` defining the MS level on which the features
-## #'     should be grouped.
-## #'
-## #' @param object [XCMSnExp()] object containing also correspondence results.
-## #'
-## #' @param param `SimilarRtimeParam` object with the settings for the method.
-## #'
-## #' @return input `XCMSnExp` with feature groups added (i.e. in column
-## #'     `"feature_group"` of its `featureDefinitions` data frame.
-## #'
-## #' @family feature grouping methods
-## #'
-## #' @seealso feature-grouping for a general overview.
-## #'
-## #' @rdname groupFeatures-approximate-rtime
-## #'
-## #' @importClassesFrom xcms Param
-## #'
-## #' @importFrom MsFeatures groupClosest
-## #'
-## #' @exportClass SimilarRtimeParam
-## #'
-## #' @author Johannes Rainer
-## #'
-## #' @examples
-## #'
-## #' ## Performing a quick preprocessing of a test data set.
-## #' library(faahKO)
-## #' fls <- c(system.file('cdf/KO/ko15.CDF', package = "faahKO"),
-## #'         system.file('cdf/KO/ko16.CDF', package = "faahKO"),
-## #'         system.file('cdf/WT/wt19.CDF', package = "faahKO"))
-## #'
-## #' od <- readMSData(fls, mode = "onDisk")
-## #' xod <- findChromPeaks(
-## #'     od, param = CentWaveParam(noise = 10000, snthresh = 40,
-## #'                               prefilter = c(3, 10000)))
-## #' pdp <- PeakDensityParam(sampleGroups = c(1, 1, 2))
-## #' xodg <- groupChromPeaks(xod, param = pdp)
-## #'
-## #' ## Group features based on similar retention time (i.e. difference <= 2 seconds)
-## #' xodg_grp <- groupFeatures(xodg, param = SimilarRtimeParam(diffRt = 2))
-## #'
-## #' ## Feature grouping get added to the featureDefinitions in column "feature_group"
-## #' head(featureDefinitions(xodg_grp)$feature_group)
-## #'
-## #' table(featureDefinitions(xodg_grp)$feature_group)
-## #' length(unique(featureDefinitions(xodg_grp)$feature_group))
-## #'
-## #' ## Using the "greedy" method to create larger groups
-## #' xodg_grp <- groupFeatures(xodg,
-## #'     param = SimilarRtimeParam(diffRt = 2, method = "greedy"))
-## #'
-## #' length(unique(featureDefinitions(xodg_grp)$feature_group))
-## NULL
+#' @include grouping-functions.R
 
-## setClass("SimilarRtimeParam",
-##          slots = c(diffRt = "numeric",
-##                    method = "character"),
-##          contains = "Param",
-##          prototype = prototype(
-##              diffRt = 1,
-##              method = "groupClosest"
-##          ),
-##          validity = function(object) {
-##              msg <- NULL
-##              if (length(object@diffRt) != 1 || object@diffRt < 0)
-##                  msg <- c("'diffRt' has to be a positive numeric of length 1")
-##              if (length(object@method) != 1 || !object@method %in%
-##                  c("greedy", "groupClosest"))
-##                  msg <- c(
-##                      msg,
-##                      "'method' should be either \"groupClosest\" or \"greedy\"")
-##              msg
-##          })
+#' @title Group features based on approximate retention times
+#'
+#' @name groupFeatures-similar-rtime
+#'
+#' @description
+#'
+#' Group features based on similar retention time. This method is supposed to be
+#' used as an initial *crude* grouping of LC-MS features based on the median
+#' retention time of all their chromatographic peaks. All features with a
+#' difference in their retention time which is `<=` parameter `diffRt` of the
+#' parameter object are grouped together. If a column `"feature_group"` is
+#' found in
+#' [SummarizedExperiment::colData()] this is further sub-grouped by this method.
+#'
+#' Parameter `groupFun` allows to specify the function that should be used for
+#' the actual grouping. Two possible choices are:
+#'
+#' - `groupFun = groupClosest` (the default): the [groupClosest()] function
+#'   groups values together if their difference is smaller than `diffRt`.
+#'   If the difference of a feature to more than one group is smaller `diffRt`
+#'   it is assigned to the group to which its retention time is closest (most
+#'   similar) to the mean retention time of that group. This leads to smaller
+#'   group sizes. See [groupClosest()] for details and examples.
+#'
+#' - `groupFun = MsCoreUtils::group`: this function consecutively groups
+#'   elements together if their difference in retention time is smaller than
+#'   `diffRt`. If two features are grouped into one group, also all other
+#'   features with a retention time within the defined window to any of the two
+#'   features are also included into the feature group. This grouping is
+#'   recursively expanded which can lead, depending on `diffRt`, to very large
+#'   feature groups spanning a large retention time window. See
+#'   [MsCoreUtils::group()] for details.
+#'
+#' Other grouping functions might be added in future. Alternatively it is also
+#' possible to provide a custom function for the grouping operation.
+#'
+#' @param diffRt `numeric(1)` defining the retention time window within which
+#'     features should be grouped. All features with a rtime difference
+#'     smaller or equal than `diffRt` are grouped.
+#'
+#' @param groupFun `function` that can be used to group values. Defaults to
+#'     `groupFun = groupClosest`. See description for details and alternatives.
+#'
+#' @param object input object that provides the retention times that should be
+#'     grouped. The `MsFeatures` package defines a method for `object` being
+#'     either a `numeric` or a `SummarizedExperiment`.
+#'
+#' @param param `SimilarRtimeParam` object with the settings for the method.
+#'
+#' @param ... additional parameters passed to the `groupFun` function.
+#'
+#' @return
+#'
+#' Depending on parameter `object`:
+#'
+#' - for `object` being a `numeric`: returns a `factor` defining the feature
+#'   groups.
+#'
+#' @family feature grouping methods
+#'
+#' @seealso [groupFeatures()] for the general concept of feature grouping.
+#'
+#' @rdname groupFeatures-similar-rtime
+#'
+#' @importClassesFrom ProtGenerics Param
+#'
+#' @exportClass SimilarRtimeParam
+#'
+#' @importFrom MsCoreUtils group
+#'
+#' @author Johannes Rainer
+#'
+#' @examples
+#'
+#' ## Simple grouping of a numeric vector.
+#' ##
+#' ## Define a numeric vector that could represent retention times of features
+#' x <- c(2, 3, 4, 5, 10, 11, 12, 14, 15)
+#'
+#' ## Group the values using a `group` function. This will create larger
+#' ## groups.
+#' groupFeatures(x, param = SimilarRtimeParam(2, MsCoreUtils::group))
+#'
+#' ## Group values using the default `groupClosest` function. This creates
+#' ## smaller groups in which all elements have a difference smaller than the
+#' ## defined `diffRt` with each other.
+#' groupFeatures(x, param = SimilarRtimeParam(2, groupClosest))
+NULL
+
+setClass("SimilarRtimeParam",
+         slots = c(diffRt = "numeric",
+                   groupFun = "function"),
+         contains = "Param",
+         prototype = prototype(
+             diffRt = 1,
+             groupFun = groupClosest
+         ),
+         validity = function(object) {
+             msg <- NULL
+             if (length(object@diffRt) != 1 || object@diffRt < 0)
+                 msg <- c("'diffRt' has to be a positive numeric of length 1")
+             if (!is.function(object@groupFun))
+                 msg <- c(msg, "'groupFun' should be a function")
+             msg
+         })
+
+#' @rdname groupFeatures-similar-rtime
+#'
+#' @importFrom methods new
+#'
+#' @export
+SimilarRtimeParam <- function(diffRt = 1, groupFun = groupClosest) {
+    new("SimilarRtimeParam", diffRt = diffRt, groupFun = groupFun)
+}
+
+#' @rdname groupFeatures-similar-rtime
+#'
+#' @importFrom MsCoreUtils group
+setMethod("groupFeatures",
+          signature(object = "numeric", param = "SimilarRtimeParam"),
+          function(object, param, ...) {
+              factor(param@groupFun(object, param@diffRt, ...))
+          })
