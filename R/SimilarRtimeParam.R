@@ -13,6 +13,9 @@
 #' parameter object are grouped together. If a column `"feature_group"` is
 #' found in
 #' [SummarizedExperiment::colData()] this is further sub-grouped by this method.
+#' For `object` being a `SummarizedExperiment` it might be required to specify
+#' the column in the object's `rowData` containing the retention times with the
+#' `rtime` parameter (which defaults to `rtime = "rtime"`.
 #'
 #' Parameter `groupFun` allows to specify the function that should be used for
 #' the actual grouping. Two possible choices are:
@@ -22,7 +25,9 @@
 #'   If the difference of a feature to more than one group is smaller `diffRt`
 #'   it is assigned to the group to which its retention time is closest (most
 #'   similar) to the mean retention time of that group. This leads to smaller
-#'   group sizes. See [groupClosest()] for details and examples.
+#'   group sizes. Be aware that with this grouping differences in retention
+#'   times between individual features within a group could still be larger
+#'   `diffRt`. See [groupClosest()] for details and examples.
 #'
 #' - `groupFun = MsCoreUtils::group`: this function consecutively groups
 #'   elements together if their difference in retention time is smaller than
@@ -47,6 +52,10 @@
 #'     grouped. The `MsFeatures` package defines a method for `object` being
 #'     either a `numeric` or a `SummarizedExperiment`.
 #'
+#' @param rtime for `object` being a [SummarizedExperiment()]: `character(1)`
+#'     specifying the column in `rowData(object)` that contains the retention
+#'     time values.
+#'
 #' @param param `SimilarRtimeParam` object with the settings for the method.
 #'
 #' @param ... additional parameters passed to the `groupFun` function.
@@ -57,10 +66,16 @@
 #'
 #' - for `object` being a `numeric`: returns a `factor` defining the feature
 #'   groups.
+#' - for `object` being `SummarizedExperiment`: returns the input object with
+#'   the feature group definition added to a column `"feature_group"` in the
+#'   result object's `rowData`.
 #'
 #' @family feature grouping methods
 #'
 #' @seealso [groupFeatures()] for the general concept of feature grouping.
+#'
+#' @seealso [featureGroups()] for the function to extract defined feature
+#'     groups from a `SummarizedExperiment`.
 #'
 #' @rdname groupFeatures-similar-rtime
 #'
@@ -87,6 +102,45 @@
 #' ## smaller groups in which all elements have a difference smaller than the
 #' ## defined `diffRt` with each other.
 #' groupFeatures(x, param = SimilarRtimeParam(2, groupClosest))
+#'
+#' ## Grouping on a SummarizedExperiment
+#' ##
+#' ## load the test SummarizedExperiment object
+#' library(SummarizedExperiment)
+#' data(se)
+#'
+#' ## No feature groups defined yet
+#' featureGroups(se)
+#'
+#' ## Determine the column that contains retention times
+#' rowData(se)
+#'
+#' ## Column "rtmed" contains the (median) retention time for each feature
+#' ## Group features that are eluting within 10 seconds
+#' res <- groupFeatures(se, SimilarRtimeParam(10), rtime = "rtmed")
+#'
+#' featureGroups(res)
+#'
+#' ## Evaluating differences between retention times within each feature group
+#' rts <- split(rowData(res)$rtmed, featureGroups(res))
+#' lapply(rts, function(z) abs(diff(z)) <= 10)
+#'
+#' ## One feature group ("FG.053") has elements with a difference larger 10:
+#' rts[["FG.053"]]
+#' abs(diff(rts[["FG.053"]]))
+#'
+#' ## But the difference between the **sorted** retention times is < 10:
+#' abs(diff(sort(rts[["FG.053"]])))
+#'
+#' ## Feature grouping with pre-defined feature groups: groupFeatures will
+#' ## sub-group the pre-defined feature groups, features with the feature group
+#' ## being `NA` are skipped. Below we perform the feature grouping only on
+#' ## features 40 to 70
+#' fgs <- rep(NA, nrow(rowData(se)))
+#' fgs[40:70] <- "FG"
+#' featureGroups(se) <- fgs
+#' res <- groupFeatures(se, SimilarRtimeParam(10), rtime = "rtmed")
+#' featureGroups(res)
 NULL
 
 setClass("SimilarRtimeParam",
@@ -129,8 +183,26 @@ setMethod(
 setMethod(
     "groupFeatures",
     signature(object = "SummarizedExperiment", param = "SimilarRtimeParam"),
-    function(object, param, ...) {
-
+    function(object, param, rtime = "rtime", ...) {
+        if (!any(colnames(rowData(object)) == rtime) ||
+            !is.numeric(rowData(object)[, rtime]))
+            stop("Column ", rtime, " in 'rowData(object)' is supposed to ",
+                 "contain numeric values representing retention times.")
+        fgs <- featureGroups(object)
+        if (all(is.na(fgs)))
+            fgs <- rep("FG", length(fgs))
+        nas <- is.na(fgs)
+        fgs <- factor(fgs, levels = unique(fgs))
+        rtl <- split(rowData(object)[, rtime], fgs)
+        res <- lapply(
+            rtl,
+            function(z, param) .format_id(groupFeatures(z, param = param, ...)),
+            param = param, ...)
+        res <- paste(fgs, unsplit(res, f = fgs), sep = ".")
+        if (any(nas))
+            res[nas] <- NA_character_
+        featureGroups(object) <- res
+        object
     })
 
 #' Simple helper function to add a (minimum) number of leading 0s to a numeric

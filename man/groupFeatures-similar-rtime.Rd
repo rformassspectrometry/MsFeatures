@@ -4,11 +4,14 @@
 \alias{groupFeatures-similar-rtime}
 \alias{SimilarRtimeParam}
 \alias{groupFeatures,numeric,SimilarRtimeParam-method}
+\alias{groupFeatures,SummarizedExperiment,SimilarRtimeParam-method}
 \title{Group features based on approximate retention times}
 \usage{
 SimilarRtimeParam(diffRt = 1, groupFun = groupClosest)
 
 \S4method{groupFeatures}{numeric,SimilarRtimeParam}(object, param, ...)
+
+\S4method{groupFeatures}{SummarizedExperiment,SimilarRtimeParam}(object, param, rtime = "rtime", ...)
 }
 \arguments{
 \item{diffRt}{\code{numeric(1)} defining the retention time window within which
@@ -25,12 +28,19 @@ either a \code{numeric} or a \code{SummarizedExperiment}.}
 \item{param}{\code{SimilarRtimeParam} object with the settings for the method.}
 
 \item{...}{additional parameters passed to the \code{groupFun} function.}
+
+\item{rtime}{for \code{object} being a \code{\link[=SummarizedExperiment]{SummarizedExperiment()}}: \code{character(1)}
+specifying the column in \code{rowData(object)} that contains the retention
+time values.}
 }
 \value{
 Depending on parameter \code{object}:
 \itemize{
 \item for \code{object} being a \code{numeric}: returns a \code{factor} defining the feature
 groups.
+\item for \code{object} being \code{SummarizedExperiment}: returns the input object with
+the feature group definition added to a column \code{"feature_group"} in the
+result object's \code{rowData}.
 }
 }
 \description{
@@ -41,6 +51,9 @@ difference in their retention time which is \code{<=} parameter \code{diffRt} of
 parameter object are grouped together. If a column \code{"feature_group"} is
 found in
 \code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment::colData()}} this is further sub-grouped by this method.
+For \code{object} being a \code{SummarizedExperiment} it might be required to specify
+the column in the object's \code{rowData} containing the retention times with the
+\code{rtime} parameter (which defaults to \code{rtime = "rtime"}.
 
 Parameter \code{groupFun} allows to specify the function that should be used for
 the actual grouping. Two possible choices are:
@@ -50,7 +63,9 @@ groups values together if their difference is smaller than \code{diffRt}.
 If the difference of a feature to more than one group is smaller \code{diffRt}
 it is assigned to the group to which its retention time is closest (most
 similar) to the mean retention time of that group. This leads to smaller
-group sizes. See \code{\link[=groupClosest]{groupClosest()}} for details and examples.
+group sizes. Be aware that with this grouping differences in retention
+times between individual features within a group could still be larger
+\code{diffRt}. See \code{\link[=groupClosest]{groupClosest()}} for details and examples.
 \item \code{groupFun = MsCoreUtils::group}: this function consecutively groups
 elements together if their difference in retention time is smaller than
 \code{diffRt}. If two features are grouped into one group, also all other
@@ -79,9 +94,51 @@ groupFeatures(x, param = SimilarRtimeParam(2, MsCoreUtils::group))
 ## smaller groups in which all elements have a difference smaller than the
 ## defined `diffRt` with each other.
 groupFeatures(x, param = SimilarRtimeParam(2, groupClosest))
+
+## Grouping on a SummarizedExperiment
+##
+## load the test SummarizedExperiment object
+library(SummarizedExperiment)
+data(se)
+
+## No feature groups defined yet
+featureGroups(se)
+
+## Determine the column that contains retention times
+rowData(se)
+
+## Column "rtmed" contains the (median) retention time for each feature
+## Group features that are eluting within 10 seconds
+res <- groupFeatures(se, SimilarRtimeParam(10), rtime = "rtmed")
+
+featureGroups(res)
+
+## Evaluating differences between retention times within each feature group
+rts <- split(rowData(res)$rtmed, featureGroups(res))
+lapply(rts, function(z) abs(diff(z)) <= 10)
+
+## One feature group ("FG.053") has elements with a difference larger 10:
+rts[["FG.053"]]
+abs(diff(rts[["FG.053"]]))
+
+## But the difference between the **sorted** retention times is < 10:
+abs(diff(sort(rts[["FG.053"]])))
+
+## Feature grouping with pre-defined feature groups: groupFeatures will
+## sub-group the pre-defined feature groups, features with the feature group
+## being `NA` are skipped. Below we perform the feature grouping only on
+## features 40 to 70
+fgs <- rep(NA, nrow(rowData(se)))
+fgs[40:70] <- "FG"
+featureGroups(se) <- fgs
+res <- groupFeatures(se, SimilarRtimeParam(10), rtime = "rtmed")
+featureGroups(res)
 }
 \seealso{
 \code{\link[=groupFeatures]{groupFeatures()}} for the general concept of feature grouping.
+
+\code{\link[=featureGroups]{featureGroups()}} for the function to extract defined feature
+groups from a \code{SummarizedExperiment}.
 }
 \author{
 Johannes Rainer

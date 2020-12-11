@@ -34,3 +34,41 @@ test_that(".format_id works", {
     res <- .format_id(1:1000)
     expect_equal(res[1], "0001")
 })
+
+test_that("groupFeatures,SummarizedExperiment,SimilarRtimeParam works", {
+    data(se)
+    prm <- SimilarRtimeParam(10)
+    rts <- rowData(se)$rtmed
+    res <- groupFeatures(se, prm, rtime = "rtmed")
+    expect_true(!any(is.na(featureGroups(res))))
+
+    library(SummarizedExperiment)
+    tmp <- split(rts, featureGroups(res))
+    test_fun <- function(z) {
+        if (length(z))
+            all(diff(sort(z)) < 10)
+        else TRUE
+    }
+    expect_true(all(vapply(tmp, test_fun, logical(1))))
+
+    ## Pre-defined features.
+    fgs <- c(rep("1", 5), rep("2", 20), rep("4", 10), rep("2", 20),
+             rep("1", 20), rep("3", 30), rep("4", 120))
+    featureGroups(se) <- fgs
+    res <- groupFeatures(se, prm, rtime = "rtmed")
+    tmp <- strsplit(featureGroups(res), split = ".", fixed = TRUE)
+    expect_equal(fgs, vapply(tmp, function(z) z[1], character(1)))
+    tmp <- split(rts, featureGroups(res))
+    expect_true(all(vapply(tmp, test_fun, logical(1))))
+
+    ## How does this work with NAs?
+    fgs[c(5, 14, 67)] <- NA
+    featureGroups(se) <- fgs
+    res <- groupFeatures(se, param = prm, rtime = "rtmed")
+    expect_true(all(is.na(featureGroups(res)[c(5, 14, 67)])))
+    tmp <- split(rts, featureGroups(res))
+    expect_true(all(vapply(tmp, test_fun, logical(1))))
+
+    expect_error(groupFeatures(se, prm), "numeric values")
+    expect_error(groupFeatures(se, prm, rtime = "peakidx"), "numeric values")
+})

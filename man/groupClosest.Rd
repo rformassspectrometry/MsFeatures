@@ -47,6 +47,11 @@ current group (\verb{mean(c(1.9, 2.2)}) is then compared to the difference of
 smaller, \code{1.9} is removed from the first group and assigned to the second
 one.
 }
+\note{
+The difference between consecutive (ordered) values within a defined group
+is always \verb{<= maxDiff}, but the difference between e.g. the first and the
+last of the (ordered) values can be larger than \code{maxDiff}.
+}
 \examples{
 
 ## The example described above

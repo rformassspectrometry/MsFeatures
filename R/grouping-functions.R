@@ -32,6 +32,12 @@
 #' smaller, `1.9` is removed from the first group and assigned to the second
 #' one.
 #'
+#' @note
+#'
+#' The difference between consecutive (ordered) values within a defined group
+#' is always `<= maxDiff`, but the difference between e.g. the first and the
+#' last of the (ordered) values can be larger than `maxDiff`.
+#'
 #' @param x `numeric` of values that should be grouped.
 #'
 #' @param maxDiff `numeric(1)` defining the threshold for difference between
