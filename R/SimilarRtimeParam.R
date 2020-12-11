@@ -20,14 +20,23 @@
 #' Parameter `groupFun` allows to specify the function that should be used for
 #' the actual grouping. Two possible choices are:
 #'
-#' - `groupFun = groupClosest` (the default): the [groupClosest()] function
-#'   groups values together if their difference is smaller than `diffRt`.
+#' - `groupFun = groupClosest` (the default): this method creates groups
+#'   of features with smallest differences in retention times between the
+#'   individual group members. All differences between group members are
+#'   `< diffRt` (in contrast to the other grouping functions listed below).
+#'   See [groupSimilarityMatrix()] (which is used for the actual grouping on
+#'   pairwise retention time differences) for more details.
+#'
+#' - `groupFun = groupSorted`: the [groupSorted()] function
+#'   groups values together if their difference is smaller than `diffRt`. This
+#'   function iterates over the sorted retention times starting the grouping
+#'   from the lowest value.
 #'   If the difference of a feature to more than one group is smaller `diffRt`
 #'   it is assigned to the group to which its retention time is closest (most
 #'   similar) to the mean retention time of that group. This leads to smaller
 #'   group sizes. Be aware that with this grouping differences in retention
 #'   times between individual features within a group could still be larger
-#'   `diffRt`. See [groupClosest()] for details and examples.
+#'   `diffRt`. See [groupSorted()] for details and examples.
 #'
 #' - `groupFun = MsCoreUtils::group`: this function consecutively groups
 #'   elements together if their difference in retention time is smaller than
@@ -46,7 +55,8 @@
 #'     smaller or equal than `diffRt` are grouped.
 #'
 #' @param groupFun `function` that can be used to group values. Defaults to
-#'     `groupFun = groupClosest`. See description for details and alternatives.
+#'     `groupFun = groupClosest`. See description for details and
+#'     alternatives.
 #'
 #' @param object input object that provides the retention times that should be
 #'     grouped. The `MsFeatures` package defines a method for `object` being
