@@ -26,3 +26,11 @@ test_that("groupFeatures,SimilarRtimeParam,numeric works", {
     res <- groupFeatures(x, prm)
     expect_equal(res, factor(c(1, 1, 2, 2, 3, 3, 3, 4, 4)))
 })
+
+test_that(".format_id works", {
+    vals <- 1:4
+    res <- .format_id(vals)
+    expect_equal(res, c("001", "002", "003", "004"))
+    res <- .format_id(1:1000)
+    expect_equal(res[1], "0001")
+})

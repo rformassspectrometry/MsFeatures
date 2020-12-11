@@ -118,8 +118,26 @@ SimilarRtimeParam <- function(diffRt = 1, groupFun = groupClosest) {
 #' @rdname groupFeatures-similar-rtime
 #'
 #' @importFrom MsCoreUtils group
-setMethod("groupFeatures",
-          signature(object = "numeric", param = "SimilarRtimeParam"),
-          function(object, param, ...) {
-              factor(param@groupFun(object, param@diffRt, ...))
-          })
+setMethod(
+    "groupFeatures",
+    signature(object = "numeric", param = "SimilarRtimeParam"),
+    function(object, param, ...) {
+        factor(param@groupFun(object, param@diffRt, ...))
+    })
+
+#' @rdname groupFeatures-similar-rtime
+setMethod(
+    "groupFeatures",
+    signature(object = "SummarizedExperiment", param = "SimilarRtimeParam"),
+    function(object, param, ...) {
+
+    })
+
+#' Simple helper function to add a (minimum) number of leading 0s to a numeric
+#' value to create *better looking* identifiers.
+#'
+#' @noRd
+.format_id <- function(x, length = 3L) {
+    digits <- max(ceiling(log10(length(x) + 1L)), length)
+    sprintf(paste0("%0", digits, "d"), as.integer(x))
+}
