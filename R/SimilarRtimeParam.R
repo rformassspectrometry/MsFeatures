@@ -27,7 +27,7 @@
 #'   See [groupSimilarityMatrix()] (which is used for the actual grouping on
 #'   pairwise retention time differences) for more details.
 #'
-#' - `groupFun = groupSorted`: the [groupSorted()] function
+#' - `groupFun = groupConsecutive`: the [groupConsecutive()] function
 #'   groups values together if their difference is smaller than `diffRt`. This
 #'   function iterates over the sorted retention times starting the grouping
 #'   from the lowest value.
@@ -36,7 +36,7 @@
 #'   similar) to the mean retention time of that group. This leads to smaller
 #'   group sizes. Be aware that with this grouping differences in retention
 #'   times between individual features within a group could still be larger
-#'   `diffRt`. See [groupSorted()] for details and examples.
+#'   `diffRt`. See [groupConsecutive()] for details and examples.
 #'
 #' - `groupFun = MsCoreUtils::group`: this function consecutively groups
 #'   elements together if their difference in retention time is smaller than

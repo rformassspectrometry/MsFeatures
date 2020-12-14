@@ -1,7 +1,7 @@
-test_that("SimillarRtimeParam works", {
+test_that("SimilarRtimeParam works", {
     res <- SimilarRtimeParam(4)
     expect_true(res@diffRt == 4)
-    expect_equal(res@groupFun, groupSorted)
+    expect_equal(res@groupFun, groupClosest)
 
     expect_error(SimilarRtimeParam(1:2), "positive numeric")
     expect_error(SimilarRtimeParam(-1), "positive numeric")
@@ -22,7 +22,7 @@ test_that("groupFeatures,SimilarRtimeParam,numeric works", {
     res <- groupFeatures(x, prm)
     expect_equal(res, factor(c(1, 1, 1, 1, 2, 2, 2, 2, 2)))
 
-    prm <- SimilarRtimeParam(2, groupFun = groupSorted)
+    prm <- SimilarRtimeParam(2, groupFun = groupConsecutive)
     res <- groupFeatures(x, prm)
     expect_equal(res, factor(c(1, 1, 2, 2, 3, 3, 3, 4, 4)))
 })
@@ -37,7 +37,7 @@ test_that(".format_id works", {
 
 test_that("groupFeatures,SummarizedExperiment,SimilarRtimeParam works", {
     data(se)
-    prm <- SimilarRtimeParam(10, groupFun = groupSorted)
+    prm <- SimilarRtimeParam(10, groupFun = groupConsecutive)
     rts <- rowData(se)$rtmed
     res <- groupFeatures(se, prm, rtime = "rtmed")
     expect_true(!any(is.na(featureGroups(res))))

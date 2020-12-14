@@ -2,7 +2,7 @@
 % Please edit documentation in R/grouping-functions.R
 \name{groupClosest}
 \alias{groupClosest}
-\title{Grouping of values into sets with smallest differences}
+\title{Group values with differences below threshold}
 \usage{
 groupClosest(x, maxDiff = 1)
 }
@@ -14,63 +14,36 @@ values in \code{x} to be grouped into the same group.}
 }
 \value{
 \code{integer} with the group assignment (values grouped together have
-the same value).
+the same return value).
 }
 \description{
-\code{groupClosest} groups values in \code{x} for which the difference is smaller than
-\code{maxDiff}. As a result, the mean value between the groups will always be
-larger than \code{maxDiff}. Values which would be assigned to more than one
-group, are assigned to the one with the smallest difference to the group
-mean value. A use case for this would be to group MS features based on their
-retention times into groups of ~ co-eluting features.
-
-In detail, from the sorted \code{x}, the function starts from the smallest value
-defining the first group as the one containing all
-values in \code{x} with a difference to this first value which is \verb{<= maxDiff}.
-The next group is the defined based on the next larger value not being part
-of the first group and includes all values with a difference \verb{<= maxDiff} to
-this value. For values fulfilling this criteria but being already part of
-a previous group, the differences to the mean value of the current group
-and to the mean of previous groups are compared and values are assigned to
-the group to which they have the smallest difference.
-
-Example: values \verb{1.1, 1.9, 2.2} should be grouped with a \code{maxDiff = 1}. The
-first group is defined to include all values for which the difference to the
-first value (\code{1.1}) is smaller \code{maxDiff}. Thus, the first group is defined
-to contain values \verb{1.1 and 1.9}. Then the next group is defined based on the
-next larger value not part of any group, \code{2.2}. This group contains values
-\code{1.9} and \code{2.2} with the value \code{1.9} being already assigned to the first
-group. The difference between this value \code{1.9} and the mean of the
-current group (\verb{mean(c(1.9, 2.2)}) is then compared to the difference of
-\code{1.9} to the mean value of the group \code{1.9} is already part of
-(which is \code{mean(c(1.1, 1.9))}). Since the difference to the second group is
-smaller, \code{1.9} is removed from the first group and assigned to the second
-one.
-}
-\note{
-The difference between consecutive (ordered) values within a defined group
-is always \verb{<= maxDiff}, but the difference between e.g. the first and the
-last of the (ordered) values can be larger than \code{maxDiff}.
+Group values with a difference between them being smaller than a user
+defined threshold. This function uses the \code{\link[=groupSimilarityMatrix]{groupSimilarityMatrix()}} function
+to create groups with smallest differences between its members. Differences
+between \strong{all} members of one group are below the user defined threshold
+\code{maxDiff}. This is a more stringent grouping than what \code{\link[=groupConsecutive]{groupConsecutive()}}
+performs leading thus to smaller groups (with smaller differences between
+its members).
 }
 \examples{
 
-## The example described above
 x <- c(1.1, 1.9, 2.2)
 groupClosest(x)
+## Although the difference between the 1st and 2nd element would be smaller
+## than the threshold, they are not grouped because the difference between
+## the 2nd and 3rd element is even smaller. The first element is also not
+## put into the same group, because it has a difference > diffRt to the 3rd
+## element.
 
 x <- c(1.1, 1.5, 1.7, 2.3, 2.7, 4.3, 4.4, 4.9, 5.2, 5.4, 5.8, 6, 7,
     9, 9.5, 15)
 
 groupClosest(x)
-## value 5.2 was initially grouped with 4.3 (because their difference is
-## smaller 1, but then re-grouped together with 5.4 because the difference
-## between 5.4 (the next value outside the group of 4.3) and 5.2 is smaller
-## than its difference to the mean value of the group for value 4.3
-
-## Example for a case in which values are NOT grouped into the same group
-## even if the difference between them is <= maxDiff
-a <- c(4.9, 5.2, 5.4)
-groupClosest(a, maxDiff = 0.3)
+}
+\seealso{
+Other grouping operations: 
+\code{\link{groupConsecutive}()},
+\code{\link{groupSimilarityMatrix}()}
 }
 \author{
 Johannes Rainer

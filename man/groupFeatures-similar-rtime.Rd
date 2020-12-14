@@ -19,7 +19,8 @@ features should be grouped. All features with a rtime difference
 smaller or equal than \code{diffRt} are grouped.}
 
 \item{groupFun}{\code{function} that can be used to group values. Defaults to
-\code{groupFun = groupClosest}. See description for details and alternatives.}
+\code{groupFun = groupClosest}. See description for details and
+alternatives.}
 
 \item{object}{input object that provides the retention times that should be
 grouped. The \code{MsFeatures} package defines a method for \code{object} being
@@ -58,14 +59,22 @@ the column in the object's \code{rowData} containing the retention times with th
 Parameter \code{groupFun} allows to specify the function that should be used for
 the actual grouping. Two possible choices are:
 \itemize{
-\item \code{groupFun = groupClosest} (the default): the \code{\link[=groupClosest]{groupClosest()}} function
-groups values together if their difference is smaller than \code{diffRt}.
+\item \code{groupFun = groupClosest} (the default): this method creates groups
+of features with smallest differences in retention times between the
+individual group members. All differences between group members are
+\verb{< diffRt} (in contrast to the other grouping functions listed below).
+See \code{\link[=groupSimilarityMatrix]{groupSimilarityMatrix()}} (which is used for the actual grouping on
+pairwise retention time differences) for more details.
+\item \code{groupFun = groupConsecutive}: the \code{\link[=groupConsecutive]{groupConsecutive()}} function
+groups values together if their difference is smaller than \code{diffRt}. This
+function iterates over the sorted retention times starting the grouping
+from the lowest value.
 If the difference of a feature to more than one group is smaller \code{diffRt}
 it is assigned to the group to which its retention time is closest (most
 similar) to the mean retention time of that group. This leads to smaller
 group sizes. Be aware that with this grouping differences in retention
 times between individual features within a group could still be larger
-\code{diffRt}. See \code{\link[=groupClosest]{groupClosest()}} for details and examples.
+\code{diffRt}. See \code{\link[=groupConsecutive]{groupConsecutive()}} for details and examples.
 \item \code{groupFun = MsCoreUtils::group}: this function consecutively groups
 elements together if their difference in retention time is smaller than
 \code{diffRt}. If two features are grouped into one group, also all other

@@ -1,17 +1,17 @@
-test_that("groupSorted works", {
+test_that("groupConsecutive works", {
     x <- c(1.1, 1.5, 1.7, 2.3, 2.7, 4.3, 4.4, 4.9, 5.2, 5.4, 5.8, 6, 7, 9, 9.5, 15)
-    res <- groupSorted(x)
+    res <- groupConsecutive(x)
     expect_equal(res, c(1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 6, 6, 7))
 
-    res <- groupSorted(x, maxDiff = 0.3)
+    res <- groupConsecutive(x, maxDiff = 0.3)
     expect_equal(res, c(1, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 8, 9, 10, 11, 12))
 
     idx <- sample(seq_along(res))
-    res_2 <- groupSorted(x[idx], maxDiff = 0.3)
+    res_2 <- groupConsecutive(x[idx], maxDiff = 0.3)
     expect_equal(res[idx], res_2)
 
     a <- c(4.9, 5.2, 5.4)
-    res <- groupSorted(a, maxDiff = 0.3)
+    res <- groupConsecutive(a, maxDiff = 0.3)
     expect_equal(res, c(1, 2, 2))
 })
 
@@ -68,6 +68,24 @@ test_that("groupSimilarityMatrix works", {
 })
 
 test_that("groupClosest works", {
-    stop("add some unit tests")
+    data(se)
+    rts <- rowData(se)$rtmed
     ## Check that all differences within each group are below threshold!
+    res <- groupClosest(rts, 10)
+    resl <- split(rts, res)
+    comp_fun <- function(z) {
+        if (length(z) == 1)
+            TRUE
+        else all(diff(z) <= 10)
+    }
+    expect_true(all(vapply(resl, comp_fun, logical(1))))
+
+    res <- groupClosest(rts, 60)
+    resl <- split(rts, res)
+    comp_fun <- function(z) {
+        if (length(z) == 1)
+            TRUE
+        else all(diff(z) <= 60)
+    }
+    expect_true(all(vapply(resl, comp_fun, logical(1))))
 })

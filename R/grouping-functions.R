@@ -2,16 +2,16 @@
 #'
 #' @description
 #'
-#' `groupSorted` groups **sorted** values in `x` for which the difference is
-#' smaller than `maxDiff`. As a result, the mean difference between the groups
-#' will always be larger than `maxDiff`. Values which would be assigned to more
-#' than one group, are assigned to the group to which they have the smallest
-#' difference.
+#' `groupConsecutive` groups **sorted** values in `x` for which the difference
+#' is smaller than `maxDiff`. As a result, the mean difference between the
+#' groups will always be larger than `maxDiff`, but difference between
+#' individual values within the same group (e.g. between the first and last)
+#' can be larger `maxDiff`.
 #'
 #' In detail, from the sorted `x`, the function starts from the smallest value
-#' defining the first group as the one containing all
-#' values in `x` with a difference to this first value which is `<= maxDiff`.
-#' The next group is the defined based on the next larger value not being part
+#' defining the first group as the one containing all values in `x` with a
+#' difference to this first value which is `<= maxDiff`.
+#' The next group is the defined based on the next larger value that is not part
 #' of the first group and includes all values with a difference `<= maxDiff` to
 #' this value. For values fulfilling this criteria but being already part of
 #' a previous group, the differences to the mean value of the current group
@@ -56,12 +56,12 @@
 #'
 #' ## The example described above
 #' x <- c(1.1, 1.9, 2.2)
-#' groupSorted(x)
+#' groupConsecutive(x)
 #'
 #' x <- c(1.1, 1.5, 1.7, 2.3, 2.7, 4.3, 4.4, 4.9, 5.2, 5.4, 5.8, 6, 7,
 #'     9, 9.5, 15)
 #'
-#' groupSorted(x)
+#' groupConsecutive(x)
 #' ## value 5.2 was initially grouped with 4.3 (because their difference is
 #' ## smaller 1, but then re-grouped together with 5.4 because the difference
 #' ## between 5.4 (the next value outside the group of 4.3) and 5.2 is smaller
@@ -70,8 +70,8 @@
 #' ## Example for a case in which values are NOT grouped into the same group
 #' ## even if the difference between them is <= maxDiff
 #' a <- c(4.9, 5.2, 5.4)
-#' groupSorted(a, maxDiff = 0.3)
-groupSorted <- function(x, maxDiff = 1) {
+#' groupConsecutive(a, maxDiff = 0.3)
+groupConsecutive <- function(x, maxDiff = 1) {
     if (is.unsorted(x)) {
         idx <- order(x)
         x <- x[idx]
@@ -298,7 +298,7 @@ groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE) {
 #' defined threshold. This function uses the [groupSimilarityMatrix()] function
 #' to create groups with smallest differences between its members. Differences
 #' between **all** members of one group are below the user defined threshold
-#' `maxDiff`. This is a more stringent grouping than what [groupSorted()]
+#' `maxDiff`. This is a more stringent grouping than what [groupConsecutive()]
 #' performs leading thus to smaller groups (with smaller differences between
 #' its members).
 #'
@@ -315,6 +315,8 @@ groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE) {
 #' @family grouping operations
 #'
 #' @export
+#'
+#' @importFrom stats diff
 #'
 #' @examples
 #'
