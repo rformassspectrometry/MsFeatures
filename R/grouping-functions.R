@@ -316,7 +316,7 @@ groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE) {
 #'
 #' @export
 #'
-#' @importFrom stats diff
+#' @importFrom stats dist
 #'
 #' @examples
 #'
