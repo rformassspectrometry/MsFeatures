@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Group values with differences below threshold — groupClosest • MsFeatures</title>
+<title>Grouping of sorted values into sets with smallest differences — groupConsecutive • MsFeatures</title>
 
 
 <!-- jquery -->
@@ -39,14 +39,33 @@
 
 
 
-<meta property="og:title" content="Group values with differences below threshold — groupClosest" />
-<meta property="og:description" content="Group values with a difference between them being smaller than a user
-defined threshold. This function uses the groupSimilarityMatrix() function
-to create groups with smallest differences between its members. Differences
-between all members of one group are below the user defined threshold
-maxDiff. This is a more stringent grouping than what groupConsecutive()
-performs leading thus to smaller groups (with smaller differences between
-its members)." />
+<meta property="og:title" content="Grouping of sorted values into sets with smallest differences — groupConsecutive" />
+<meta property="og:description" content="groupConsecutive groups sorted values in x for which the difference
+is smaller than maxDiff. As a result, the mean difference between the
+groups will always be larger than maxDiff, but difference between
+individual values within the same group (e.g. between the first and last)
+can be larger maxDiff.
+In detail, from the sorted x, the function starts from the smallest value
+defining the first group as the one containing all values in x with a
+difference to this first value which is &amp;lt;= maxDiff.
+The next group is the defined based on the next larger value that is not part
+of the first group and includes all values with a difference &amp;lt;= maxDiff to
+this value. For values fulfilling this criteria but being already part of
+a previous group, the differences to the mean value of the current group
+and to the mean of previous groups are compared and values are assigned to
+the group to which they have the smallest difference.
+Example: values 1.1, 1.9, 2.2 should be grouped with a maxDiff = 1. The
+first group is defined to include all values for which the difference to the
+first value (1.1) is smaller maxDiff. Thus, the first group is defined
+to contain values 1.1 and 1.9. Then the next group is defined based on the
+next larger value not part of any group, 2.2. This group contains values
+1.9 and 2.2 with the value 1.9 being already assigned to the first
+group. The difference between this value 1.9 and the mean of the
+current group (mean(c(1.9, 2.2)) is then compared to the difference of
+1.9 to the mean value of the group 1.9 is already part of
+(which is mean(c(1.1, 1.9))). Since the difference to the second group is
+smaller, 1.9 is removed from the first group and assigned to the second
+one." />
 
 
 
@@ -111,22 +130,41 @@ its members)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Group values with differences below threshold</h1>
+    <h1>Grouping of sorted values into sets with smallest differences</h1>
     <small class="dont-index">Source: <a href='https://github.com/RforMassSpectrometry/MsFeatures/blob/master/R/grouping-functions.R'><code>R/grouping-functions.R</code></a></small>
-    <div class="hidden name"><code>groupClosest.Rd</code></div>
+    <div class="hidden name"><code>groupConsecutive.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Group values with a difference between them being smaller than a user
-defined threshold. This function uses the <code><a href='groupSimilarityMatrix.html'>groupSimilarityMatrix()</a></code> function
-to create groups with smallest differences between its members. Differences
-between <strong>all</strong> members of one group are below the user defined threshold
-<code>maxDiff</code>. This is a more stringent grouping than what <code><a href='groupConsecutive.html'>groupConsecutive()</a></code>
-performs leading thus to smaller groups (with smaller differences between
-its members).</p>
+    <p><code>groupConsecutive</code> groups <strong>sorted</strong> values in <code>x</code> for which the difference
+is smaller than <code>maxDiff</code>. As a result, the mean difference between the
+groups will always be larger than <code>maxDiff</code>, but difference between
+individual values within the same group (e.g. between the first and last)
+can be larger <code>maxDiff</code>.</p>
+<p>In detail, from the sorted <code>x</code>, the function starts from the smallest value
+defining the first group as the one containing all values in <code>x</code> with a
+difference to this first value which is <code>&lt;= maxDiff</code>.
+The next group is the defined based on the next larger value that is not part
+of the first group and includes all values with a difference <code>&lt;= maxDiff</code> to
+this value. For values fulfilling this criteria but being already part of
+a previous group, the differences to the mean value of the current group
+and to the mean of previous groups are compared and values are assigned to
+the group to which they have the smallest difference.</p>
+<p>Example: values <code>1.1, 1.9, 2.2</code> should be grouped with a <code>maxDiff = 1</code>. The
+first group is defined to include all values for which the difference to the
+first value (<code>1.1</code>) is smaller <code>maxDiff</code>. Thus, the first group is defined
+to contain values <code>1.1 and 1.9</code>. Then the next group is defined based on the
+next larger value not part of any group, <code>2.2</code>. This group contains values
+<code>1.9</code> and <code>2.2</code> with the value <code>1.9</code> being already assigned to the first
+group. The difference between this value <code>1.9</code> and the mean of the
+current group (<code>mean(c(1.9, 2.2)</code>) is then compared to the difference of
+<code>1.9</code> to the mean value of the group <code>1.9</code> is already part of
+(which is <code><a href='https://rdrr.io/r/base/mean.html'>mean(c(1.1, 1.9))</a></code>). Since the difference to the second group is
+smaller, <code>1.9</code> is removed from the first group and assigned to the second
+one.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>groupClosest</span><span class='op'>(</span><span class='va'>x</span>, maxDiff <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>groupConsecutive</span><span class='op'>(</span><span class='va'>x</span>, maxDiff <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -146,10 +184,16 @@ values in <code>x</code> to be grouped into the same group.</p></td>
 
     <p><code>integer</code> with the group assignment (values grouped together have
 the same return value).</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>The difference between consecutive (ordered) values within a defined group
+is always <code>&lt;= maxDiff</code>, but the difference between e.g. the first and the
+last of the (ordered) values can be larger than <code>maxDiff</code>. See
+<code><a href='groupClosest.html'>groupClosest()</a></code> for a more stringent grouping function.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other grouping operations: 
-<code><a href='groupConsecutive.html'>groupConsecutive</a>()</code>,
+<code><a href='groupClosest.html'>groupClosest</a>()</code>,
 <code><a href='groupSimilarityMatrix.html'>groupSimilarityMatrix</a>()</code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
@@ -157,19 +201,24 @@ the same return value).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='co'>## The example described above</span>
 <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.1</span>, <span class='fl'>1.9</span>, <span class='fl'>2.2</span><span class='op'>)</span>
-<span class='fu'>groupClosest</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 2 1 1</div><div class='input'><span class='co'>## Although the difference between the 1st and 2nd element would be smaller</span>
-<span class='co'>## than the threshold, they are not grouped because the difference between</span>
-<span class='co'>## the 2nd and 3rd element is even smaller. The first element is also not</span>
-<span class='co'>## put into the same group, because it has a difference &gt; diffRt to the 3rd</span>
-<span class='co'>## element.</span>
-
+<span class='fu'>groupConsecutive</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 1 2 2</div><div class='input'>
 <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.1</span>, <span class='fl'>1.5</span>, <span class='fl'>1.7</span>, <span class='fl'>2.3</span>, <span class='fl'>2.7</span>, <span class='fl'>4.3</span>, <span class='fl'>4.4</span>, <span class='fl'>4.9</span>, <span class='fl'>5.2</span>, <span class='fl'>5.4</span>, <span class='fl'>5.8</span>, <span class='fl'>6</span>, <span class='fl'>7</span>,
     <span class='fl'>9</span>, <span class='fl'>9.5</span>, <span class='fl'>15</span><span class='op'>)</span>
 
-<span class='fu'>groupClosest</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] 2 2 2 5 5 1 1 3 3 3 4 4 7 6 6 8</div></pre>
+<span class='fu'>groupConsecutive</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  [1] 1 1 1 2 2 3 3 3 4 4 4 4 5 6 6 7</div><div class='input'><span class='co'>## value 5.2 was initially grouped with 4.3 (because their difference is</span>
+<span class='co'>## smaller 1, but then re-grouped together with 5.4 because the difference</span>
+<span class='co'>## between 5.4 (the next value outside the group of 4.3) and 5.2 is smaller</span>
+<span class='co'>## than its difference to the mean value of the group for value 4.3</span>
+
+<span class='co'>## Example for a case in which values are NOT grouped into the same group</span>
+<span class='co'>## even if the difference between them is &lt;= maxDiff</span>
+<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4.9</span>, <span class='fl'>5.2</span>, <span class='fl'>5.4</span><span class='op'>)</span>
+<span class='fu'>groupConsecutive</span><span class='op'>(</span><span class='va'>a</span>, maxDiff <span class='op'>=</span> <span class='fl'>0.3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 1 2 2</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

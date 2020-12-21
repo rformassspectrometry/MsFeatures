@@ -79,7 +79,7 @@ be larger to that of the other." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MsFeatures</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@ be larger to that of the other." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/RforMassSpectrometry/MsFeatures/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -157,7 +157,7 @@ by the same value.</p>
     <p>The algorithm is defined as follows:</p><ul>
 <li><p>all pairs of values in <code>x</code> which are <code>&gt;= threshold</code> are identified and
 sorted decreasingly.</p></li>
-<li><p>starting with the pair with the highest correlation groups are defined:</p></li>
+<li><p>starting with the pair with the highest correlation, groups are defined:</p></li>
 <li><p>if none of the two is in a group, both are put into the same new group.</p></li>
 <li><p>if one of the two is already in a group, the other is put into the same
 group if <strong>all</strong> correlations of it to that group are <code>&gt;= threshold</code>
@@ -172,6 +172,11 @@ other group is larger than the average correlation to its own group.</p></li>
 <p>This ensures that groups are defined in which all elements have a correlation
 <code>&gt;= threshold</code> with each other and the correlation between members of the
 same group is maximized.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other grouping operations: 
+<code><a href='groupClosest.html'>groupClosest</a>()</code>,
+<code><a href='groupConsecutive.html'>groupConsecutive</a>()</code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Johannes Rainer</p>

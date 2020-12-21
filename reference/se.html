@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • MsFeatures</title>
+<title>Quantified LC-MS preprocessing result test data — se • MsFeatures</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,13 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Quantified LC-MS preprocessing result test data — se" />
+<meta property="og:description" content="The se variable is a SummarizedExperiment() object representing the
+results from a xcms-based pre-processing of an LC-MS untargeted
+metabolomics data set. The raw data files are provided in the faahKO
+package. The pre-processing of this data set is described in detail in
+the xcms vignette of the xcms package. This object was created from the
+XCMSnExp result object with the quantify method." />
 
 
 
@@ -58,7 +64,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -102,86 +108,26 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Quantified LC-MS preprocessing result test data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/RforMassSpectrometry/MsFeatures/blob/master/R/se.R'><code>R/se.R</code></a></small>
+    <div class="hidden name"><code>se.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>The <code>se</code> variable is a <code><a href='https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html'>SummarizedExperiment()</a></code> object representing the
+results from a <code>xcms</code>-based pre-processing of an LC-MS untargeted
+metabolomics data set. The raw data files are provided in the <code>faahKO</code>
+package. The pre-processing of this data set is described in detail in
+the <em>xcms</em> vignette of the <code>xcms</code> package. This object was created from the
+<code>XCMSnExp</code> result object with the <code>quantify</code> method.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="featureGroups.html">featureGroups()</a></code> <code><a href="featureGroups.html">`featureGroups&lt;-`()</a></code> </p>
-        </td>
-        <td><p>Get or set feature group definitions from an object
 
-<code>featureGroups</code> and <code>featureGroups&lt;-</code> allow to extract or set the feature
-definitions from the input object. The implementations for
-<code>SummarizedExperiment()</code> get or set the content of a column named
-<code>"feature_group"</code> in the object's <code>rowData</code>.
 
-This method should be implemented for all other object for which a
-<code>groupFeatures()</code> method is defined.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="groupClosest.html">groupClosest()</a></code> </p>
-        </td>
-        <td><p>Group values with differences below threshold</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="groupConsecutive.html">groupConsecutive()</a></code> </p>
-        </td>
-        <td><p>Grouping of sorted values into sets with smallest differences</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="groupFeatures-similar-rtime.html">SimilarRtimeParam()</a></code> <code><a href="groupFeatures-similar-rtime.html">groupFeatures(<i>&lt;numeric&gt;</i>,<i>&lt;SimilarRtimeParam&gt;</i>)</a></code> <code><a href="groupFeatures-similar-rtime.html">groupFeatures(<i>&lt;SummarizedExperiment&gt;</i>,<i>&lt;SimilarRtimeParam&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Group features based on approximate retention times</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="groupFeatures.html">groupFeatures()</a></code> </p>
-        </td>
-        <td><p>General Feature Grouping Concept</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="groupSimilarityMatrix.html">groupSimilarityMatrix()</a></code> </p>
-        </td>
-        <td><p>Group rows of a diagonal matrix using a threshold</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="se.html">se</a></code> </p>
-        </td>
-        <td><p>Quantified LC-MS preprocessing result test data</p></td>
-      </tr>
-    </tbody>
-    </table>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
