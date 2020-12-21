@@ -61,6 +61,10 @@ The major disadvantage is that a wrong group assignment in one of the initial
 steps can not be \emph{corrected} for in later steps.
 }
 
+\seealso{
+\code{\link[=featureGroups]{featureGroups()}} for the function to extract (defined) feature
+groups from a result object.
+}
 \author{
 Johannes Rainer
 }

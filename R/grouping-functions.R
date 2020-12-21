@@ -1,18 +1,17 @@
-#' @title Grouping of values into sets with smallest differences
+#' @title Grouping of sorted values into sets with smallest differences
 #'
 #' @description
 #'
-#' `groupClosest` groups values in `x` for which the difference is smaller than
-#' `maxDiff`. As a result, the mean value between the groups will always be
-#' larger than `maxDiff`. Values which would be assigned to more than one
-#' group, are assigned to the one with the smallest difference to the group
-#' mean value. A use case for this would be to group MS features based on their
-#' retention times into groups of ~ co-eluting features.
+#' `groupConsecutive` groups **sorted** values in `x` for which the difference
+#' is smaller than `maxDiff`. As a result, the mean difference between the
+#' groups will always be larger than `maxDiff`, but difference between
+#' individual values within the same group (e.g. between the first and last)
+#' can be larger `maxDiff`.
 #'
 #' In detail, from the sorted `x`, the function starts from the smallest value
-#' defining the first group as the one containing all
-#' values in `x` with a difference to this first value which is `<= maxDiff`.
-#' The next group is the defined based on the next larger value not being part
+#' defining the first group as the one containing all values in `x` with a
+#' difference to this first value which is `<= maxDiff`.
+#' The next group is the defined based on the next larger value that is not part
 #' of the first group and includes all values with a difference `<= maxDiff` to
 #' this value. For values fulfilling this criteria but being already part of
 #' a previous group, the differences to the mean value of the current group
@@ -32,13 +31,20 @@
 #' smaller, `1.9` is removed from the first group and assigned to the second
 #' one.
 #'
+#' @note
+#'
+#' The difference between consecutive (ordered) values within a defined group
+#' is always `<= maxDiff`, but the difference between e.g. the first and the
+#' last of the (ordered) values can be larger than `maxDiff`. See
+#' [groupClosest()] for a more stringent grouping function.
+#'
 #' @param x `numeric` of values that should be grouped.
 #'
 #' @param maxDiff `numeric(1)` defining the threshold for difference between
 #'     values in `x` to be grouped into the same group.
 #'
 #' @return `integer` with the group assignment (values grouped together have
-#'     the same value).
+#'     the same return value).
 #'
 #' @author Johannes Rainer
 #'
@@ -50,12 +56,12 @@
 #'
 #' ## The example described above
 #' x <- c(1.1, 1.9, 2.2)
-#' groupClosest(x)
+#' groupConsecutive(x)
 #'
 #' x <- c(1.1, 1.5, 1.7, 2.3, 2.7, 4.3, 4.4, 4.9, 5.2, 5.4, 5.8, 6, 7,
 #'     9, 9.5, 15)
 #'
-#' groupClosest(x)
+#' groupConsecutive(x)
 #' ## value 5.2 was initially grouped with 4.3 (because their difference is
 #' ## smaller 1, but then re-grouped together with 5.4 because the difference
 #' ## between 5.4 (the next value outside the group of 4.3) and 5.2 is smaller
@@ -64,8 +70,8 @@
 #' ## Example for a case in which values are NOT grouped into the same group
 #' ## even if the difference between them is <= maxDiff
 #' a <- c(4.9, 5.2, 5.4)
-#' groupClosest(a, maxDiff = 0.3)
-groupClosest <- function(x, maxDiff = 1) {
+#' groupConsecutive(a, maxDiff = 0.3)
+groupConsecutive <- function(x, maxDiff = 1) {
     if (is.unsorted(x)) {
         idx <- order(x)
         x <- x[idx]
@@ -122,7 +128,7 @@ groupClosest <- function(x, maxDiff = 1) {
 #' The algorithm is defined as follows:
 #' - all pairs of values in `x` which are `>= threshold` are identified and
 #'   sorted decreasingly.
-#' - starting with the pair with the highest correlation groups are defined:
+#' - starting with the pair with the highest correlation, groups are defined:
 #' - if none of the two is in a group, both are put into the same new group.
 #' - if one of the two is already in a group, the other is put into the same
 #'   group if **all** correlations of it to that group are `>= threshold`
@@ -149,7 +155,9 @@ groupClosest <- function(x, maxDiff = 1) {
 #'
 #' @author Johannes Rainer
 #'
-#' @export
+#' @family grouping operations
+#'
+#' @export groupSimilarityMatrix
 #'
 #' @examples
 #'
@@ -280,4 +288,51 @@ groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE) {
     if (any(nas))
         res[nas] <- seq(grp_id, length.out = sum(nas))
     res
+}
+
+#' @title Group values with differences below threshold
+#'
+#' @description
+#'
+#' Group values with a difference between them being smaller than a user
+#' defined threshold. This function uses the [groupSimilarityMatrix()] function
+#' to create groups with smallest differences between its members. Differences
+#' between **all** members of one group are below the user defined threshold
+#' `maxDiff`. This is a more stringent grouping than what [groupConsecutive()]
+#' performs leading thus to smaller groups (with smaller differences between
+#' its members).
+#'
+#' @param x `numeric` of values that should be grouped.
+#'
+#' @param maxDiff `numeric(1)` defining the threshold for difference between
+#'     values in `x` to be grouped into the same group.
+#'
+#' @return `integer` with the group assignment (values grouped together have
+#'     the same return value).
+#'
+#' @author Johannes Rainer
+#'
+#' @family grouping operations
+#'
+#' @export
+#'
+#' @importFrom stats dist
+#'
+#' @examples
+#'
+#' x <- c(1.1, 1.9, 2.2)
+#' groupClosest(x)
+#' ## Although the difference between the 1st and 2nd element would be smaller
+#' ## than the threshold, they are not grouped because the difference between
+#' ## the 2nd and 3rd element is even smaller. The first element is also not
+#' ## put into the same group, because it has a difference > diffRt to the 3rd
+#' ## element.
+#'
+#' x <- c(1.1, 1.5, 1.7, 2.3, 2.7, 4.3, 4.4, 4.9, 5.2, 5.4, 5.8, 6, 7,
+#'     9, 9.5, 15)
+#'
+#' groupClosest(x)
+groupClosest <- function(x, maxDiff = 1) {
+    dists <- as.matrix(dist(x, method = "manhattan"))
+    groupSimilarityMatrix(-dists, threshold = -maxDiff, full = TRUE)
 }

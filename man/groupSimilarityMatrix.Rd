@@ -33,7 +33,7 @@ The algorithm is defined as follows:
 \itemize{
 \item all pairs of values in \code{x} which are \verb{>= threshold} are identified and
 sorted decreasingly.
-\item starting with the pair with the highest correlation groups are defined:
+\item starting with the pair with the highest correlation, groups are defined:
 \item if none of the two is in a group, both are put into the same new group.
 \item if one of the two is already in a group, the other is put into the same
 group if \strong{all} correlations of it to that group are \verb{>= threshold}
@@ -81,6 +81,12 @@ x[3, 2] <- 0.92
 x
 groupSimilarityMatrix(x, threshold = 0.9) ## Don't break previous cluster!
 }
+\seealso{
+Other grouping operations: 
+\code{\link{groupClosest}()},
+\code{\link{groupConsecutive}()}
+}
 \author{
 Johannes Rainer
 }
+\concept{grouping operations}

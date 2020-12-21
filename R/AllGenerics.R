@@ -60,6 +60,8 @@ NULL
 #'
 #' @author Johannes Rainer
 #'
+#' @seealso [featureGroups()] for the function to extract (defined) feature
+#'     groups from a result object.
 NULL
 
 #' @rdname groupFeatures
@@ -67,3 +69,51 @@ NULL
 #' @exportMethod groupFeatures
 setGeneric("groupFeatures", function(object, param, ...)
     standardGeneric("groupFeatures"))
+
+#' @title Get or set feature group definitions from an object
+#'
+#' `featureGroups` and `featureGroups<-` allow to extract or set the feature
+#' definitions from the input object. The implementations for
+#' [SummarizedExperiment()] get or set the content of a column named
+#' `"feature_group"` in the object's `rowData`.
+#'
+#'  This method should be implemented for all other object for which a
+#' [groupFeatures()] method is defined.
+#'
+#' @param object the input object. In the `MsFeatures` package this method is
+#'     implemented for `SummarizedExperiment`.
+#'
+#' @param value the new value for the *feature groups* variable.
+#'
+#' @param ... ignored.
+#'
+#' @return a `character` with the group assignment of the features. Has to have
+#'     the same length as there are features in `object.`
+#'
+#' @author Johannes Rainer
+#'
+#' @rdname featureGroups
+#'
+#' @exportMethod featureGroups
+#'
+#' @exportMethod featureGroups<-
+#'
+#' @examples
+#'
+#' ## Load the test SummarizedExperiment
+#' library(SummarizedExperiment)
+#' data(se)
+#'
+#' ## No column "feature_group" present in the object, this NA is returned
+#' featureGroups(se)
+#'
+#' ## Add a column "feature_group" to the `rowData` of the object
+#' rowData(se)$feature_group <- seq_len(nrow(rowData(se)))
+#'
+#' featureGroups(se)
+setGeneric("featureGroups", function(object, ...)
+    standardGeneric("featureGroups"))
+
+#' @rdname featureGroups
+setGeneric("featureGroups<-", function(object, value)
+    standardGeneric("featureGroups<-"))

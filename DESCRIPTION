@@ -1,6 +1,6 @@
 Package: MsFeatures
 Title: Functionality for Mass Spectrometry Features
-Version: 0.0.2
+Version: 0.0.3
 Description: The MsFeature package defines functionality for Mass Spectrometry
     features. This includes functions to group (LC-MS) features based on some
     of their properties, such as retention time (coeluting features), or
@@ -23,14 +23,16 @@ Authors@R: c(person(given = "RforMassSpectrometry Package Maintainer",
 Depends:
     R (>= 3.6.0)
 Imports:
-    stats,
-    MsCoreUtils
+    methods,
+    ProtGenerics (>= 1.23.5),
+    MsCoreUtils,
+    SummarizedExperiment
 Suggests:
     testthat,
     roxygen2
 License: Artistic-2.0
 Encoding: UTF-8
-LazyData: yes
+LazyData: no
 BugReports: https://github.com/RforMassSpectrometry/MsFeatures/issues
 URL: https://github.com/RforMassSpectrometry/MsFeatures
 biocViews: Infrastructure, MassSpectrometry, Metabolomics
@@ -39,5 +41,7 @@ Roxygen: list(markdown=TRUE)
 Collate:
     'hidden_aliases.R'
     'AllGenerics.R'
-    'SimilarRtimeParam.R'
     'grouping-functions.R'
+    'SimilarRtimeParam.R'
+    'featureGroups.R'
+    'se.R'
