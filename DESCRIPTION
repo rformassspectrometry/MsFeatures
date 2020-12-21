@@ -32,7 +32,7 @@ Suggests:
     roxygen2
 License: Artistic-2.0
 Encoding: UTF-8
-LazyData: yes
+LazyData: no
 BugReports: https://github.com/RforMassSpectrometry/MsFeatures/issues
 URL: https://github.com/RforMassSpectrometry/MsFeatures
 biocViews: Infrastructure, MassSpectrometry, Metabolomics
