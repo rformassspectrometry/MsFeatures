@@ -270,10 +270,10 @@ groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE) {
                 ## Put the elements into the group of the other, if its
                 ## correlation to its group is larger than to its own group
                 if (is.finite(mcor_1_2) && is.finite(mcor_1_1) &&
-                    !any(cor_1_2 < threshold) && mcor_1_2 > mcor_1_1)
+                    !any(cor_1_2 < threshold) && mcor_1_2 >= mcor_1_1)
                     res[idx_pairs[i, 1]] <- got_grp[2]
                 if (is.finite(mcor_2_1) && is.finite(mcor_2_2) &&
-                    !any(cor_2_1 < threshold) && mcor_2_1 > mcor_2_2)
+                    !any(cor_2_1 < threshold) && mcor_2_1 >= mcor_2_2)
                     res[idx_pairs[i, 2]] <- got_grp[1]
                 ## if (!(is.na(mcor_1_2) || any(cor_1_2 < threshold))
                 ##     && is.finite(mcor_1_1) && mcor_1_2 > mcor_1_1)
