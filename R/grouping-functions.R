@@ -190,7 +190,7 @@ groupConsecutive <- function(x, maxDiff = 1) {
 #' x[3, 2] <- 0.92
 #' x
 #' groupSimilarityMatrix(x, threshold = 0.9) ## Don't break previous cluster!
-groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE) {
+groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE, ...) {
     nr <- nrow(x)
     if (nr != ncol(x))
         stop("'x' should be a symmetric matrix")
