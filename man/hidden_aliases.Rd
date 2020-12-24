@@ -4,6 +4,7 @@
 \name{hidden_aliases}
 \alias{hidden_aliases}
 \alias{SimilarRtimeParam-class}
+\alias{AbundanceSimilarityParam-class}
 \title{Internal page for hidden aliases}
 \value{
 Not applicable

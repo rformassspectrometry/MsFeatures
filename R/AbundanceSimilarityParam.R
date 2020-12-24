@@ -23,6 +23,11 @@
 #' similarity function. It defaults to `groupSimilarityMatrix`. See
 #' [groupSimilarityMatrix()] for details.
 #'
+#' Additional settings for the `groupFun` and `simFun` functions can be passed
+#' to the **parameter object**  with the `...` in the `AbundanceSimilarityParam`
+#' constructor function. Other additional parameters specific for the type
+#' of `object` can be passed *via* `...` in the `groupFeatures` call.
+#'
 #' @param groupFun `function` to group features based on the calculated
 #'     similarity matrix. Defaults to `groupFun = groupSimilarityMatrix`. See
 #'     [groupSimilarityMatrix()] for details.
@@ -44,13 +49,10 @@
 #'     to the similarity calculation. Defaults to `transform = log2`. To use
 #'     feature values *as is* use `transform = identity`.
 #'
-#' @param ... for `SimilarAbundanceParam`: optional parameters to be passed
-#'     along to `simFun` and `groupFun`.
-#'
-#' LLLLLL
-#' All optional settings that define the GROUPING should go to the ... of the
-#' param object! Stuff like `value` etc that are specific to the input object
-#' should be passed to the method call.
+#' @param ... for `AbundanceSimilarityParam`: optional parameters to be passed
+#'     along to `simFun` and `groupFun`. For `groupFeatures`: optional
+#'     parameters for the extraction/definition of the feature values from
+#'     `object`.
 #'
 #' @family feature grouping methods
 #'
@@ -61,11 +63,11 @@
 #'
 #' @rdname groupFeatures-similar-abundance
 #'
-#' @exportClass SimilarAbundanceParam
+#' @exportClass AbundanceSimilarityParam
 #'
 #' @author Johannes Rainer
 
-setClass("SimilarAbundanceParam",
+setClass("AbundanceSimilarityParam",
          slots = c(threshold = "numeric",
                    simFun = "function",
                    groupFun = "function",
@@ -83,7 +85,30 @@ setClass("SimilarAbundanceParam",
          ),
          validity = function(object) {
              msg <- NULL
-             if (length(threshold) != 1)
+             if (length(object@threshold) != 1)
                  msg <- "'threshold' has to be of length 1"
              msg
          })
+
+#' @rdname groupFeatures-similar-abundance
+#'
+#' @importFrom stats cor
+#'
+#' @export
+AbundanceSimilarityParam <- function(threshold = 0.9, simFun = cor,
+                                     groupFun = groupSimilarityMatrix,
+                                     subset = integer(), transform = log2,
+                                     ...) {
+    if (is.logical(subset))
+        subset <- which(subset)
+    if (is.numeric(subset))
+        subset <- as.integer(subset)
+    if (!is.integer(subset))
+        stop("'subset' has to be either a logical or an integer vector")
+    new("AbundanceSimilarityParam", threshold = threshold, simFun = simFun,
+        groupFun = groupFun, subset = subset, transform = transform,
+        dots = list(...))
+}
+
+## groupFeatures on a `matrix`.
+## groupFeatures on a `SummarizedExperiment`.

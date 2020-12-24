@@ -148,6 +148,9 @@ featureGroups(res)
 
 \code{\link[=featureGroups]{featureGroups()}} for the function to extract defined feature
 groups from a \code{SummarizedExperiment}.
+
+Other feature grouping methods: 
+\code{\link{groupFeatures-similar-abundance}}
 }
 \author{
 Johannes Rainer

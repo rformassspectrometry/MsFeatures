@@ -4,7 +4,7 @@
 \alias{groupSimilarityMatrix}
 \title{Group rows of a diagonal matrix using a threshold}
 \usage{
-groupSimilarityMatrix(x, threshold = 0.9, full = TRUE)
+groupSimilarityMatrix(x, threshold = 0.9, full = TRUE, ...)
 }
 \arguments{
 \item{x}{symmetrix \code{numeric} \code{matrix}.}
@@ -13,6 +13,8 @@ groupSimilarityMatrix(x, threshold = 0.9, full = TRUE)
 
 \item{full}{\code{logical(1)} whether the full matrix should be considered, or
 just the upper triangular matrix (including the diagonal).}
+
+\item{...}{ignored.}
 }
 \value{
 \code{integer} same length than \code{nrow(x)}, grouped elements (rows) defined

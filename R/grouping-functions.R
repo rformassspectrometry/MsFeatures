@@ -150,6 +150,8 @@ groupConsecutive <- function(x, maxDiff = 1) {
 #' @param full `logical(1)` whether the full matrix should be considered, or
 #'     just the upper triangular matrix (including the diagonal).
 #'
+#' @param ... ignored.
+#'
 #' @return `integer` same length than `nrow(x)`, grouped elements (rows) defined
 #'     by the same value.
 #'
