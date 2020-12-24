@@ -40,9 +40,9 @@ RoxygenNote: 7.1.1
 Roxygen: list(markdown=TRUE)
 Collate:
     'grouping-functions.R'
-    'AbundanceSimilarityParam.R'
     'hidden_aliases.R'
     'AllGenerics.R'
+    'AbundanceSimilarityParam.R'
     'SimilarRtimeParam.R'
     'featureGroups.R'
     'se.R'

@@ -4,16 +4,19 @@
 \name{groupFeatures-similar-abundance}
 \alias{groupFeatures-similar-abundance}
 \alias{AbundanceSimilarityParam}
+\alias{groupFeatures,matrix,AbundanceSimilarityParam-method}
 \title{Group features based on abundance similarities across samples}
 \usage{
 AbundanceSimilarityParam(
   threshold = 0.9,
-  simFun = cor,
+  simFun = function(x, use = "pairwise.complete.obs", ...) cor(t(x), use = use, ...),
   groupFun = groupSimilarityMatrix,
   subset = integer(),
-  transform = log2,
+  transform = identity,
   ...
 )
+
+\S4method{groupFeatures}{matrix,AbundanceSimilarityParam}(object, param, ...)
 }
 \arguments{
 \item{threshold}{\code{numeric(1)} defining the (similarity) threshold to be used
@@ -21,9 +24,9 @@ for the feature grouping. This parameter is passed to the \code{groupFun}
 function.}
 
 \item{simFun}{\code{function} to be used to calculate the (pairwise)
-similarities. Defaults to \code{simFun = cor} in which case also
-\code{use = "pairwise.complete.obs"} is automatically passed along to the
-function.}
+similarities. Defaults to \code{simFun = function(x, use = "pairwise.complete.obs", ...) cor(t(x), use = use, ...)} which
+calculates similarities between \strong{rows} in \code{object} using the \code{cor}
+function. See description for more details.}
 
 \item{groupFun}{\code{function} to group features based on the calculated
 similarity matrix. Defaults to \code{groupFun = groupSimilarityMatrix}. See
@@ -34,13 +37,20 @@ similarity matrix. Defaults to \code{groupFun = groupSimilarityMatrix}. See
 the calculation is performed on all samples.}
 
 \item{transform}{\code{function} to be used to transform feature abundances prior
-to the similarity calculation. Defaults to \code{transform = log2}. To use
-feature values \emph{as is} use \code{transform = identity}.}
+to the similarity calculation. Defaults to \code{transform = identity}.
+Alternatively, values could e.g. transformed into log2 scale with
+\code{transform = log2}.}
 
 \item{...}{for \code{AbundanceSimilarityParam}: optional parameters to be passed
 along to \code{simFun} and \code{groupFun}. For \code{groupFeatures}: optional
 parameters for the extraction/definition of the feature values from
 \code{object}.}
+
+\item{object}{object containing the feature abundances on which features
+should be grouped.}
+
+\item{param}{\code{AbundanceSimilarityParam} defining the settings for the
+grouping based on feature values.}
 }
 \description{
 Group features based on similar abundances (i.e. \emph{feature values}) across
@@ -54,16 +64,41 @@ number of features and subsequently groups features for which the similarity
 is higher than the user provided threshold. Parameter \code{simFun} allows
 to specify the function to calculate the pairwise similarities on the feature
 values (eventually transformed by the function specified with parameter
-\code{transform}). \code{simFun} defaults to \code{cor} but any function that
-returns a (symmetric) numeric similarity matrix can be used. Parameter
-\code{groupFun} allows to specify the function to group the features based on the
-similarity function. It defaults to \code{groupSimilarityMatrix}. See
+\code{transform}). \code{simFun} defaults to a function that uses \code{cor} to calculate
+similarities between rows in \code{object} but any function that calculates
+similarities between rows and that returns a (symmetric) numeric similarity
+matrix can be used.
+
+Parameter \code{groupFun} allows to specify the function to group the features
+based on the similarity function. It defaults to \code{groupSimilarityMatrix}. See
 \code{\link[=groupSimilarityMatrix]{groupSimilarityMatrix()}} for details.
 
 Additional settings for the \code{groupFun} and \code{simFun} functions can be passed
 to the \strong{parameter object}  with the \code{...} in the \code{AbundanceSimilarityParam}
 constructor function. Other additional parameters specific for the type
 of \code{object} can be passed \emph{via} \code{...} in the \code{groupFeatures} call.
+}
+\examples{
+
+## Define a simple numeric matrix on which we want to group the rows
+x <- rbind(
+    c(12, 34, 231, 234, 9, 5, 7),
+    c(900, 900, 800, 10, 12, 9, 4),
+    c(25, 70, 400, 409, 15, 8, 4),
+    c(12, 13, 14, 15, 16, 17, 18),
+    c(14, 36, 240, 239, 12, 7, 8),
+    c(100, 103, 80, 2, 3, 1, 1)
+    )
+
+## Group rows based on similarity calculated with Pearson's correlation
+## on the actual data values (without transforming them).
+res <- groupFeatures(x, AbundanceSimilarityParam())
+res
+
+## Use Spearman's rho to correlate rows of the log2 transformed x matrix
+res <- groupFeatures(x, AbundanceSimilarityParam(method = "spearman",
+    transform = log2))
+res
 }
 \seealso{
 \code{\link[=groupFeatures]{groupFeatures()}} for the general concept of feature grouping.
