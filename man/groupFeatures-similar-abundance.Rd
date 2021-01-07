@@ -5,11 +5,12 @@
 \alias{groupFeatures-similar-abundance}
 \alias{AbundanceSimilarityParam}
 \alias{groupFeatures,matrix,AbundanceSimilarityParam-method}
+\alias{groupFeatures,SummarizedExperiment,AbundanceSimilarityParam-method}
 \title{Group features based on abundance similarities across samples}
 \usage{
 AbundanceSimilarityParam(
   threshold = 0.9,
-  simFun = function(x, use = "pairwise.complete.obs", ...) cor(t(x), use = use, ...),
+  simFun = corRows,
   groupFun = groupSimilarityMatrix,
   subset = integer(),
   transform = identity,
@@ -17,16 +18,17 @@ AbundanceSimilarityParam(
 )
 
 \S4method{groupFeatures}{matrix,AbundanceSimilarityParam}(object, param, ...)
+
+\S4method{groupFeatures}{SummarizedExperiment,AbundanceSimilarityParam}(object, param, i = 1L, ...)
 }
 \arguments{
 \item{threshold}{\code{numeric(1)} defining the (similarity) threshold to be used
 for the feature grouping. This parameter is passed to the \code{groupFun}
 function.}
 
-\item{simFun}{\code{function} to be used to calculate the (pairwise)
-similarities. Defaults to \code{simFun = function(x, use = "pairwise.complete.obs", ...) cor(t(x), use = use, ...)} which
-calculates similarities between \strong{rows} in \code{object} using the \code{cor}
-function. See description for more details.}
+\item{simFun}{\code{function} to be used to calculate (pairwise)
+similarities (between \strong{rows}). Defaults to \code{simFun = corRows}.
+See description or \code{\link[=corRows]{corRows()}} for more details.}
 
 \item{groupFun}{\code{function} to group features based on the calculated
 similarity matrix. Defaults to \code{groupFun = groupSimilarityMatrix}. See
@@ -51,6 +53,11 @@ should be grouped.}
 
 \item{param}{\code{AbundanceSimilarityParam} defining the settings for the
 grouping based on feature values.}
+
+\item{i}{for \code{object} being a \code{\link[=SummarizedExperiment]{SummarizedExperiment()}}: \code{integer(1)} or
+\code{character(1)} specifying either the index or name of the  the \emph{assay}
+in \code{object} that contains the feature values that should be used. Use
+\code{\link[=assayNames]{assayNames()}} on \code{object} to list all available assays.}
 }
 \description{
 Group features based on similar abundances (i.e. \emph{feature values}) across
@@ -68,6 +75,11 @@ values (eventually transformed by the function specified with parameter
 similarities between rows in \code{object} but any function that calculates
 similarities between rows and that returns a (symmetric) numeric similarity
 matrix can be used.
+
+If \code{object} is a \code{\link[=SummarizedExperiment]{SummarizedExperiment()}}: if a column \code{"feature_group"} is
+found in \code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment::colData()}} feature groups defined in that
+column are further sub-grouped with this method. See \code{\link[=groupFeatures]{groupFeatures()}} for
+the general concept of this feature grouping.
 
 Parameter \code{groupFun} allows to specify the function to group the features
 based on the similarity function. It defaults to \code{groupSimilarityMatrix}. See
@@ -99,6 +111,23 @@ res
 res <- groupFeatures(x, AbundanceSimilarityParam(method = "spearman",
     transform = log2))
 res
+
+## Perform the grouping on a SummarizedExperiment
+library(SummarizedExperiment)
+data(se)
+
+## Group features based on log2 transformed feature values in the first
+## assay of the SummarizedExperiment
+res <- groupFeatures(se, param = AbundanceSimilarityParam(threshold = 0.7,
+    transform = log2))
+
+featureGroups(res)
+
+## Perform feature grouping only on a subset of rows/features:
+featureGroups(res) <- NA_character_
+featureGroups(res)[40:80] <- "FG"
+res <- groupFeatures(res, AbundanceSimilarityParam(transform = log2))
+featureGroups(res)
 }
 \seealso{
 \code{\link[=groupFeatures]{groupFeatures()}} for the general concept of feature grouping.

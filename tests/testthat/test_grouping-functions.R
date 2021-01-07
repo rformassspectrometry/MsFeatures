@@ -65,6 +65,7 @@ test_that("groupSimilarityMatrix works", {
 
     res <- groupSimilarityMatrix(cors, threshold = 0.7)
     expect_equal(res, c(2, 1, 1, 1, 1, 1, 1))
+
 })
 
 test_that("groupClosest works", {

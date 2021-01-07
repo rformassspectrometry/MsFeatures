@@ -120,8 +120,8 @@ groupConsecutive <- function(x, maxDiff = 1) {
 #' correlation matrix (such as created with `cor`) it will generate small
 #' clusters of highly correlated elements. Note however that single elements in
 #' one cluster could also have a correlation `>= threshold` to another element
-#' in another cluster. The average correlation to its own cluster will however
-#' be larger to that of the other.
+#' in another cluster. The average similarity to its own cluster will however
+#' be higher to that of the other.
 #'
 #' @details
 #'
@@ -232,7 +232,7 @@ groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE, ...) {
                     ## yes: put them into the group with which both have the
                     ## highest correlation.
                     res[idx] <- as.integer(
-                        names(sort(mean_cor_to_grp, decreasing = TRUE)))
+                        names(sort(mean_cor_to_grp, decreasing = TRUE)))[1L]
                 } else {
                     ## no: add them as new group
                     res[idx] <- grp_id
@@ -274,15 +274,9 @@ groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE, ...) {
                 if (is.finite(mcor_1_2) && is.finite(mcor_1_1) &&
                     !any(cor_1_2 < threshold) && mcor_1_2 >= mcor_1_1)
                     res[idx_pairs[i, 1]] <- got_grp[2]
-                if (is.finite(mcor_2_1) && is.finite(mcor_2_2) &&
-                    !any(cor_2_1 < threshold) && mcor_2_1 >= mcor_2_2)
+                else if (is.finite(mcor_2_1) && is.finite(mcor_2_2) &&
+                         !any(cor_2_1 < threshold) && mcor_2_1 >= mcor_2_2)
                     res[idx_pairs[i, 2]] <- got_grp[1]
-                ## if (!(is.na(mcor_1_2) || any(cor_1_2 < threshold))
-                ##     && is.finite(mcor_1_1) && mcor_1_2 > mcor_1_1)
-                ##     res[idx_pairs[i, 1]] <- got_grp[2]
-                ## if (!(is.na(mcor_2_1) || any(cor_2_1 < threshold))
-                ##     && is.finite(mcor_2_2) && mcor_2_1 > mcor_2_2)
-                ##     res[idx_pairs[i, 2]] <- got_grp[1]
             } # else nothing to do - they are already in the same group
         }
     }

@@ -49,12 +49,15 @@ Group features based on similar retention time. This method is supposed to be
 used as an initial \emph{crude} grouping of LC-MS features based on the median
 retention time of all their chromatographic peaks. All features with a
 difference in their retention time which is \code{<=} parameter \code{diffRt} of the
-parameter object are grouped together. If a column \code{"feature_group"} is
-found in
-\code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment::colData()}} this is further sub-grouped by this method.
-For \code{object} being a \code{SummarizedExperiment} it might be required to specify
-the column in the object's \code{rowData} containing the retention times with the
-\code{rtime} parameter (which defaults to \code{rtime = "rtime"}.
+parameter object are grouped together.
+
+If \code{object} is a \code{\link[=SummarizedExperiment]{SummarizedExperiment()}}: if a column \code{"feature_group"} is
+found in \code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment::colData()}} feature groups defined in that
+column are further sub-grouped with this method. See \code{\link[=groupFeatures]{groupFeatures()}} for
+the general concept of this feature grouping.
+Also, it might be required to specify the column in the object's \code{rowData}
+containing the retention times with the \code{rtime} parameter (which defaults
+to \code{rtime = "rtime"}.
 
 Parameter \code{groupFun} allows to specify the function that should be used for
 the actual grouping. Two possible choices are:

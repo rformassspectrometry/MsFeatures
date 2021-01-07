@@ -39,6 +39,7 @@ biocViews: Infrastructure, MassSpectrometry, Metabolomics
 RoxygenNote: 7.1.1
 Roxygen: list(markdown=TRUE)
 Collate:
+    'corRows.R'
     'grouping-functions.R'
     'hidden_aliases.R'
     'AllGenerics.R'

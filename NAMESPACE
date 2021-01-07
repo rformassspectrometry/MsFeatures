@@ -2,6 +2,7 @@
 
 export(AbundanceSimilarityParam)
 export(SimilarRtimeParam)
+export(corRows)
 export(groupClosest)
 export(groupConsecutive)
 export(groupSimilarityMatrix)
@@ -17,4 +18,5 @@ importFrom(methods,new)
 importFrom(stats,cor)
 importFrom(stats,dist)
 importMethodsFrom(SummarizedExperiment,"rowData<-")
+importMethodsFrom(SummarizedExperiment,assay)
 importMethodsFrom(SummarizedExperiment,rowData)

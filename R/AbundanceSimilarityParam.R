@@ -1,5 +1,6 @@
 #' @include AllGenerics.R
 #' @include grouping-functions.R
+#' @include corRows.R
 
 #' @title Group features based on abundance similarities across samples
 #'
@@ -23,6 +24,11 @@
 #' similarities between rows and that returns a (symmetric) numeric similarity
 #' matrix can be used.
 #'
+#' If `object` is a [SummarizedExperiment()]: if a column `"feature_group"` is
+#' found in [SummarizedExperiment::colData()] feature groups defined in that
+#' column are further sub-grouped with this method. See [groupFeatures()] for
+#' the general concept of this feature grouping.
+#'
 #' Parameter `groupFun` allows to specify the function to group the features
 #' based on the similarity function. It defaults to `groupSimilarityMatrix`. See
 #' [groupSimilarityMatrix()] for details.
@@ -36,17 +42,20 @@
 #'     similarity matrix. Defaults to `groupFun = groupSimilarityMatrix`. See
 #'     [groupSimilarityMatrix()] for details.
 #'
+#' @param i for `object` being a [SummarizedExperiment()]: `integer(1)` or
+#'     `character(1)` specifying either the index or name of the  the *assay*
+#'     in `object` that contains the feature values that should be used. Use
+#'     [assayNames()] on `object` to list all available assays.
+#'
 #' @param object object containing the feature abundances on which features
 #'     should be grouped.
 #'
 #' @param param `AbundanceSimilarityParam` defining the settings for the
 #'     grouping based on feature values.
 #'
-#' @param simFun `function` to be used to calculate the (pairwise)
-#'     similarities. Defaults to `simFun = function(x, use =
-#'     "pairwise.complete.obs", ...) cor(t(x), use = use, ...)` which
-#'     calculates similarities between **rows** in `object` using the `cor`
-#'     function. See description for more details.
+#' @param simFun `function` to be used to calculate (pairwise)
+#'     similarities (between **rows**). Defaults to `simFun = corRows`.
+#'     See description or [corRows()] for more details.
 #'
 #' @param subset `integer` or `logical` defining a subset of samples (at least
 #'     2) on which the similarity calculation should be performed. By default
@@ -100,6 +109,23 @@
 #' res <- groupFeatures(x, AbundanceSimilarityParam(method = "spearman",
 #'     transform = log2))
 #' res
+#'
+#' ## Perform the grouping on a SummarizedExperiment
+#' library(SummarizedExperiment)
+#' data(se)
+#'
+#' ## Group features based on log2 transformed feature values in the first
+#' ## assay of the SummarizedExperiment
+#' res <- groupFeatures(se, param = AbundanceSimilarityParam(threshold = 0.7,
+#'     transform = log2))
+#'
+#' featureGroups(res)
+#'
+#' ## Perform feature grouping only on a subset of rows/features:
+#' featureGroups(res) <- NA_character_
+#' featureGroups(res)[40:80] <- "FG"
+#' res <- groupFeatures(res, AbundanceSimilarityParam(transform = log2))
+#' featureGroups(res)
 
 setClass("AbundanceSimilarityParam",
          slots = c(threshold = "numeric",
@@ -111,8 +137,7 @@ setClass("AbundanceSimilarityParam",
          contains = "Param",
          prototype = prototype(
              threshold = 0.9,
-             simFun = function(x, use = "pairwise.complete.obs", ...)
-                 cor(t(x), use = use, ...),
+             simFun = corRows,
              groupFun = groupSimilarityMatrix,
              subset = integer(),
              transform = identity,
@@ -132,8 +157,7 @@ setClass("AbundanceSimilarityParam",
 #' @export
 AbundanceSimilarityParam <-
     function(threshold = 0.9,
-             simFun = function(x, use = "pairwise.complete.obs", ...)
-                 cor(t(x), use = use, ...),
+             simFun = corRows,
              groupFun = groupSimilarityMatrix,
              subset = integer(), transform = identity,
              ...) {
@@ -158,14 +182,7 @@ setMethod(
             if (!is.numeric(object))
                 stop("'object' needs to be a numeric matrix", call. = FALSE)
             simFun <- param@simFun
-            if (identical(simFun, cor)) {
-                parms <- list()
-                if (!is.null(param@dots$use))
-                    parms$use <- param@dots$use
-                else parms$use <- "pairwise.complete.obs"
-                if (!is.null(param@dots$method))
-                    parms$method <- param@dots$method
-            } else parms <- param@dots
+            parms <- param@dots
             res <- do.call(
                 simFun, args = c(list(param@transform(object)), parms))
             if (!(is.matrix(res) && nrow(res) == ncol(res) &&
@@ -178,4 +195,29 @@ setMethod(
                              param@dots))
         })
 
-## groupFeatures on a `SummarizedExperiment`.
+#' @rdname groupFeatures-similar-abundance
+#'
+#' @importMethodsFrom SummarizedExperiment assay
+#'
+#' @export
+setMethod(
+    "groupFeatures",
+    signature(object = "SummarizedExperiment",
+              param = "AbundanceSimilarityParam"),
+    function(object, param, i = 1L, ...) {
+        fgs <- featureGroups(object)
+        if (all(is.na(fgs)))
+            fgs <- rep("FG", length(fgs))
+        nas <- is.na(fgs)
+        fgs <- factor(fgs, levels = unique(fgs))
+        l <- split.data.frame(assay(object, i), fgs)
+        res <- lapply(
+            l,
+            function(z, param) .format_id(groupFeatures(z, param = param, ...)),
+            param = param, ...)
+        res <- paste(fgs, unsplit(res, f = fgs), sep = ".")
+        if (any(nas))
+            res[nas] <- NA_character_
+        featureGroups(object) <- res
+        object
+    })
