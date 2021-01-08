@@ -176,7 +176,7 @@ jobs:
           remotes::install_local(dependencies = TRUE, repos = BiocManager::repositories(), build_vignettes = TRUE, upgrade = TRUE)
 
           message(paste('****', Sys.time(), 'force installation of selected packages ****'))
-          BiocManager::install(c("BiocStyle", "rmarkdown"))
+          BiocManager::install(c("BiocStyle", "rmarkdown", "magick", "pheatmap"))
 
           ## For running the checks
           message(paste('****', Sys.time(), 'installing rcmdcheck and BiocCheck ****'))
