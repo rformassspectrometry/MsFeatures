@@ -38,7 +38,7 @@ test_that("groupFeatures,AbundanceSimilarityParam,matrix works", {
                  "out of bounds")
 
     res <- groupFeatures(x, AbundanceSimilarityParam(subset = c(1, 2, 6, 7)))
-    expect_equals(res, c(2, 1, 2, 3, 2, 1))
+    expect_equal(res, c(2, 1, 2, 3, 2, 1))
 
     x <- matrix("a", nrow = 3, ncol = 2)
     expect_error(groupFeatures(x, AbundanceSimilarityParam(simFun = cor)),
