@@ -199,7 +199,8 @@ groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE, ...) {
     if (!full)
         x[lower.tri(x)] <- NA
     res <- rep(NA_integer_, nr)
-    x[cbind(1:nr, 1:nr)] <- NA
+    sl <- seq_len(nr)
+    x[cbind(sl, sl)] <- NA
     idx_pairs <- which(x >= threshold, arr.ind = TRUE)
     idx_pairs <- idx_pairs[order(x[idx_pairs], decreasing = TRUE), ,
                            drop = FALSE]

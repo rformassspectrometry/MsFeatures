@@ -17,6 +17,8 @@
 #'
 #' @param ... additional parameters (ignored).
 #'
+#' @return `matrix` with correlation coefficients between rows in `x`.
+#'
 #' @author Johannes Rainer
 #'
 #' @export

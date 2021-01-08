@@ -75,6 +75,11 @@
 #'     parameters for the extraction/definition of the feature values from
 #'     `object`.
 #'
+#' @return for object being a `SummarizedExperiment`: a `SummarizedExperiment`
+#'     with the grouping results added to a column `"feature_group"` in the
+#'     object's `rowData`. For object being a `matrix`: a `character` of length
+#'     equal to the number of rows with the group identifiers.
+#'
 #' @family feature grouping methods
 #'
 #' @seealso [groupFeatures()] for the general concept of feature grouping.

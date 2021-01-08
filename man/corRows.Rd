@@ -24,6 +24,9 @@ to \code{use = "pairwise.complete.obs"}.}
 
 \item{...}{additional parameters (ignored).}
 }
+\value{
+\code{matrix} with correlation coefficients between rows in \code{x}.
+}
 \description{
 \code{corRows} is a simple function to perform a pairwise correlation between
 \strong{rows} of a numeric matrix by calling \code{\link[stats:cor]{stats::cor()}} on the transposed

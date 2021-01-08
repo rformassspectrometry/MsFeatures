@@ -59,6 +59,12 @@ grouping based on feature values.}
 in \code{object} that contains the feature values that should be used. Use
 \code{\link[=assayNames]{assayNames()}} on \code{object} to list all available assays.}
 }
+\value{
+for object being a \code{SummarizedExperiment}: a \code{SummarizedExperiment}
+with the grouping results added to a column \code{"feature_group"} in the
+object's \code{rowData}. For object being a \code{matrix}: a \code{character} of length
+equal to the number of rows with the group identifiers.
+}
 \description{
 Group features based on similar abundances (i.e. \emph{feature values}) across
 samples. Parameter \code{subset} allows to define a sub set of samples on which

@@ -10,4 +10,14 @@
 #' `XCMSnExp` result object with the `quantify` method.
 #'
 #' @name se
+#'
+#' @examples
+#'
+#' ## Load the data
+#' data(se)
+#'
+#' library(SummarizedExperiment)
+#'
+#' ## Access row (feature) data
+#' rowData(se)
 NULL
