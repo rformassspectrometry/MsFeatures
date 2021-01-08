@@ -77,7 +77,7 @@
 #'
 #' @return for object being a `SummarizedExperiment`: a `SummarizedExperiment`
 #'     with the grouping results added to a column `"feature_group"` in the
-#'     object's `rowData`. For object being a `matrix`: a `character` of length
+#'     object's `rowData`. For object being a `matrix`: an `integer` of length
 #'     equal to the number of rows with the group identifiers.
 #'
 #' @family feature grouping methods
@@ -186,10 +186,18 @@ setMethod(
         function(object, param, ...) {
             if (!is.numeric(object))
                 stop("'object' needs to be a numeric matrix", call. = FALSE)
+            subs <- param@subset
+            if (!length(subs))
+                subs <- seq_len(ncol(object))
+            if (!all(subs %in% seq_len(ncol(object))))
+                stop("'subset' out of bounds. 'subset' should be ",
+                     "between 1 and ", ncol(object))
             simFun <- param@simFun
             parms <- param@dots
             res <- do.call(
-                simFun, args = c(list(param@transform(object)), parms))
+                simFun,
+                args = c(list(param@transform(object[, subs, drop = FALSE])),
+                         parms))
             if (!(is.matrix(res) && nrow(res) == ncol(res) &&
                   nrow(res) == nrow(object) && is.numeric(res)))
                 stop("'simFun' did not return the expected results, ",

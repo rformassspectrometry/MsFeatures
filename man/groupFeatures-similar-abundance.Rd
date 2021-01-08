@@ -62,7 +62,7 @@ in \code{object} that contains the feature values that should be used. Use
 \value{
 for object being a \code{SummarizedExperiment}: a \code{SummarizedExperiment}
 with the grouping results added to a column \code{"feature_group"} in the
-object's \code{rowData}. For object being a \code{matrix}: a \code{character} of length
+object's \code{rowData}. For object being a \code{matrix}: an \code{integer} of length
 equal to the number of rows with the group identifiers.
 }
 \description{
