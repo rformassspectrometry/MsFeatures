@@ -84,9 +84,14 @@ samples from 4 mice with knock-out of the fatty acid amide hydrolase (FAAH) and
 the result from this pre-processing which is provided as a
 `SummarizedExperiment` within this package and can be loaded with `data(se)`.
 
-```{r load-data, messages = FALSE}
-library(SummarizedExperiment)
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 library(MsFeatures)
+library(SummarizedExperiment)
+```
+
+```{r load-data, message = FALSE}
+library(MsFeatures)
+library(SummarizedExperiment)
 
 data("se")
 ```
