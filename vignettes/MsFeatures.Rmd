@@ -32,12 +32,19 @@ different mass-to-charge ratios (m/z). To reduce data set complexity (and to aid
 subsequent annotation steps) it is advisable to group features which supposedly
 represent signal from the same original compound into a single entity.
 
-The `MsFeatures` package providing key concepts and functions facilitating this
-feature grouping. See also the description of the [general grouping
+The `MsFeatures` package provides key concepts and functions for this feature
+grouping. Methods are implemented for base R objects as well as for
+Bioconductor's `SummarizedExperiment` class. See also the description of the
+[general grouping
 concept](https://rformassspectrometry.github.io/MsFeatures/reference/groupFeatures.html)
-on the package webpage for more information. After definition of the feature
-groups, the `r BiocStyle::Biocpkg("QFeatures")` package could be used to
-aggregate their abundances into a single signal.
+on the package webpage for more information. Additional grouping methodology is
+expected to be implemented in other R packages for data objects with additional
+LC-MS related information, such as the `XCMSnExp` object in the `xcms`
+package. The implementation for the `SummarizedExperiment` provided in this
+package can be used as a reference for these additional methodology.
+
+After definition of the feature groups, the `r BiocStyle::Biocpkg("QFeatures")`
+package could be used to aggregate their abundances into a single signal.
 
 
 # Installation
@@ -77,7 +84,7 @@ samples from 4 mice with knock-out of the fatty acid amide hydrolase (FAAH) and
 the result from this pre-processing which is provided as a
 `SummarizedExperiment` within this package and can be loaded with `data(se)`.
 
-```{r load-data}
+```{r load-data, messages = FALSE}
 library(SummarizedExperiment)
 library(MsFeatures)
 
