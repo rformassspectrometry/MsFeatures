@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Group values with differences below threshold — groupClosest • MsFeatures</title>
+<title>Correlate rows of a numeric matrix — corRows • MsFeatures</title>
 
 
 <!-- jquery -->
@@ -39,14 +39,10 @@
 
 
 
-<meta property="og:title" content="Group values with differences below threshold — groupClosest" />
-<meta property="og:description" content="Group values with a difference between them being smaller than a user
-defined threshold. This function uses the groupSimilarityMatrix() function
-to create groups with smallest differences between its members. Differences
-between all members of one group are below the user defined threshold
-maxDiff. This is a more stringent grouping than what groupConsecutive()
-performs leading thus to smaller groups (with smaller differences between
-its members)." />
+<meta property="og:title" content="Correlate rows of a numeric matrix — corRows" />
+<meta property="og:description" content="corRows is a simple function to perform a pairwise correlation between
+rows of a numeric matrix by calling stats::cor() on the transposed
+input matrix x." />
 
 
 
@@ -116,65 +112,83 @@ its members)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Group values with differences below threshold</h1>
-    <small class="dont-index">Source: <a href='https://github.com/RforMassSpectrometry/MsFeatures/blob/master/R/grouping-functions.R'><code>R/grouping-functions.R</code></a></small>
-    <div class="hidden name"><code>groupClosest.Rd</code></div>
+    <h1>Correlate rows of a numeric matrix</h1>
+    <small class="dont-index">Source: <a href='https://github.com/RforMassSpectrometry/MsFeatures/blob/master/R/corRows.R'><code>R/corRows.R</code></a></small>
+    <div class="hidden name"><code>corRows.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Group values with a difference between them being smaller than a user
-defined threshold. This function uses the <code><a href='groupSimilarityMatrix.html'>groupSimilarityMatrix()</a></code> function
-to create groups with smallest differences between its members. Differences
-between <strong>all</strong> members of one group are below the user defined threshold
-<code>maxDiff</code>. This is a more stringent grouping than what <code><a href='groupConsecutive.html'>groupConsecutive()</a></code>
-performs leading thus to smaller groups (with smaller differences between
-its members).</p>
+    <p><code>corRows</code> is a simple function to perform a pairwise correlation between
+<strong>rows</strong> of a numeric matrix by calling <code><a href='https://rdrr.io/r/stats/cor.html'>stats::cor()</a></code> on the transposed
+input matrix <code>x</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>groupClosest</span><span class='op'>(</span><span class='va'>x</span>, maxDiff <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>corRows</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  y <span class='op'>=</span> <span class='cn'>NULL</span>,
+  use <span class='op'>=</span> <span class='st'>"pairwise.complete.obs"</span>,
+  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"pearson"</span>, <span class='st'>"kendall"</span>, <span class='st'>"spearman"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>numeric</code> of values that should be grouped.</p></td>
+      <td><p><code>numeric</code> <code>matrix</code>.</p></td>
     </tr>
     <tr>
-      <th>maxDiff</th>
-      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> defining the threshold for difference between
-values in <code>x</code> to be grouped into the same group.</p></td>
+      <th>y</th>
+      <td><p>not supported (ignored).</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>see information for parameter <code>use</code> in <code><a href='https://rdrr.io/r/stats/cor.html'>stats::cor()</a></code>. Defaults
+to <code>use = "pairwise.complete.obs"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>method</th>
+      <td><p>see information for parameter <code>method</code> in <code><a href='https://rdrr.io/r/stats/cor.html'>stats::cor()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional parameters (ignored).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>integer</code> with the group assignment (values grouped together have
-the same return value).</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other grouping operations: 
-<code><a href='groupConsecutive.html'>groupConsecutive</a>()</code>,
-<code><a href='groupSimilarityMatrix.html'>groupSimilarityMatrix</a>()</code></p></div>
+    <p><code>matrix</code> with correlation coefficients between rows in <code>x</code>.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Johannes Rainer</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.1</span>, <span class='fl'>1.9</span>, <span class='fl'>2.2</span><span class='op'>)</span>
-<span class='fu'>groupClosest</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 2 1 1</div><div class='input'><span class='co'>## Although the difference between the 1st and 2nd element would be smaller</span>
-<span class='co'>## than the threshold, they are not grouped because the difference between</span>
-<span class='co'>## the 2nd and 3rd element is even smaller. The first element is also not</span>
-<span class='co'>## put into the same group, because it has a difference &gt; diffRt to the 3rd</span>
-<span class='co'>## element.</span>
+<span class='co'>## Define a simple numeric matrix</span>
+<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>12</span>, <span class='fl'>34</span>, <span class='fl'>231</span>, <span class='fl'>234</span>, <span class='fl'>9</span>, <span class='fl'>5</span>, <span class='fl'>7</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>900</span>, <span class='fl'>900</span>, <span class='fl'>800</span>, <span class='fl'>10</span>, <span class='fl'>12</span>, <span class='fl'>9</span>, <span class='fl'>4</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>25</span>, <span class='fl'>70</span>, <span class='fl'>400</span>, <span class='fl'>409</span>, <span class='fl'>15</span>, <span class='fl'>8</span>, <span class='fl'>4</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>12</span>, <span class='fl'>13</span>, <span class='fl'>14</span>, <span class='fl'>15</span>, <span class='fl'>16</span>, <span class='fl'>17</span>, <span class='fl'>18</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>14</span>, <span class='fl'>36</span>, <span class='fl'>240</span>, <span class='fl'>239</span>, <span class='fl'>12</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>
+    <span class='op'>)</span>
 
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.1</span>, <span class='fl'>1.5</span>, <span class='fl'>1.7</span>, <span class='fl'>2.3</span>, <span class='fl'>2.7</span>, <span class='fl'>4.3</span>, <span class='fl'>4.4</span>, <span class='fl'>4.9</span>, <span class='fl'>5.2</span>, <span class='fl'>5.4</span>, <span class='fl'>5.8</span>, <span class='fl'>6</span>, <span class='fl'>7</span>,
-    <span class='fl'>9</span>, <span class='fl'>9.5</span>, <span class='fl'>15</span><span class='op'>)</span>
-
-<span class='fu'>groupClosest</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] 2 2 2 5 5 1 1 3 3 3 4 4 7 6 6 8</div></pre>
+<span class='fu'>corRows</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;             [,1]        [,2]       [,3]       [,4]       [,5]
+#&gt; [1,]  1.00000000  0.09610556  0.9995093 -0.2120207  0.9999276
+#&gt; [2,]  0.09610556  1.00000000  0.1152920 -0.8822763  0.1001638
+#&gt; [3,]  0.99950928  0.11529202  1.0000000 -0.2362897  0.9993837
+#&gt; [4,] -0.21202072 -0.88227627 -0.2362897  1.0000000 -0.2136497
+#&gt; [5,]  0.99992759  0.10016376  0.9993837 -0.2136497  1.0000000</div><div class='input'>
+<span class='fu'>corRows</span><span class='op'>(</span><span class='va'>x</span>, method <span class='op'>=</span> <span class='st'>"spearman"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;            [,1]       [,2]       [,3]       [,4]       [,5]
+#&gt; [1,]  1.0000000  0.4865062  0.9642857 -0.6071429  0.9642857
+#&gt; [2,]  0.4865062  1.0000000  0.5225437 -0.9549937  0.5585812
+#&gt; [3,]  0.9642857  0.5225437  1.0000000 -0.6428571  0.9285714
+#&gt; [4,] -0.6071429 -0.9549937 -0.6428571  1.0000000 -0.6428571
+#&gt; [5,]  0.9642857  0.5585812  0.9285714 -0.6428571  1.0000000</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -44,6 +44,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -71,13 +73,16 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MsFeatures</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../articles/MsFeatures.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -130,6 +135,12 @@
       <tr>
         
         <td>
+          <p><code><a href="corRows.html">corRows()</a></code> </p>
+        </td>
+        <td><p>Correlate rows of a numeric matrix</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="featureGroups.html">featureGroups()</a></code> <code><a href="featureGroups.html">`featureGroups&lt;-`()</a></code> </p>
         </td>
         <td><p>Get or set feature group definitions from an object
@@ -153,6 +164,12 @@ This method should be implemented for all other object for which a
           <p><code><a href="groupConsecutive.html">groupConsecutive()</a></code> </p>
         </td>
         <td><p>Grouping of sorted values into sets with smallest differences</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="groupFeatures-similar-abundance.html">AbundanceSimilarityParam()</a></code> <code><a href="groupFeatures-similar-abundance.html">groupFeatures(<i>&lt;matrix&gt;</i>,<i>&lt;AbundanceSimilarityParam&gt;</i>)</a></code> <code><a href="groupFeatures-similar-abundance.html">groupFeatures(<i>&lt;SummarizedExperiment&gt;</i>,<i>&lt;AbundanceSimilarityParam&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Group features based on abundance similarities across samples</p></td>
       </tr><tr>
         
         <td>
@@ -192,7 +209,7 @@ This method should be implemented for all other object for which a
 
       <footer>
       <div class="copyright">
-  <p>Developed by RforMassSpectrometry Package Maintainer, Johannes Rainer.</p>
+  <p>Developed by Johannes Rainer.</p>
 </div>
 
 <div class="pkgdown">

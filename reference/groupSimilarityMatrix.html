@@ -46,8 +46,10 @@ a value &amp;gt;= threshold with any other element in that cluster. On a
 correlation matrix (such as created with cor) it will generate small
 clusters of highly correlated elements. Note however that single elements in
 one cluster could also have a correlation &amp;gt;= threshold to another element
-in another cluster. The average correlation to its own cluster will however
-be larger to that of the other." />
+in another cluster. The average similarity to its own cluster will however
+be higher to that of the other." />
+
+
 
 
 
@@ -79,13 +81,16 @@ be larger to that of the other." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MsFeatures</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../articles/MsFeatures.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -124,11 +129,11 @@ a value <code>&gt;= threshold</code> with <strong>any</strong> other element in 
 correlation matrix (such as created with <code>cor</code>) it will generate small
 clusters of highly correlated elements. Note however that single elements in
 one cluster could also have a correlation <code>&gt;= threshold</code> to another element
-in another cluster. The average correlation to its own cluster will however
-be larger to that of the other.</p>
+in another cluster. The average similarity to its own cluster will however
+be higher to that of the other.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>groupSimilarityMatrix</span><span class='op'>(</span><span class='va'>x</span>, threshold <span class='op'>=</span> <span class='fl'>0.9</span>, full <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>groupSimilarityMatrix</span><span class='op'>(</span><span class='va'>x</span>, threshold <span class='op'>=</span> <span class='fl'>0.9</span>, full <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,6 +150,10 @@ be larger to that of the other.</p>
       <th>full</th>
       <td><p><code><a href='https://rdrr.io/r/base/logical.html'>logical(1)</a></code> whether the full matrix should be considered, or
 just the upper triangular matrix (including the diagonal).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>ignored.</p></td>
     </tr>
     </table>
 
@@ -239,7 +248,7 @@ same group is maximized.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by RforMassSpectrometry Package Maintainer, Johannes Rainer.</p>
+  <p>Developed by Johannes Rainer.</p>
 </div>
 
 <div class="pkgdown">

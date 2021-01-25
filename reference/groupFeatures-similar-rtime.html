@@ -44,12 +44,14 @@
 used as an initial crude grouping of LC-MS features based on the median
 retention time of all their chromatographic peaks. All features with a
 difference in their retention time which is &amp;lt;= parameter diffRt of the
-parameter object are grouped together. If a column &quot;feature_group&quot; is
-found in
-SummarizedExperiment::colData() this is further sub-grouped by this method.
-For object being a SummarizedExperiment it might be required to specify
-the column in the object's rowData containing the retention times with the
-rtime parameter (which defaults to rtime = &quot;rtime&quot;.
+parameter object are grouped together.
+If object is a SummarizedExperiment(): if a column &quot;feature_group&quot; is
+found in SummarizedExperiment::colData() feature groups defined in that
+column are further sub-grouped with this method. See groupFeatures() for
+the general concept of this feature grouping.
+Also, it might be required to specify the column in the object's rowData
+containing the retention times with the rtime parameter (which defaults
+to rtime = &quot;rtime&quot;.
 Parameter groupFun allows to specify the function that should be used for
 the actual grouping. Two possible choices are:
 groupFun = groupClosest (the default): this method creates groups
@@ -84,6 +86,8 @@ possible to provide a custom function for the grouping operation." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -111,13 +115,16 @@ possible to provide a custom function for the grouping operation." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MsFeatures</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../articles/MsFeatures.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -154,12 +161,14 @@ possible to provide a custom function for the grouping operation." />
 used as an initial <em>crude</em> grouping of LC-MS features based on the median
 retention time of all their chromatographic peaks. All features with a
 difference in their retention time which is <code>&lt;=</code> parameter <code>diffRt</code> of the
-parameter object are grouped together. If a column <code>"feature_group"</code> is
-found in
-<code><a href='https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html'>SummarizedExperiment::colData()</a></code> this is further sub-grouped by this method.
-For <code>object</code> being a <code>SummarizedExperiment</code> it might be required to specify
-the column in the object's <code>rowData</code> containing the retention times with the
-<code>rtime</code> parameter (which defaults to <code>rtime = "rtime"</code>.</p>
+parameter object are grouped together.</p>
+<p>If <code>object</code> is a <code><a href='https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html'>SummarizedExperiment()</a></code>: if a column <code>"feature_group"</code> is
+found in <code><a href='https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html'>SummarizedExperiment::colData()</a></code> feature groups defined in that
+column are further sub-grouped with this method. See <code><a href='groupFeatures.html'>groupFeatures()</a></code> for
+the general concept of this feature grouping.
+Also, it might be required to specify the column in the object's <code>rowData</code>
+containing the retention times with the <code>rtime</code> parameter (which defaults
+to <code>rtime = "rtime"</code>.</p>
 <p>Parameter <code>groupFun</code> allows to specify the function that should be used for
 the actual grouping. Two possible choices are:</p><ul>
 <li><p><code>groupFun = groupClosest</code> (the default): this method creates groups
@@ -251,7 +260,9 @@ result object's <code>rowData</code>.</p></li>
 
     <div class='dont-index'><p><code><a href='groupFeatures.html'>groupFeatures()</a></code> for the general concept of feature grouping.</p>
 <p><code><a href='featureGroups.html'>featureGroups()</a></code> for the function to extract defined feature
-groups from a <code>SummarizedExperiment</code>.</p></div>
+groups from a <code>SummarizedExperiment</code>.</p>
+<p>Other feature grouping methods: 
+<code><a href='groupFeatures-similar-abundance.html'>groupFeatures-similar-abundance</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Johannes Rainer</p>
@@ -665,7 +676,7 @@ groups from a <code>SummarizedExperiment</code>.</p></div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by RforMassSpectrometry Package Maintainer, Johannes Rainer.</p>
+  <p>Developed by Johannes Rainer.</p>
 </div>
 
 <div class="pkgdown">
