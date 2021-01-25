@@ -58,6 +58,10 @@ NULL
 #'
 #' @param ... additional arguments to be passed to the grouping algorithm.
 #'
+#' @return Depending on the implementation and the input object. Generally the
+#'      input object with grouping results added. See respective help pages for
+#'      more information.
+#'
 #' @author Johannes Rainer
 #'
 #' @seealso [featureGroups()] for the function to extract (defined) feature

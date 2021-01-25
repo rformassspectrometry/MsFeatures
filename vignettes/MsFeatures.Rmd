@@ -1,0 +1,318 @@
+---
+title: "Grouping Mass Spectrometry Features"
+package: MsFeatures
+output:
+  BiocStyle::html_document:
+    toc_float: true
+vignette: >
+  %\VignetteIndexEntry{Grouping Mass Spectrometry Features}
+  %\VignetteEngine{knitr::rmarkdown}
+  %%\VignetteKeywords{Mass Spectrometry, MS, MSMS, Proteomics, Metabolomics}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{BiocStyle,pheatmap,SummarizedExperiment,MsFeatures}
+---
+
+```{r style, echo = FALSE, results = 'asis'}
+BiocStyle::markdown()
+```
+
+**Package**: `r BiocStyle::Biocpkg("MsFeatures")`<br />
+**Authors**: `r packageDescription("MsFeatures")[["Author"]] `<br />
+**Last modified:** `r file.info("MsFeatures.Rmd")$mtime`<br />
+**Compiled**: `r date()`
+
+
+# Introduction
+
+Electrospray ionization (ESI) is commonly used in mass spectrometry (MS)-based
+metabolomics to generate ions from the compounds to enable their detection by
+the MS instrument. Ionization can generate different ions (adducts) of the
+same original compound which are then reported as separate *MS features* with
+different mass-to-charge ratios (m/z). To reduce data set complexity (and to aid
+subsequent annotation steps) it is advisable to group features which supposedly
+represent signal from the same original compound into a single entity.
+
+The `MsFeatures` package providing key concepts and functions facilitating this
+feature grouping. See also the description of the [general grouping
+concept](https://rformassspectrometry.github.io/MsFeatures/reference/groupFeatures.html)
+on the package webpage for more information. After definition of the feature
+groups, the `r BiocStyle::Biocpkg("QFeatures")` package could be used to
+aggregate their abundances into a single signal.
+
+
+# Installation
+
+The package can be installed with the `BiocManager` package. To
+install `BiocManager` use `install.packages("BiocManager")` and, after that,
+`BiocManager::install("MsFeatures")` to install this package.
+
+
+# Mass Spectrometry Feature Grouping
+
+Features from the same originating compound inherit its characteristics
+including its retention time (for LC or GC-MS experiments) and
+abundance/intensity. For the latter it is expected that features from the same
+compound have the same pattern of feature values/abundances across samples.
+
+The `MsFeatures` package defines the `groupFeatures` method to perform MS
+feature grouping based on the provided input data and a parameter object which
+selects and defines the feature grouping algorithm. This algorithm is supposed
+to assign individual features to a (single) feature group. Currently two feature
+grouping approaches are implemented:
+
+- `SimilarRtimeParam`: group features based on similar retention times.
+- `AbundanceSimilarityParam`: group features based on similar feature
+  values/abundances across samples.
+
+Additional algorithms, e.g. by considering also differences in features' m/z
+values matching expected ions/adducts or isotopes, may be implemented in future
+in this or other packages.
+
+In this document we demonstrate the feature grouping functionality on a simple
+toy data set used also in the `r BiocStyle::Biocpkg("xcms")` package with the
+raw data being provided in the `faahKO` data package. This data set consists of
+samples from 4 mice with knock-out of the fatty acid amide hydrolase (FAAH) and
+4 wild type mice. Pre-processing of this data set is described in detail in the
+*xcms* vignette of the `xcms` package. Below we load all required packages and
+the result from this pre-processing which is provided as a
+`SummarizedExperiment` within this package and can be loaded with `data(se)`.
+
+```{r load-data}
+library(SummarizedExperiment)
+library(MsFeatures)
+
+data("se")
+```
+
+Before performing the feature grouping we inspect the result object. Feature
+properties and definitions can be accessed with `rowData`, the feature
+abundances with `assay`.
+
+```{r fdev}
+rowData(se)
+head(assay(se))
+```
+
+Columns `"mzmed"` and `"rtmed"` in the object's `rowData` provide the m/z and
+retention time which characterizes each feature. In total `r nrow(rowData(se))`
+features are available in the present data set, with many of them most likely
+representing signal from different ions of the same compound. We aim to identify
+these based on the following assumptions of the LC-MS data:
+
+- Features (ions) of the same compound should have similar retention time.
+- The abundance of features (ions) of the same compound should have a similar
+  pattern across samples, i.e. if a compound is highly concentrated in one
+  sample and low in another, all ions from it also should follow the same
+  pattern.
+
+As detailed in the [general grouping
+concept](https://rformassspectrometry.github.io/MsFeatures/reference/groupFeatures.html),
+the feature grouping implemented in `MsFeatures` is by default intended to be
+used as a stepwise approach in which each `groupFeatures` call further
+sub-groups (and thus refines) previously defined feature groups. This enables to
+either use a single algorithm for the feature grouping or to build a feature
+grouping *pipeline* by combining different algorithms. In our example we perform
+first a initial grouping of features based on similar retention time and
+subsequently further refine these feature groups by requiring also similarity of
+feature values across samples.
+
+Note that it would also be possible to perform the grouping only on a subset of
+features instead of the full data set. An example is provided in the last
+section of this vignette.
+
+
+## Grouping of features by similar retention time
+
+The most intuitive and simple way to group LC-MS features is based on their
+retention times: ionization of the compounds happens after the LC and thus all
+ions from the same compound should have the same retention time. The plot below
+shows the retention times (and m/z) of all features from the present data
+set.
+
+```{r feature-rt-mz-plot, fig.width = 8, fig.height = 6, fig.cap = "Plot of retention times and m/z for all features in the data set."}
+plot(rowData(se)$rtmed, rowData(se)$mzmed,
+     xlab = "retention time", ylab = "m/z", main = "features",
+     col = "#00000060")
+grid()
+```
+
+As we can see there are several features with a similar retention time,
+especially for lower retention times. By using `groupFeatures` with the
+`SimilarRtimeParam` we can next group features if their difference in retention
+time is below a certain threshold. This approach will however not only group
+features representing ions from the same compound together, but also features
+from different, but co-eluting compounds (i.e. different compounds with the same
+retention time). Thus feature groups defined by this algorithm should be further
+*refined* based on another feature property to reduce false positives.
+
+For the present example, we group features with a maximal difference in
+retention time of 10 seconds into a feature group. We also have to specify the
+column in the object's `rowData` which contains the retention times for the
+features.
+
+```{r}
+se <- groupFeatures(se, param = SimilarRtimeParam(10), rtime = "rtmed")
+```
+
+The `groupFeatures` call on the `SummarizedExperiment` added the results of the
+grouping into a new column called `"feature_group"` in the object's
+`rowData`. This column can also be directly accessed with the `featureGroups`
+function. Below we print the number of features for each feature grouped defined
+by the `SimilarRtimeParam` approach.
+
+```{r}
+table(featureGroups(se))
+```
+
+We also calculate the mean retention time for all the feature groups and order
+them increasingly.
+
+```{r}
+split(rowData(se)$rtmed, featureGroups(se)) |>
+vapply(FUN = mean, numeric(1)) |>
+sort()
+```
+
+Note that the differences in retention times between the feature groups can be
+smaller than the used cut-off (10 seconds in our case). If we were not happy
+with this feature grouping and would like to repeat it we would need to drop the
+`"feature_group"` column in the object's `rowData` with
+`rowData(se)$feature_group <- NULL` and repeat the feature grouping with
+different settings. This is required, because by default `groupFeatures` will
+*refine* previous feature grouping results but not overwrite them.
+
+As stated above, this initial grouping on retention times put features from the
+same, but also from different co-eluting compounds into the same feature
+group. We thus next refine the feature groups requiring also feature abundances
+across samples to be correlated.
+
+
+## Grouping of features by abundance correlation across samples
+
+Features representing ions of the same compound are expected to have correlated
+feature values (intensities, abundances) across samples. `groupFeatures` with
+`AbundanceSimilarityParam` allows to group features with similar abundance
+patterns. This approach performs a pairwise similarity calculation and puts
+features with a similarity `>= threshold` into the same feature group. By
+calling this function on the previous result object the initial feature groups
+will be refined, by eventually splitting them based on the (missing)
+correlation of feature abundances.
+
+We below evaluate the correlation between individual features indicating also
+the previously defined feature groups.
+
+```{r abundance-correlation-heatmap, fig.cap = "Correlation of features based on their abundances.", fig.width = 12, fig.height = 14}
+library(pheatmap)
+fvals <- log2(assay(se))
+
+cormat <- cor(t(fvals), use = "pairwise.complete.obs")
+ann <- data.frame(fgroup = featureGroups(se))
+rownames(ann) <- rownames(cormat)
+
+res <- pheatmap(cormat, annotation_row = ann, cluster_rows = TRUE,
+                cluster_cols = TRUE)
+```
+
+As expected, the clustering based on the feature abundances does not perfectly
+match the retention time-based feature grouping. Many features grouped based on
+retention time have a low, or even negative correlation of feature abundances
+across samples hence most likely representing features from different, but
+co-eluting compounds. On the other hand, many features are highly correlated,
+but have a different retention time and can thus also not represent signal from
+ions of the same compound. Thus, each single approach has its drawbacks, but
+combination them can reduce the number of wrongly grouped features.
+
+We thus next perform the feature grouping with `AbundanceSimilarityParam` on the
+result object to refine the retention time-based feature groups. The approach
+can be further customized by providing a function to calculate feature
+similarities with parameter `simFun` (by default `cor` will be used to calculate
+similarities using Pearson's correlation). Parameter `transform` allows to
+specify a function to transform feature abundances prior similarity
+calculation. By default the feature values are taken *as-is*, but below we use
+`transform = log2` to perform the calculations in log2 scale. With `threshold =
+0.7` we ensure that only features with a correlation coefficient `>= 0.7` are
+assigned to the same feature group. Finally, parameter `i` would allow to
+specify the assay in the `SummarizedExperiment` that contains the feature
+abundances on which similarities should be calculated. See the
+`AbundanceSimilarityParam` help page for a full listing of the parameters and
+more details.
+
+```{r abundance-correlation}
+se <- groupFeatures(se, AbundanceSimilarityParam(threshold = 0.7,
+                                                 transform = log2), i = 1)
+table(featureGroups(se))
+```
+
+Many of the larger retention time-based feature groups have been splitted into
+two or more sub-groups based on the correlation of their feature abundances. We
+evaluate this for one specific feature group `"FG.003"` by plotting their
+pairwise correlation.
+
+```{r abundance-correlation-fg003, fig.width = 8, fig.height = 8, fig.cap = "Pairwise correlation plot for  features initially grouped into the feature group FG.003."}
+fts <- grep("FG.003", featureGroups(se))
+pairs(t(fvals[fts, ]), gap = 0.1, main = "FG.003")
+```
+
+A high correlation can be observed between *FT035* and *FT051* while they are
+not correlated with feature *FT013*. We next evaluate the feature grouping for
+another example.
+
+```{r abundance-correlation-fg008, fig.width = 8, fig.height = 8, fig.cap = "Pairwise correlation plot for  features initially grouped into the feature group FG.008."}
+fts <- grep("FG.008", featureGroups(se))
+pairs(t(fvals[fts, ]), gap = 0.1, main = "FG.008")
+```
+
+The results are less clear than for the previous example, still, some features
+seem to be correlated with each other while others are not. Generally, the
+abundance correlation approach in this data set suffers from the low number of
+sample (8 in total). Also, the approach works better for features with a high
+variance (biologically or technically) across samples.
+
+The table below lists the retention time, m/z and group assignment for these
+features.
+
+```{r abundance-correlation-fg008-table, results = "asis"}
+tmp <- as.data.frame(rowData(se)[fts, c("rtmed", "mzmed", "feature_group")])
+tmp <- tmp[order(tmp$feature_group), ]
+knitr::kable(tmp)
+```
+
+The difference in m/z between features *FT163* and *FT165*, both being assigned
+to the same feature group, is ~ 1 suggesting that one of the two is in fact a
+(C13) isotope of the other feature.
+
+
+## Performing feature grouping on a subset of features
+
+Sometimes it might not be needed or required to perform the feature grouping on
+the full data set but only on a subset of *interesting* features (i.e. those
+with significant differences in feature abundances between sample groups). This
+has also the advantage of a larger range of feature values across samples which
+supports the abundance similarity-based feature grouping.
+
+Feature grouping on a subset of features can be performed by manually assigning
+all features of interest to an initial feature group and setting the feature
+group for all other features to `NA`. As an example we perform below the feature
+grouping only features 30-60.
+
+```{r}
+featureGroups(se) <- NA_character_
+featureGroups(se)[30:60] <- "FG"
+
+se <- groupFeatures(se, SimilarRtimeParam(10), rtime = "rtmed")
+```
+
+This did not *refine* this initial, manually specified feature group by the
+retention time-based grouping. Features with `NA` value in their feature group
+column are skipped. As a result we get the following grouping:
+
+```{r}
+featureGroups(se)
+```
+
+
+# Session information {-}
+
+```{r sessioninfo, echo=FALSE}
+sessionInfo()
+```

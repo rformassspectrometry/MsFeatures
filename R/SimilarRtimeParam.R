@@ -10,12 +10,15 @@
 #' used as an initial *crude* grouping of LC-MS features based on the median
 #' retention time of all their chromatographic peaks. All features with a
 #' difference in their retention time which is `<=` parameter `diffRt` of the
-#' parameter object are grouped together. If a column `"feature_group"` is
-#' found in
-#' [SummarizedExperiment::colData()] this is further sub-grouped by this method.
-#' For `object` being a `SummarizedExperiment` it might be required to specify
-#' the column in the object's `rowData` containing the retention times with the
-#' `rtime` parameter (which defaults to `rtime = "rtime"`.
+#' parameter object are grouped together.
+#'
+#' If `object` is a [SummarizedExperiment()]: if a column `"feature_group"` is
+#' found in [SummarizedExperiment::colData()] feature groups defined in that
+#' column are further sub-grouped with this method. See [groupFeatures()] for
+#' the general concept of this feature grouping.
+#' Also, it might be required to specify the column in the object's `rowData`
+#' containing the retention times with the `rtime` parameter (which defaults
+#' to `rtime = "rtime"`.
 #'
 #' Parameter `groupFun` allows to specify the function that should be used for
 #' the actual grouping. Two possible choices are:

@@ -15,6 +15,11 @@ grouping algorithm.}
 
 \item{...}{additional arguments to be passed to the grouping algorithm.}
 }
+\value{
+Depending on the implementation and the input object. Generally the
+input object with grouping results added. See respective help pages for
+more information.
+}
 \description{
 This documentation describes the general concepts of feature grouping, which
 can be achieved by the different approaches described further below.

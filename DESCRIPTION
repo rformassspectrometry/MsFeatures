@@ -1,6 +1,6 @@
 Package: MsFeatures
 Title: Functionality for Mass Spectrometry Features
-Version: 0.0.3
+Version: 0.0.4
 Description: The MsFeature package defines functionality for Mass Spectrometry
     features. This includes functions to group (LC-MS) features based on some
     of their properties, such as retention time (coeluting features), or
@@ -13,23 +13,25 @@ Description: The MsFeature package defines functionality for Mass Spectrometry
     functionality of this package is implemented in a modular way which allows
     combination of different grouping approaches and enables its re-use in
     other R packages.
-Authors@R: c(person(given = "RforMassSpectrometry Package Maintainer",
-                    email = "maintainer@rformassspectrometry.org",
-                    role = "cre"),
-             person(given = "Johannes", family = "Rainer",
+Authors@R: c(person(given = "Johannes", family = "Rainer",
                     email = "Johannes.Rainer@eurac.edu",
                     comment = c(ORCID = "0000-0002-6977-7147"),
-                    role = "aut"))
+                    role = c("aut", "cre")))
 Depends:
-    R (>= 3.6.0)
+    R (>= 4.1)
 Imports:
     methods,
     ProtGenerics (>= 1.23.5),
     MsCoreUtils,
-    SummarizedExperiment
+    SummarizedExperiment,
+    stats
 Suggests:
     testthat,
-    roxygen2
+    roxygen2,
+    BiocStyle,
+    pheatmap,
+    knitr,
+    rmarkdown
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: no
@@ -38,10 +40,13 @@ URL: https://github.com/RforMassSpectrometry/MsFeatures
 biocViews: Infrastructure, MassSpectrometry, Metabolomics
 RoxygenNote: 7.1.1
 Roxygen: list(markdown=TRUE)
+VignetteBuilder: knitr
 Collate:
+    'corRows.R'
+    'grouping-functions.R'
     'hidden_aliases.R'
     'AllGenerics.R'
-    'grouping-functions.R'
+    'AbundanceSimilarityParam.R'
     'SimilarRtimeParam.R'
     'featureGroups.R'
     'se.R'

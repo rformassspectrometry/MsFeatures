@@ -4,7 +4,7 @@
 \alias{groupSimilarityMatrix}
 \title{Group rows of a diagonal matrix using a threshold}
 \usage{
-groupSimilarityMatrix(x, threshold = 0.9, full = TRUE)
+groupSimilarityMatrix(x, threshold = 0.9, full = TRUE, ...)
 }
 \arguments{
 \item{x}{symmetrix \code{numeric} \code{matrix}.}
@@ -13,6 +13,8 @@ groupSimilarityMatrix(x, threshold = 0.9, full = TRUE)
 
 \item{full}{\code{logical(1)} whether the full matrix should be considered, or
 just the upper triangular matrix (including the diagonal).}
+
+\item{...}{ignored.}
 }
 \value{
 \code{integer} same length than \code{nrow(x)}, grouped elements (rows) defined
@@ -25,8 +27,8 @@ a value \verb{>= threshold} with \strong{any} other element in that cluster. On 
 correlation matrix (such as created with \code{cor}) it will generate small
 clusters of highly correlated elements. Note however that single elements in
 one cluster could also have a correlation \verb{>= threshold} to another element
-in another cluster. The average correlation to its own cluster will however
-be larger to that of the other.
+in another cluster. The average similarity to its own cluster will however
+be higher to that of the other.
 }
 \details{
 The algorithm is defined as follows:

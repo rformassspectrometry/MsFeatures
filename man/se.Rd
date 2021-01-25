@@ -11,3 +11,13 @@ package. The pre-processing of this data set is described in detail in
 the \emph{xcms} vignette of the \code{xcms} package. This object was created from the
 \code{XCMSnExp} result object with the \code{quantify} method.
 }
+\examples{
+
+## Load the data
+data(se)
+
+library(SummarizedExperiment)
+
+## Access row (feature) data
+rowData(se)
+}
