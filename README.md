@@ -5,6 +5,10 @@
 [![codecov.io](http://codecov.io/github/rformassspectrometry/MsFeatures/coverage.svg?branch=master)](http://codecov.io/github/rformassspectrometry/MsFeatures?branch=master)
 [![license](https://img.shields.io/badge/license-Artistic--2.0-brightgreen.svg)](https://opensource.org/licenses/Artistic-2.0)
 
+<img
+src="https://raw.githubusercontent.com/rformassspectrometry/stickers/master/MsFeatures/MsFeatures.png"
+height="150">
+
 The `MsFeatures` package defines functionality for Mass Spectrometry (MS)
 features. These features are characterized by their specific mass-to-charge
 ration m/z and eventually a retention time rt (for LC-MS features).
