@@ -132,28 +132,29 @@
 #' res <- groupFeatures(res, AbundanceSimilarityParam(transform = log2))
 #' featureGroups(res)
 
-setClass("AbundanceSimilarityParam",
-         slots = c(threshold = "numeric",
-                   simFun = "function",
-                   groupFun = "function",
-                   subset = "integer",
-                   transform = "function",
-                   dots = "list"),
-         contains = "Param",
-         prototype = prototype(
-             threshold = 0.9,
-             simFun = corRows,
-             groupFun = groupSimilarityMatrix,
-             subset = integer(),
-             transform = identity,
-             dots = list()
-         ),
-         validity = function(object) {
-             msg <- NULL
-             if (length(object@threshold) != 1)
-                 msg <- "'threshold' has to be of length 1"
-             msg
-         })
+setClass(
+    "AbundanceSimilarityParam",
+    slots = c(threshold = "numeric",
+              simFun = "function",
+              groupFun = "function",
+              subset = "integer",
+              transform = "function",
+              dots = "list"),
+    contains = "Param",
+    prototype = prototype(
+        threshold = 0.9,
+        simFun = corRows,
+        groupFun = groupSimilarityMatrix,
+        subset = integer(),
+        transform = identity,
+        dots = list()
+    ),
+    validity = function(object) {
+        msg <- NULL
+        if (length(object@threshold) != 1)
+            msg <- "'threshold' has to be of length 1"
+        msg
+    })
 
 #' @rdname groupFeatures-similar-abundance
 #'
