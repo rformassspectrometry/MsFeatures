@@ -66,6 +66,12 @@ NULL
 #'
 #' @seealso [featureGroups()] for the function to extract (defined) feature
 #'     groups from a result object.
+#'
+#' @examples
+#'
+#' ## For examples please refer to the help pages of the `SimilarRtimeParam` or
+#' ## `AbundanceSimilarityParam` objects.
+#' NULL
 NULL
 
 #' @rdname groupFeatures

@@ -134,12 +134,13 @@
 
 setClass(
     "AbundanceSimilarityParam",
-    slots = c(threshold = "numeric",
-              simFun = "function",
-              groupFun = "function",
-              subset = "integer",
-              transform = "function",
-              dots = "list"),
+    slots = c(
+        threshold = "numeric",
+        simFun = "function",
+        groupFun = "function",
+        subset = "integer",
+        transform = "function",
+        dots = "list"),
     contains = "Param",
     prototype = prototype(
         threshold = 0.9,

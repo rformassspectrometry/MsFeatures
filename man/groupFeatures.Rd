@@ -66,6 +66,12 @@ The major disadvantage is that a wrong group assignment in one of the initial
 steps can not be \emph{corrected} for in later steps.
 }
 
+\examples{
+
+## For examples please refer to the help pages of the `SimilarRtimeParam` or
+## `AbundanceSimilarityParam` objects.
+NULL
+}
 \seealso{
 \code{\link[=featureGroups]{featureGroups()}} for the function to extract (defined) feature
 groups from a result object.
