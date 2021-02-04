@@ -2,18 +2,10 @@
 % Please edit documentation in R/AllGenerics.R, R/featureGroups.R
 \name{featureGroups}
 \alias{featureGroups}
-\alias{featureGroups<-}
-\alias{featureGroups,SummarizedExperiment-method}
 \alias{featureGroups<-,SummarizedExperiment-method}
-\title{Get or set feature group definitions from an object
-
-\code{featureGroups} and \verb{featureGroups<-} allow to extract or set the feature
-definitions from the input object. The implementations for
-\code{\link[=SummarizedExperiment]{SummarizedExperiment()}} get or set the content of a column named
-\code{"feature_group"} in the object's \code{rowData}.
-
-This method should be implemented for all other object for which a
-\code{\link[=groupFeatures]{groupFeatures()}} method is defined.}
+\alias{featureGroups,SummarizedExperiment-method}
+\alias{featureGroups<-}
+\title{Get or set feature group definitions from an object}
 \usage{
 featureGroups(object, ...)
 
@@ -36,8 +28,6 @@ a \code{character} with the group assignment of the features. Has to have
 the same length as there are features in \code{object.}
 }
 \description{
-Get or set feature group definitions from an object
-
 \code{featureGroups} and \verb{featureGroups<-} allow to extract or set the feature
 definitions from the input object. The implementations for
 \code{\link[=SummarizedExperiment]{SummarizedExperiment()}} get or set the content of a column named

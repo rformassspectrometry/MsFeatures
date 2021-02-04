@@ -3,6 +3,8 @@
 #' @importClassesFrom SummarizedExperiment SummarizedExperiment
 #'
 #' @importMethodsFrom SummarizedExperiment rowData
+#'
+#' @export
 setMethod("featureGroups", "SummarizedExperiment", function(object) {
     if (any(colnames(rowData(object)) == "feature_group"))
         as.character(rowData(object)$feature_group)
@@ -12,6 +14,8 @@ setMethod("featureGroups", "SummarizedExperiment", function(object) {
 #' @rdname featureGroups
 #'
 #' @importMethodsFrom SummarizedExperiment rowData<-
+#'
+#' @export
 setReplaceMethod(
     "featureGroups", "SummarizedExperiment", function(object, value) {
         if (!(length(value) == 1 | length(value) == nrow(rowData(object))))
