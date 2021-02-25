@@ -1,7 +1,7 @@
 pandoc: 2.11.2
 pkgdown: 1.6.1.9000
-pkgdown_sha: 84f234cf19153ce99bf1bcf875dc56248ddf0cbe
+pkgdown_sha: 8bb9cef2f58d6c6ceec351d2f96497af6cef485b
 articles:
   MsFeatures: MsFeatures.html
-last_built: 2021-01-28T08:23Z
+last_built: 2021-02-25T09:16Z
 

@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MsFeatures</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.1</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/RforMassSpectrometry/MsFeatures/">
+  <a href="https://github.com/RforMassSpectrometry/MsFeatures/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -64,13 +66,13 @@
 
       
 
-      </header><script src="MsFeatures_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
+      </header><script src="MsFeatures_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Grouping Mass Spectrometry Features</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/RforMassSpectrometry/MsFeatures/blob/master/vignettes/MsFeatures.Rmd"><code>vignettes/MsFeatures.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/RforMassSpectrometry/MsFeatures/blob/master/vignettes/MsFeatures.Rmd" class="external-link"><code>vignettes/MsFeatures.Rmd</code></a></small>
       <div class="hidden name"><code>MsFeatures.Rmd</code></div>
 
     </div>
@@ -88,18 +90,18 @@ document.addEventListener("DOMContentLoaded", function() {
     if (links[i].hostname != window.location.hostname)
       links[i].target = '_blank';
 });
-</script><p><strong>Package</strong>: <em><a href="https://bioconductor.org/packages/3.13/MsFeatures">MsFeatures</a></em><br><strong>Authors</strong>: Johannes Rainer [aut, cre] (<a href="https://orcid.org/0000-0002-6977-7147" class="uri">https://orcid.org/0000-0002-6977-7147</a>)<br><strong>Last modified:</strong> 2021-01-28 08:16:22<br><strong>Compiled</strong>: Thu Jan 28 08:23:56 2021</p>
+</script><p><strong>Package</strong>: <em><a href="https://bioconductor.org/packages/3.13/MsFeatures" class="external-link">MsFeatures</a></em><br><strong>Authors</strong>: Johannes Rainer [aut, cre] (<a href="https://orcid.org/0000-0002-6977-7147" class="external-link uri">https://orcid.org/0000-0002-6977-7147</a>)<br><strong>Last modified:</strong> 2021-02-25 08:57:20<br><strong>Compiled</strong>: Thu Feb 25 09:16:36 2021</p>
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
 <p>Electrospray ionization (ESI) is commonly used in mass spectrometry (MS)-based metabolomics to generate ions from the compounds to enable their detection by the MS instrument. Ionization can generate different ions (adducts) of the same original compound which are then reported as separate <em>MS features</em> with different mass-to-charge ratios (m/z). To reduce data set complexity (and to aid subsequent annotation steps) it is advisable to group features which supposedly represent signal from the same original compound into a single entity.</p>
-<p>The <code>MsFeatures</code> package provides key concepts and functions for this feature grouping. Methods are implemented for base R objects as well as for Bioconductor’s <code>SummarizedExperiment</code> class. See also the description of the <a href="https://rformassspectrometry.github.io/MsFeatures/reference/groupFeatures.html">general grouping concept</a> on the package webpage for more information. Additional grouping methodology is expected to be implemented in other R packages for data objects with additional LC-MS related information, such as the <code>XCMSnExp</code> object in the <code>xcms</code> package. The implementation for the <code>SummarizedExperiment</code> provided in this package can be used as a reference for these additional methodology.</p>
-<p>After definition of the feature groups, the <em><a href="https://bioconductor.org/packages/3.13/QFeatures">QFeatures</a></em> package could be used to aggregate their abundances into a single signal.</p>
+<p>The <code>MsFeatures</code> package provides key concepts and functions for this feature grouping. Methods are implemented for base R objects as well as for Bioconductor’s <code>SummarizedExperiment</code> class. See also the description of the <a href="https://rformassspectrometry.github.io/MsFeatures/reference/groupFeatures.html" class="external-link">general grouping concept</a> on the package webpage for more information. Additional grouping methodology is expected to be implemented in other R packages for data objects with additional LC-MS related information, such as the <code>XCMSnExp</code> object in the <code>xcms</code> package. The implementation for the <code>SummarizedExperiment</code> provided in this package can be used as a reference for these additional methodology.</p>
+<p>After definition of the feature groups, the <em><a href="https://bioconductor.org/packages/3.13/QFeatures" class="external-link">QFeatures</a></em> package could be used to aggregate their abundances into a single signal.</p>
 </div>
 <div id="installation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h1>
-<p>The package can be installed with the <code>BiocManager</code> package. To install <code>BiocManager</code> use <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages("BiocManager")</a></code> and, after that, <code><a href="https://rdrr.io/pkg/BiocManager/man/install.html">BiocManager::install("MsFeatures")</a></code> to install this package.</p>
+<p>The package can be installed with the <code>BiocManager</code> package. To install <code>BiocManager</code> use <code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages("BiocManager")</a></code> and, after that, <code><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">BiocManager::install("MsFeatures")</a></code> to install this package.</p>
 </div>
 <div id="mass-spectrometry-feature-grouping" class="section level1">
 <h1 class="hasAnchor">
@@ -113,15 +115,15 @@ document.addEventListener("DOMContentLoaded", function() {
 <code>AbundanceSimilarityParam</code>: group features based on similar feature values/abundances across samples.</li>
 </ul>
 <p>Additional algorithms, e.g. by considering also differences in features’ m/z values matching expected ions/adducts or isotopes, may be implemented in future in this or other packages.</p>
-<p>In this document we demonstrate the feature grouping functionality on a simple toy data set used also in the <em><a href="https://bioconductor.org/packages/3.13/xcms">xcms</a></em> package with the raw data being provided in the <code>faahKO</code> data package. This data set consists of samples from 4 mice with knock-out of the fatty acid amide hydrolase (FAAH) and 4 wild type mice. Pre-processing of this data set is described in detail in the <em>xcms</em> vignette of the <code>xcms</code> package. Below we load all required packages and the result from this pre-processing which is provided as a <code>SummarizedExperiment</code> within this package and can be loaded with <code><a href="https://rdrr.io/r/utils/data.html">data(se)</a></code>.</p>
+<p>In this document we demonstrate the feature grouping functionality on a simple toy data set used also in the <em><a href="https://bioconductor.org/packages/3.13/xcms" class="external-link">xcms</a></em> package with the raw data being provided in the <code>faahKO</code> data package. This data set consists of samples from 4 mice with knock-out of the fatty acid amide hydrolase (FAAH) and 4 wild type mice. Pre-processing of this data set is described in detail in the <em>xcms</em> vignette of the <code>xcms</code> package. Below we load all required packages and the result from this pre-processing which is provided as a <code>SummarizedExperiment</code> within this package and can be loaded with <code><a href="https://rdrr.io/r/utils/data.html" class="external-link">data(se)</a></code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RforMassSpectrometry/MsFeatures">MsFeatures</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/SummarizedExperiment">SummarizedExperiment</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RforMassSpectrometry/MsFeatures" class="external-link">MsFeatures</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/SummarizedExperiment" class="external-link">SummarizedExperiment</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"se"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"se"</span><span class="op">)</span></code></pre></div>
 <p>Before performing the feature grouping we inspect the result object. Feature properties and definitions can be accessed with <code>rowData</code>, the feature abundances with <code>assay</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">rowData</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">rowData</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span></code></pre></div>
 <pre><code>## DataFrame with 225 rows and 11 columns
 ##           mzmed     mzmin     mzmax     rtmed     rtmin     rtmax    npeaks
 ##       &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
@@ -150,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
 ## FT224         2         3     67,353,876,...         1
 ## FT225         0         2  866,1447,1643,...         1</code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assay</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>##        ko15.CDF   ko16.CDF   ko21.CDF  ko22.CDF  wt15.CDF  wt16.CDF  wt21.CDF
 ## FT001  159738.1  506848.88  113441.08  169955.6  216096.6  145509.7  230477.9
 ## FT002 1924712.0 1757150.96 1383416.72 1180288.2 2129885.1 1634342.0 1623589.2
@@ -170,17 +172,17 @@ document.addEventListener("DOMContentLoaded", function() {
 <li>Features (ions) of the same compound should have similar retention time.</li>
 <li>The abundance of features (ions) of the same compound should have a similar pattern across samples, i.e. if a compound is highly concentrated in one sample and low in another, all ions from it also should follow the same pattern.</li>
 </ul>
-<p>As detailed in the <a href="https://rformassspectrometry.github.io/MsFeatures/reference/groupFeatures.html">general grouping concept</a>, the feature grouping implemented in <code>MsFeatures</code> is by default intended to be used as a stepwise approach in which each <code>groupFeatures</code> call further sub-groups (and thus refines) previously defined feature groups. This enables to either use a single algorithm for the feature grouping or to build a feature grouping <em>pipeline</em> by combining different algorithms. In our example we perform first a initial grouping of features based on similar retention time and subsequently further refine these feature groups by requiring also similarity of feature values across samples.</p>
+<p>As detailed in the <a href="https://rformassspectrometry.github.io/MsFeatures/reference/groupFeatures.html" class="external-link">general grouping concept</a>, the feature grouping implemented in <code>MsFeatures</code> is by default intended to be used as a stepwise approach in which each <code>groupFeatures</code> call further sub-groups (and thus refines) previously defined feature groups. This enables to either use a single algorithm for the feature grouping or to build a feature grouping <em>pipeline</em> by combining different algorithms. In our example we perform first a initial grouping of features based on similar retention time and subsequently further refine these feature groups by requiring also similarity of feature values across samples.</p>
 <p>Note that it would also be possible to perform the grouping only on a subset of features instead of the full data set. An example is provided in the last section of this vignette.</p>
 <div id="grouping-of-features-by-similar-retention-time" class="section level2">
 <h2 class="hasAnchor">
 <a href="#grouping-of-features-by-similar-retention-time" class="anchor"></a>Grouping of features by similar retention time</h2>
 <p>The most intuitive and simple way to group LC-MS features is based on their retention times: ionization of the compounds happens after the LC and thus all ions from the same compound should have the same retention time. The plot below shows the retention times (and m/z) of all features from the present data set.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">rowData</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">$</span><span class="va">rtmed</span>, <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">rowData</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">$</span><span class="va">mzmed</span>,
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">rowData</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">$</span><span class="va">rtmed</span>, <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">rowData</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">$</span><span class="va">mzmed</span>,
      xlab <span class="op">=</span> <span class="st">"retention time"</span>, ylab <span class="op">=</span> <span class="st">"m/z"</span>, main <span class="op">=</span> <span class="st">"features"</span>,
      col <span class="op">=</span> <span class="st">"#00000060"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="MsFeatures_files/figure-html/feature-rt-mz-plot-1.png" alt="Plot of retention times and m/z for all features in the data set." width="768"><p class="caption">
 Plot of retention times and m/z for all features in the data set.
@@ -192,7 +194,7 @@ Plot of retention times and m/z for all features in the data set.
 <code class="sourceCode R"><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/groupFeatures.html">groupFeatures</a></span><span class="op">(</span><span class="va">se</span>, param <span class="op">=</span> <span class="fu"><a href="../reference/groupFeatures-similar-rtime.html">SimilarRtimeParam</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, rtime <span class="op">=</span> <span class="st">"rtmed"</span><span class="op">)</span></code></pre></div>
 <p>The <code>groupFeatures</code> call on the <code>SummarizedExperiment</code> added the results of the grouping into a new column called <code>"feature_group"</code> in the object’s <code>rowData</code>. This column can also be directly accessed with the <code>featureGroups</code> function. Below we print the number of features for each feature grouped defined by the <code>SimilarRtimeParam</code> approach.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="fu"><a href="../reference/featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="../reference/featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## FG.001 FG.002 FG.003 FG.004 FG.005 FG.006 FG.007 FG.008 FG.009 FG.010 FG.011 
 ##      3      3      3      3      2      4      5      6      4      2      5 
@@ -212,9 +214,9 @@ Plot of retention times and m/z for all features in the data set.
 ##      1      1      1      1      1      1      1</code></pre>
 <p>We also calculate the mean retention time for all the feature groups and order them increasingly.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">rowData</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">$</span><span class="va">rtmed</span>, <span class="fu"><a href="../reference/featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span> |&gt;
-<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">vapply</a></span><span class="op">(</span>FUN <span class="op">=</span> <span class="va">mean</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> |&gt;
-<span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/split.html" class="external-link">split</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">rowData</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">$</span><span class="va">rtmed</span>, <span class="fu"><a href="../reference/featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span> |&gt;
+<span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">vapply</a></span><span class="op">(</span>FUN <span class="op">=</span> <span class="va">mean</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">numeric</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> |&gt;
+<span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>##   FG.005   FG.012   FG.062   FG.076   FG.069   FG.007   FG.018   FG.027 
 ## 2506.301 2511.821 2519.745 2595.503 2623.786 2684.671 2686.835 2688.495 
 ##   FG.064   FG.057   FG.066   FG.074   FG.003   FG.023   FG.004   FG.001 
@@ -246,14 +248,14 @@ Plot of retention times and m/z for all features in the data set.
 <p>Features representing ions of the same compound are expected to have correlated feature values (intensities, abundances) across samples. <code>groupFeatures</code> with <code>AbundanceSimilarityParam</code> allows to group features with similar abundance patterns. This approach performs a pairwise similarity calculation and puts features with a similarity <code>&gt;= threshold</code> into the same feature group. By calling this function on the previous result object the initial feature groups will be refined, by eventually splitting them based on the (missing) correlation of feature abundances.</p>
 <p>We below evaluate the correlation between individual features indicating also the previously defined feature groups.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">pheatmap</span><span class="op">)</span>
-<span class="va">fvals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assay</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">pheatmap</span><span class="op">)</span>
+<span class="va">fvals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">cormat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">fvals</span><span class="op">)</span>, use <span class="op">=</span> <span class="st">"pairwise.complete.obs"</span><span class="op">)</span>
-<span class="va">ann</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>fgroup <span class="op">=</span> <span class="fu"><a href="../reference/featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">ann</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">cormat</span><span class="op">)</span>
+<span class="va">cormat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">fvals</span><span class="op">)</span>, use <span class="op">=</span> <span class="st">"pairwise.complete.obs"</span><span class="op">)</span>
+<span class="va">ann</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>fgroup <span class="op">=</span> <span class="fu"><a href="../reference/featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">ann</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">cormat</span><span class="op">)</span>
 
-<span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap</a></span><span class="op">(</span><span class="va">cormat</span>, annotation_row <span class="op">=</span> <span class="va">ann</span>, cluster_rows <span class="op">=</span> <span class="cn">TRUE</span>,
+<span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html" class="external-link">pheatmap</a></span><span class="op">(</span><span class="va">cormat</span>, annotation_row <span class="op">=</span> <span class="va">ann</span>, cluster_rows <span class="op">=</span> <span class="cn">TRUE</span>,
                 cluster_cols <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="MsFeatures_files/figure-html/abundance-correlation-heatmap-1.png" alt="Correlation of features based on their abundances." width="1152"><p class="caption">
@@ -265,7 +267,7 @@ Correlation of features based on their abundances.
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/groupFeatures.html">groupFeatures</a></span><span class="op">(</span><span class="va">se</span>, <span class="fu"><a href="../reference/groupFeatures-similar-abundance.html">AbundanceSimilarityParam</a></span><span class="op">(</span>threshold <span class="op">=</span> <span class="fl">0.7</span>,
                                                  transform <span class="op">=</span> <span class="va">log2</span><span class="op">)</span>, i <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="fu"><a href="../reference/featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="fu"><a href="../reference/featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ## FG.001.001 FG.001.002 FG.002.001 FG.002.002 FG.002.003 FG.003.001 FG.003.002 
 ##          2          1          1          1          1          2          1 
@@ -319,8 +321,8 @@ Correlation of features based on their abundances.
 ##          1          1          1          1          1          1</code></pre>
 <p>Many of the larger retention time-based feature groups have been splitted into two or more sub-groups based on the correlation of their feature abundances. We evaluate this for one specific feature group <code>"FG.003"</code> by plotting their pairwise correlation.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"FG.003"</span>, <span class="fu"><a href="../reference/featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">fvals</span><span class="op">[</span><span class="va">fts</span>, <span class="op">]</span><span class="op">)</span>, gap <span class="op">=</span> <span class="fl">0.1</span>, main <span class="op">=</span> <span class="st">"FG.003"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">fts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"FG.003"</span>, <span class="fu"><a href="../reference/featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html" class="external-link">pairs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">fvals</span><span class="op">[</span><span class="va">fts</span>, <span class="op">]</span><span class="op">)</span>, gap <span class="op">=</span> <span class="fl">0.1</span>, main <span class="op">=</span> <span class="st">"FG.003"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="MsFeatures_files/figure-html/abundance-correlation-fg003-1.png" alt="Pairwise correlation plot for  features initially grouped into the feature group FG.003." width="768"><p class="caption">
 Pairwise correlation plot for features initially grouped into the feature group FG.003.
@@ -328,8 +330,8 @@ Pairwise correlation plot for features initially grouped into the feature group 
 </div>
 <p>A high correlation can be observed between <em>FT035</em> and <em>FT051</em> while they are not correlated with feature <em>FT013</em>. We next evaluate the feature grouping for another example.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"FG.008"</span>, <span class="fu"><a href="../reference/featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">fvals</span><span class="op">[</span><span class="va">fts</span>, <span class="op">]</span><span class="op">)</span>, gap <span class="op">=</span> <span class="fl">0.1</span>, main <span class="op">=</span> <span class="st">"FG.008"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">fts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"FG.008"</span>, <span class="fu"><a href="../reference/featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html" class="external-link">pairs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">fvals</span><span class="op">[</span><span class="va">fts</span>, <span class="op">]</span><span class="op">)</span>, gap <span class="op">=</span> <span class="fl">0.1</span>, main <span class="op">=</span> <span class="st">"FG.008"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="MsFeatures_files/figure-html/abundance-correlation-fg008-1.png" alt="Pairwise correlation plot for  features initially grouped into the feature group FG.008." width="768"><p class="caption">
 Pairwise correlation plot for features initially grouped into the feature group FG.008.
@@ -338,9 +340,9 @@ Pairwise correlation plot for features initially grouped into the feature group 
 <p>The results are less clear than for the previous example, still, some features seem to be correlated with each other while others are not. Generally, the abundance correlation approach in this data set suffers from the low number of sample (8 in total). Also, the approach works better for features with a high variance (biologically or technically) across samples.</p>
 <p>The table below lists the retention time, m/z and group assignment for these features.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">rowData</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">[</span><span class="va">fts</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rtmed"</span>, <span class="st">"mzmed"</span>, <span class="st">"feature_group"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
-<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="va">tmp</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">$</span><span class="va">feature_group</span><span class="op">)</span>, <span class="op">]</span>
-<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">rowData</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span><span class="op">[</span><span class="va">fts</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rtmed"</span>, <span class="st">"mzmed"</span>, <span class="st">"feature_group"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
+<span class="va">tmp</span> <span class="op">&lt;-</span> <span class="va">tmp</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">$</span><span class="va">feature_group</span><span class="op">)</span>, <span class="op">]</span>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left"></th>
@@ -436,7 +438,7 @@ Pairwise correlation plot for features initially grouped into the feature group 
 <div id="session-information" class="section level1 unnumbered">
 <h1 class="hasAnchor">
 <a href="#session-information" class="anchor"></a>Session information</h1>
-<pre><code>## R Under development (unstable) (2021-01-21 r79854)
+<pre><code>## R Under development (unstable) (2021-02-18 r80027)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 20.04.1 LTS
 ## 
@@ -458,28 +460,28 @@ Pairwise correlation plot for features initially grouped into the feature group 
 ## other attached packages:
 ##  [1] pheatmap_1.0.12             SummarizedExperiment_1.21.1
 ##  [3] Biobase_2.51.0              GenomicRanges_1.43.3       
-##  [5] GenomeInfoDb_1.27.5         IRanges_2.25.6             
-##  [7] S4Vectors_0.29.6            BiocGenerics_0.37.0        
-##  [9] MatrixGenerics_1.3.0        matrixStats_0.57.0         
-## [11] MsFeatures_0.0.5            BiocStyle_2.19.1           
+##  [5] GenomeInfoDb_1.27.6         IRanges_2.25.6             
+##  [7] S4Vectors_0.29.7            BiocGenerics_0.37.1        
+##  [9] MatrixGenerics_1.3.1        matrixStats_0.58.0         
+## [11] MsFeatures_0.99.1           BiocStyle_2.19.1           
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] xfun_0.20              lattice_0.20-41        colorspace_2.0-0      
+##  [1] xfun_0.21              lattice_0.20-41        colorspace_2.0-0      
 ##  [4] htmltools_0.5.1.1      yaml_2.2.1             rlang_0.4.10          
 ##  [7] pkgdown_1.6.1.9000     RColorBrewer_1.1-2     GenomeInfoDbData_1.2.4
-## [10] lifecycle_0.2.0        stringr_1.4.0          ProtGenerics_1.23.6   
+## [10] lifecycle_1.0.0        stringr_1.4.0          ProtGenerics_1.23.7   
 ## [13] zlibbioc_1.37.0        munsell_0.5.0          gtable_0.3.0          
-## [16] ragg_0.4.1             memoise_2.0.0          evaluate_0.14         
+## [16] ragg_1.1.0             memoise_2.0.0          evaluate_0.14         
 ## [19] knitr_1.31             fastmap_1.1.0          highr_0.8             
-## [22] scales_1.1.1           BiocManager_1.30.10    cachem_1.0.1          
-## [25] DelayedArray_0.17.7    desc_1.2.0             XVector_0.31.1        
-## [28] farver_2.0.3           MsCoreUtils_1.3.2      systemfonts_0.3.2     
-## [31] fs_1.5.0               textshaping_0.2.1      digest_0.6.27         
+## [22] scales_1.1.1           BiocManager_1.30.10    cachem_1.0.4          
+## [25] DelayedArray_0.17.9    desc_1.2.0             XVector_0.31.1        
+## [28] farver_2.0.3           MsCoreUtils_1.3.2      systemfonts_1.0.1     
+## [31] fs_1.5.0               textshaping_0.3.1      digest_0.6.27         
 ## [34] stringi_1.5.3          bookdown_0.21          rprojroot_2.0.2       
 ## [37] grid_4.1.0             tools_4.1.0            bitops_1.0-6          
-## [40] magrittr_2.0.1         RCurl_1.98-1.2         crayon_1.3.4          
-## [43] MASS_7.3-53            Matrix_1.3-2           assertthat_0.2.1      
-## [46] rmarkdown_2.6          R6_2.5.0               compiler_4.1.0</code></pre>
+## [40] magrittr_2.0.1         RCurl_1.98-1.2         crayon_1.4.1          
+## [43] MASS_7.3-53.1          Matrix_1.3-2           assertthat_0.2.1      
+## [46] rmarkdown_2.7          R6_2.5.0               compiler_4.1.0</code></pre>
 </div>
   </div>
 
@@ -498,7 +500,7 @@ Pairwise correlation plot for features initially grouped into the feature group 
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link external-link">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
@@ -506,6 +508,8 @@ Pairwise correlation plot for features initially grouped into the feature group 
 
   
 
+
+  
 
   </body>
 </html>
