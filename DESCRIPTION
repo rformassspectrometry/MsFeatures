@@ -18,7 +18,7 @@ Authors@R: c(person(given = "Johannes", family = "Rainer",
                     comment = c(ORCID = "0000-0002-6977-7147"),
                     role = c("aut", "cre")))
 Depends:
-    R (>= 4.1)
+    R (>= 4.0)
 Imports:
     methods,
     ProtGenerics (>= 1.23.5),
