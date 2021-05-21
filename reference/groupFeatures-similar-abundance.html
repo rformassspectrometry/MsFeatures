@@ -82,6 +82,7 @@ of object can be passed via ... in the groupFeatures call." />
 
 
 
+
   
 
   
@@ -104,7 +105,7 @@ of object can be passed via ... in the groupFeatures call." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MsFeatures</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -173,7 +174,7 @@ constructor function. Other additional parameters specific for the type
 of <code>object</code> can be passed <em>via</em> <code>...</code> in the <code>groupFeatures</code> call.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>AbundanceSimilarityParam</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>AbundanceSimilarityParam</span><span class='op'>(</span>
   threshold <span class='op'>=</span> <span class='fl'>0.9</span>,
   simFun <span class='op'>=</span> <span class='va'>corRows</span>,
   groupFun <span class='op'>=</span> <span class='va'>groupSimilarityMatrix</span>,
@@ -186,14 +187,14 @@ of <code>object</code> can be passed <em>via</em> <code>...</code> in the <code>
 <span class='fu'><a href='groupFeatures.html'>groupFeatures</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>param</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for SummarizedExperiment,AbundanceSimilarityParam</span>
-<span class='fu'><a href='groupFeatures.html'>groupFeatures</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>param</span>, i <span class='op'>=</span> <span class='fl'>1L</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+<span class='fu'><a href='groupFeatures.html'>groupFeatures</a></span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>param</span>, i <span class='op'>=</span> <span class='fl'>1L</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>threshold</th>
-      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> defining the (similarity) threshold to be used
+      <td><p><code>numeric(1)</code> defining the (similarity) threshold to be used
 for the feature grouping. This parameter is passed to the <code>groupFun</code>
 function.</p></td>
     </tr>
@@ -241,8 +242,8 @@ grouping based on feature values.</p></td>
     </tr>
     <tr>
       <th>i</th>
-      <td><p>for <code>object</code> being a <code><a href='https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html'>SummarizedExperiment()</a></code>: <code><a href='https://rdrr.io/r/base/integer.html'>integer(1)</a></code> or
-<code><a href='https://rdrr.io/r/base/character.html'>character(1)</a></code> specifying either the index or name of the  the <em>assay</em>
+      <td><p>for <code>object</code> being a <code><a href='https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html'>SummarizedExperiment()</a></code>: <code>integer(1)</code> or
+<code>character(1)</code> specifying either the index or name of the  the <em>assay</em>
 in <code>object</code> that contains the feature values that should be used. Use
 <code><a href='https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html'>assayNames()</a></code> on <code>object</code> to list all available assays.</p></td>
     </tr>
@@ -266,100 +267,104 @@ groups from a <code>SummarizedExperiment</code>.</p>
     <p>Johannes Rainer</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'>## Define a simple numeric matrix on which we want to group the rows</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span>
-    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>12</span>, <span class='fl'>34</span>, <span class='fl'>231</span>, <span class='fl'>234</span>, <span class='fl'>9</span>, <span class='fl'>5</span>, <span class='fl'>7</span><span class='op'>)</span>,
-    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>900</span>, <span class='fl'>900</span>, <span class='fl'>800</span>, <span class='fl'>10</span>, <span class='fl'>12</span>, <span class='fl'>9</span>, <span class='fl'>4</span><span class='op'>)</span>,
-    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>25</span>, <span class='fl'>70</span>, <span class='fl'>400</span>, <span class='fl'>409</span>, <span class='fl'>15</span>, <span class='fl'>8</span>, <span class='fl'>4</span><span class='op'>)</span>,
-    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>12</span>, <span class='fl'>13</span>, <span class='fl'>14</span>, <span class='fl'>15</span>, <span class='fl'>16</span>, <span class='fl'>17</span>, <span class='fl'>18</span><span class='op'>)</span>,
-    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>14</span>, <span class='fl'>36</span>, <span class='fl'>240</span>, <span class='fl'>239</span>, <span class='fl'>12</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>,
-    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>103</span>, <span class='fl'>80</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span>
-    <span class='op'>)</span>
-
-<span class='co'>## Group rows based on similarity calculated with Pearson's correlation</span>
-<span class='co'>## on the actual data values (without transforming them).</span>
-<span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='groupFeatures.html'>groupFeatures</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='fu'>AbundanceSimilarityParam</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>res</span>
-</div><div class='output co'>#&gt; [1] 1 2 1 3 1 2</div><div class='input'>
-<span class='co'>## Use Spearman's rho to correlate rows of the log2 transformed x matrix</span>
-<span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='groupFeatures.html'>groupFeatures</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='fu'>AbundanceSimilarityParam</span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"spearman"</span>,
-    transform <span class='op'>=</span> <span class='va'>log2</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>res</span>
-</div><div class='output co'>#&gt; [1] 2 1 2 3 2 1</div><div class='input'>
-<span class='co'>## Perform the grouping on a SummarizedExperiment</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://bioconductor.org/packages/SummarizedExperiment'>SummarizedExperiment</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>se</span><span class='op'>)</span>
-
-<span class='co'>## Group features based on log2 transformed feature values in the first</span>
-<span class='co'>## assay of the SummarizedExperiment</span>
-<span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='groupFeatures.html'>groupFeatures</a></span><span class='op'>(</span><span class='va'>se</span>, param <span class='op'>=</span> <span class='fu'>AbundanceSimilarityParam</span><span class='op'>(</span>threshold <span class='op'>=</span> <span class='fl'>0.7</span>,
-    transform <span class='op'>=</span> <span class='va'>log2</span><span class='op'>)</span><span class='op'>)</span>
-
-<span class='fu'><a href='featureGroups.html'>featureGroups</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   [1] "FG.001" "FG.017" "FG.001" "FG.002" "FG.041" "FG.003" "FG.037" "FG.021"
-#&gt;   [9] "FG.021" "FG.021" "FG.028" "FG.045" "FG.017" "FG.002" "FG.014" "FG.026"
-#&gt;  [17] "FG.048" "FG.027" "FG.008" "FG.007" "FG.008" "FG.017" "FG.002" "FG.033"
-#&gt;  [25] "FG.011" "FG.016" "FG.015" "FG.002" "FG.027" "FG.049" "FG.010" "FG.019"
-#&gt;  [33] "FG.006" "FG.010" "FG.006" "FG.018" "FG.004" "FG.004" "FG.026" "FG.013"
-#&gt;  [41] "FG.020" "FG.008" "FG.018" "FG.013" "FG.008" "FG.011" "FG.011" "FG.022"
-#&gt;  [49] "FG.047" "FG.004" "FG.006" "FG.003" "FG.004" "FG.004" "FG.043" "FG.016"
-#&gt;  [57] "FG.032" "FG.001" "FG.038" "FG.025" "FG.003" "FG.045" "FG.026" "FG.003"
-#&gt;  [65] "FG.050" "FG.041" "FG.015" "FG.022" "FG.008" "FG.002" "FG.011" "FG.013"
-#&gt;  [73] "FG.015" "FG.051" "FG.014" "FG.001" "FG.052" "FG.031" "FG.044" "FG.017"
-#&gt;  [81] "FG.047" "FG.019" "FG.017" "FG.025" "FG.046" "FG.035" "FG.053" "FG.012"
-#&gt;  [89] "FG.012" "FG.008" "FG.054" "FG.034" "FG.009" "FG.028" "FG.030" "FG.030"
-#&gt;  [97] "FG.002" "FG.010" "FG.031" "FG.028" "FG.039" "FG.024" "FG.055" "FG.044"
-#&gt; [105] "FG.004" "FG.006" "FG.016" "FG.029" "FG.044" "FG.035" "FG.006" "FG.020"
-#&gt; [113] "FG.024" "FG.008" "FG.027" "FG.004" "FG.005" "FG.004" "FG.014" "FG.010"
-#&gt; [121] "FG.004" "FG.004" "FG.010" "FG.014" "FG.042" "FG.039" "FG.056" "FG.029"
-#&gt; [129] "FG.036" "FG.008" "FG.004" "FG.005" "FG.022" "FG.010" "FG.003" "FG.020"
-#&gt; [137] "FG.020" "FG.004" "FG.003" "FG.042" "FG.010" "FG.023" "FG.025" "FG.006"
-#&gt; [145] "FG.057" "FG.010" "FG.022" "FG.014" "FG.058" "FG.023" "FG.020" "FG.046"
-#&gt; [153] "FG.037" "FG.021" "FG.008" "FG.010" "FG.023" "FG.013" "FG.013" "FG.024"
-#&gt; [161] "FG.032" "FG.010" "FG.005" "FG.020" "FG.010" "FG.020" "FG.022" "FG.013"
-#&gt; [169] "FG.010" "FG.010" "FG.020" "FG.040" "FG.023" "FG.043" "FG.034" "FG.038"
-#&gt; [177] "FG.007" "FG.007" "FG.025" "FG.022" "FG.022" "FG.022" "FG.017" "FG.010"
-#&gt; [185] "FG.010" "FG.010" "FG.010" "FG.029" "FG.010" "FG.059" "FG.024" "FG.030"
-#&gt; [193] "FG.010" "FG.019" "FG.020" "FG.020" "FG.026" "FG.022" "FG.010" "FG.020"
-#&gt; [201] "FG.020" "FG.040" "FG.013" "FG.027" "FG.060" "FG.027" "FG.036" "FG.020"
-#&gt; [209] "FG.013" "FG.022" "FG.022" "FG.005" "FG.010" "FG.019" "FG.029" "FG.017"
-#&gt; [217] "FG.002" "FG.033" "FG.009" "FG.020" "FG.020" "FG.018" "FG.009" "FG.020"
-#&gt; [225] "FG.020"</div><div class='input'>
-<span class='co'>## Perform feature grouping only on a subset of rows/features:</span>
-<span class='fu'><a href='featureGroups.html'>featureGroups</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='cn'>NA_character_</span>
-<span class='fu'><a href='featureGroups.html'>featureGroups</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>40</span><span class='op'>:</span><span class='fl'>80</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"FG"</span>
-<span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='groupFeatures.html'>groupFeatures</a></span><span class='op'>(</span><span class='va'>res</span>, <span class='fu'>AbundanceSimilarityParam</span><span class='op'>(</span>transform <span class='op'>=</span> <span class='va'>log2</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='featureGroups.html'>featureGroups</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   [1] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt;   [9] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt;  [17] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt;  [25] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt;  [33] NA       NA       NA       NA       NA       NA       NA       "FG.001"
-#&gt;  [41] "FG.002" "FG.003" "FG.008" "FG.009" "FG.006" "FG.007" "FG.006" "FG.001"
-#&gt;  [49] "FG.010" "FG.004" "FG.005" "FG.005" "FG.004" "FG.004" "FG.011" "FG.012"
-#&gt;  [57] "FG.013" "FG.001" "FG.014" "FG.015" "FG.003" "FG.016" "FG.017" "FG.003"
-#&gt;  [65] "FG.018" "FG.019" "FG.020" "FG.021" "FG.007" "FG.002" "FG.022" "FG.023"
-#&gt;  [73] "FG.024" "FG.025" "FG.026" "FG.027" "FG.028" "FG.029" "FG.030" "FG.031"
-#&gt;  [81] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt;  [89] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt;  [97] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [105] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [113] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [121] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [129] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [137] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [145] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [153] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [161] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [169] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [177] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [185] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [193] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [201] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [209] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [217] NA       NA       NA       NA       NA       NA       NA       NA      
-#&gt; [225] NA      </div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'></span>
+<span class='r-in'><span class='co'>## Define a simple numeric matrix on which we want to group the rows</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span></span>
+<span class='r-in'>    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>12</span>, <span class='fl'>34</span>, <span class='fl'>231</span>, <span class='fl'>234</span>, <span class='fl'>9</span>, <span class='fl'>5</span>, <span class='fl'>7</span><span class='op'>)</span>,</span>
+<span class='r-in'>    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>900</span>, <span class='fl'>900</span>, <span class='fl'>800</span>, <span class='fl'>10</span>, <span class='fl'>12</span>, <span class='fl'>9</span>, <span class='fl'>4</span><span class='op'>)</span>,</span>
+<span class='r-in'>    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>25</span>, <span class='fl'>70</span>, <span class='fl'>400</span>, <span class='fl'>409</span>, <span class='fl'>15</span>, <span class='fl'>8</span>, <span class='fl'>4</span><span class='op'>)</span>,</span>
+<span class='r-in'>    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>12</span>, <span class='fl'>13</span>, <span class='fl'>14</span>, <span class='fl'>15</span>, <span class='fl'>16</span>, <span class='fl'>17</span>, <span class='fl'>18</span><span class='op'>)</span>,</span>
+<span class='r-in'>    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>14</span>, <span class='fl'>36</span>, <span class='fl'>240</span>, <span class='fl'>239</span>, <span class='fl'>12</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>,</span>
+<span class='r-in'>    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fl'>103</span>, <span class='fl'>80</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'>    <span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Group rows based on similarity calculated with Pearson's correlation</span></span>
+<span class='r-in'><span class='co'>## on the actual data values (without transforming them).</span></span>
+<span class='r-in'><span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='groupFeatures.html'>groupFeatures</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='fu'>AbundanceSimilarityParam</span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>res</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1 2 1 3 1 2</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Use Spearman's rho to correlate rows of the log2 transformed x matrix</span></span>
+<span class='r-in'><span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='groupFeatures.html'>groupFeatures</a></span><span class='op'>(</span><span class='va'>x</span>, <span class='fu'>AbundanceSimilarityParam</span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"spearman"</span>,</span>
+<span class='r-in'>    transform <span class='op'>=</span> <span class='va'>log2</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>res</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2 1 2 3 2 1</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Perform the grouping on a SummarizedExperiment</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://bioconductor.org/packages/SummarizedExperiment'>SummarizedExperiment</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>se</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Group features based on log2 transformed feature values in the first</span></span>
+<span class='r-in'><span class='co'>## assay of the SummarizedExperiment</span></span>
+<span class='r-in'><span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='groupFeatures.html'>groupFeatures</a></span><span class='op'>(</span><span class='va'>se</span>, param <span class='op'>=</span> <span class='fu'>AbundanceSimilarityParam</span><span class='op'>(</span>threshold <span class='op'>=</span> <span class='fl'>0.7</span>,</span>
+<span class='r-in'>    transform <span class='op'>=</span> <span class='va'>log2</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='featureGroups.html'>featureGroups</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [1] "FG.001" "FG.017" "FG.001" "FG.002" "FG.041" "FG.003" "FG.037" "FG.021"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [9] "FG.021" "FG.021" "FG.028" "FG.045" "FG.017" "FG.002" "FG.014" "FG.026"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [17] "FG.048" "FG.027" "FG.008" "FG.007" "FG.008" "FG.017" "FG.002" "FG.033"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [25] "FG.011" "FG.016" "FG.015" "FG.002" "FG.027" "FG.049" "FG.010" "FG.019"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [33] "FG.006" "FG.010" "FG.006" "FG.018" "FG.004" "FG.004" "FG.026" "FG.013"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [41] "FG.020" "FG.008" "FG.018" "FG.013" "FG.008" "FG.011" "FG.011" "FG.022"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [49] "FG.047" "FG.004" "FG.006" "FG.003" "FG.004" "FG.004" "FG.043" "FG.016"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [57] "FG.032" "FG.001" "FG.038" "FG.025" "FG.003" "FG.045" "FG.026" "FG.003"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [65] "FG.050" "FG.041" "FG.015" "FG.022" "FG.008" "FG.002" "FG.011" "FG.013"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [73] "FG.015" "FG.051" "FG.014" "FG.001" "FG.052" "FG.031" "FG.044" "FG.017"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [81] "FG.047" "FG.019" "FG.017" "FG.025" "FG.046" "FG.035" "FG.053" "FG.012"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [89] "FG.012" "FG.008" "FG.054" "FG.034" "FG.009" "FG.028" "FG.030" "FG.030"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [97] "FG.002" "FG.010" "FG.031" "FG.028" "FG.039" "FG.024" "FG.055" "FG.044"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [105] "FG.004" "FG.006" "FG.016" "FG.029" "FG.044" "FG.035" "FG.006" "FG.020"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [113] "FG.024" "FG.008" "FG.027" "FG.004" "FG.005" "FG.004" "FG.014" "FG.010"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [121] "FG.004" "FG.004" "FG.010" "FG.014" "FG.042" "FG.039" "FG.056" "FG.029"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [129] "FG.036" "FG.008" "FG.004" "FG.005" "FG.022" "FG.010" "FG.003" "FG.020"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [137] "FG.020" "FG.004" "FG.003" "FG.042" "FG.010" "FG.023" "FG.025" "FG.006"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [145] "FG.057" "FG.010" "FG.022" "FG.014" "FG.058" "FG.023" "FG.020" "FG.046"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [153] "FG.037" "FG.021" "FG.008" "FG.010" "FG.023" "FG.013" "FG.013" "FG.024"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [161] "FG.032" "FG.010" "FG.005" "FG.020" "FG.010" "FG.020" "FG.022" "FG.013"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [169] "FG.010" "FG.010" "FG.020" "FG.040" "FG.023" "FG.043" "FG.034" "FG.038"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [177] "FG.007" "FG.007" "FG.025" "FG.022" "FG.022" "FG.022" "FG.017" "FG.010"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [185] "FG.010" "FG.010" "FG.010" "FG.029" "FG.010" "FG.059" "FG.024" "FG.030"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [193] "FG.010" "FG.019" "FG.020" "FG.020" "FG.026" "FG.022" "FG.010" "FG.020"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [201] "FG.020" "FG.040" "FG.013" "FG.027" "FG.060" "FG.027" "FG.036" "FG.020"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [209] "FG.013" "FG.022" "FG.022" "FG.005" "FG.010" "FG.019" "FG.029" "FG.017"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [217] "FG.002" "FG.033" "FG.009" "FG.020" "FG.020" "FG.018" "FG.009" "FG.020"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [225] "FG.020"</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Perform feature grouping only on a subset of rows/features:</span></span>
+<span class='r-in'><span class='fu'><a href='featureGroups.html'>featureGroups</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='cn'>NA_character_</span></span>
+<span class='r-in'><span class='fu'><a href='featureGroups.html'>featureGroups</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>40</span><span class='op'>:</span><span class='fl'>80</span><span class='op'>]</span> <span class='op'>&lt;-</span> <span class='st'>"FG"</span></span>
+<span class='r-in'><span class='va'>res</span> <span class='op'>&lt;-</span> <span class='fu'><a href='groupFeatures.html'>groupFeatures</a></span><span class='op'>(</span><span class='va'>res</span>, <span class='fu'>AbundanceSimilarityParam</span><span class='op'>(</span>transform <span class='op'>=</span> <span class='va'>log2</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='featureGroups.html'>featureGroups</a></span><span class='op'>(</span><span class='va'>res</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [1] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   [9] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [17] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [25] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [33] NA       NA       NA       NA       NA       NA       NA       "FG.001"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [41] "FG.002" "FG.003" "FG.008" "FG.009" "FG.006" "FG.007" "FG.006" "FG.001"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [49] "FG.010" "FG.004" "FG.005" "FG.005" "FG.004" "FG.004" "FG.011" "FG.012"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [57] "FG.013" "FG.001" "FG.014" "FG.015" "FG.003" "FG.016" "FG.017" "FG.003"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [65] "FG.018" "FG.019" "FG.020" "FG.021" "FG.007" "FG.002" "FG.022" "FG.023"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [73] "FG.024" "FG.025" "FG.026" "FG.027" "FG.028" "FG.029" "FG.030" "FG.031"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [81] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [89] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [97] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [105] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [113] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [121] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [129] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [137] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [145] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [153] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [161] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [169] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [177] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [185] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [193] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [201] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [209] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [217] NA       NA       NA       NA       NA       NA       NA       NA      </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [225] NA      </span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -371,11 +376,11 @@ groups from a <code>SummarizedExperiment</code>.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Johannes Rainer.</p>
+  <p><p>Developed by Johannes Rainer.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>

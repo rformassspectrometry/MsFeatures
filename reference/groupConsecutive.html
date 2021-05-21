@@ -83,6 +83,7 @@ one." />
 
 
 
+
   
 
   
@@ -105,7 +106,7 @@ one." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">MsFeatures</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -170,12 +171,12 @@ next larger value not part of any group, <code>2.2</code>. This group contains v
 group. The difference between this value <code>1.9</code> and the mean of the
 current group (<code>mean(c(1.9, 2.2)</code>) is then compared to the difference of
 <code>1.9</code> to the mean value of the group <code>1.9</code> is already part of
-(which is <code><a href='https://rdrr.io/r/base/mean.html'>mean(c(1.1, 1.9))</a></code>). Since the difference to the second group is
+(which is <code>mean(c(1.1, 1.9))</code>). Since the difference to the second group is
 smaller, <code>1.9</code> is removed from the first group and assigned to the second
 one.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>groupConsecutive</span><span class='op'>(</span><span class='va'>x</span>, maxDiff <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>groupConsecutive</span><span class='op'>(</span><span class='va'>x</span>, maxDiff <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,7 +187,7 @@ one.</p>
     </tr>
     <tr>
       <th>maxDiff</th>
-      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(1)</a></code> defining the threshold for difference between
+      <td><p><code>numeric(1)</code> defining the threshold for difference between
 values in <code>x</code> to be grouped into the same group.</p></td>
     </tr>
     </table>
@@ -211,25 +212,28 @@ last of the (ordered) values can be larger than <code>maxDiff</code>. See
     <p>Johannes Rainer</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='co'>## The example described above</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.1</span>, <span class='fl'>1.9</span>, <span class='fl'>2.2</span><span class='op'>)</span>
-<span class='fu'>groupConsecutive</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 1 2 2</div><div class='input'>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.1</span>, <span class='fl'>1.5</span>, <span class='fl'>1.7</span>, <span class='fl'>2.3</span>, <span class='fl'>2.7</span>, <span class='fl'>4.3</span>, <span class='fl'>4.4</span>, <span class='fl'>4.9</span>, <span class='fl'>5.2</span>, <span class='fl'>5.4</span>, <span class='fl'>5.8</span>, <span class='fl'>6</span>, <span class='fl'>7</span>,
-    <span class='fl'>9</span>, <span class='fl'>9.5</span>, <span class='fl'>15</span><span class='op'>)</span>
-
-<span class='fu'>groupConsecutive</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] 1 1 1 2 2 3 3 3 4 4 4 4 5 6 6 7</div><div class='input'><span class='co'>## value 5.2 was initially grouped with 4.3 (because their difference is</span>
-<span class='co'>## smaller 1, but then re-grouped together with 5.4 because the difference</span>
-<span class='co'>## between 5.4 (the next value outside the group of 4.3) and 5.2 is smaller</span>
-<span class='co'>## than its difference to the mean value of the group for value 4.3</span>
-
-<span class='co'>## Example for a case in which values are NOT grouped into the same group</span>
-<span class='co'>## even if the difference between them is &lt;= maxDiff</span>
-<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4.9</span>, <span class='fl'>5.2</span>, <span class='fl'>5.4</span><span class='op'>)</span>
-<span class='fu'>groupConsecutive</span><span class='op'>(</span><span class='va'>a</span>, maxDiff <span class='op'>=</span> <span class='fl'>0.3</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 1 2 2</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'></span>
+<span class='r-in'><span class='co'>## The example described above</span></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.1</span>, <span class='fl'>1.9</span>, <span class='fl'>2.2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>groupConsecutive</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1 2 2</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.1</span>, <span class='fl'>1.5</span>, <span class='fl'>1.7</span>, <span class='fl'>2.3</span>, <span class='fl'>2.7</span>, <span class='fl'>4.3</span>, <span class='fl'>4.4</span>, <span class='fl'>4.9</span>, <span class='fl'>5.2</span>, <span class='fl'>5.4</span>, <span class='fl'>5.8</span>, <span class='fl'>6</span>, <span class='fl'>7</span>,</span>
+<span class='r-in'>    <span class='fl'>9</span>, <span class='fl'>9.5</span>, <span class='fl'>15</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>groupConsecutive</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 1 1 1 2 2 3 3 3 4 4 4 4 5 6 6 7</span>
+<span class='r-in'><span class='co'>## value 5.2 was initially grouped with 4.3 (because their difference is</span></span>
+<span class='r-in'><span class='co'>## smaller 1, but then re-grouped together with 5.4 because the difference</span></span>
+<span class='r-in'><span class='co'>## between 5.4 (the next value outside the group of 4.3) and 5.2 is smaller</span></span>
+<span class='r-in'><span class='co'>## than its difference to the mean value of the group for value 4.3</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Example for a case in which values are NOT grouped into the same group</span></span>
+<span class='r-in'><span class='co'>## even if the difference between them is &lt;= maxDiff</span></span>
+<span class='r-in'><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4.9</span>, <span class='fl'>5.2</span>, <span class='fl'>5.4</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>groupConsecutive</span><span class='op'>(</span><span class='va'>a</span>, maxDiff <span class='op'>=</span> <span class='fl'>0.3</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1 2 2</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -241,11 +245,11 @@ last of the (ordered) values can be larger than <code>maxDiff</code>. See
 
       <footer>
       <div class="copyright">
-  <p>Developed by Johannes Rainer.</p>
+  <p><p>Developed by Johannes Rainer.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
