@@ -8,3 +8,4 @@ local_data/*
 .org
 ^\.github$
 .editorconfig
+logo.png
