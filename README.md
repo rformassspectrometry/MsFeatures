@@ -1,13 +1,14 @@
 # `MsFeatures` - Functionality for Mass Spectrometry Features
 
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](http://www.repostatus.org/badges/latest/wip.svg)](http://www.repostatus.org/#wip)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![R-CMD-check-bioc](https://github.com/RforMassSpectrometry/MsFeatures/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/RforMassSpectrometry/MsFeatures/actions?query=workflow%3AR-CMD-check-bioc)
 [![codecov.io](http://codecov.io/github/rformassspectrometry/MsFeatures/coverage.svg?branch=master)](http://codecov.io/github/rformassspectrometry/MsFeatures?branch=master)
 [![license](https://img.shields.io/badge/license-Artistic--2.0-brightgreen.svg)](https://opensource.org/licenses/Artistic-2.0)
 
-<img
-src="https://raw.githubusercontent.com/rformassspectrometry/stickers/master/MsFeatures/MsFeatures.png"
-height="150">
+[![years in bioc](http://bioconductor.org/shields/years-in-bioc/MsCoreUtils.svg)](https://bioconductor.org/packages/release/bioc/html/MsCoreUtils.html)
+[![Ranking by downloads](http://bioconductor.org/shields/downloads/release/MsCoreUtils.svg)](https://bioconductor.org/packages/stats/bioc/MsCoreUtils/)
+Release: [![build release](http://bioconductor.org/shields/build/release/bioc/MsCoreUtils.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/MsCoreUtils/)
+Devel: [![build devel](http://bioconductor.org/shields/build/devel/bioc/MsCoreUtils.svg)](https://bioconductor.org/checkResults/devel/bioc-LATEST/MsCoreUtils/)
 
 The `MsFeatures` package defines functionality for Mass Spectrometry (MS)
 features. These features are characterized by their specific mass-to-charge
@@ -23,3 +24,6 @@ feature grouping methods for more specific data objects, such as LC-MS
 preprocessing results stored in `XCMSnExp` objects from the
 [`xcms`](https://github.com/sneumann/xcms) package are implemented in the
 respective packages.
+
+See the package [homepage](https://rformassspectrometry.github.io/MsFeatures)
+for more information.
