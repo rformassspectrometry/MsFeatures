@@ -8,3 +8,5 @@ local_data/*
 .org
 ^\.github$
 .editorconfig
+logo.png
+_pkgdown.yml
