@@ -9,3 +9,4 @@ local_data/*
 ^\.github$
 .editorconfig
 logo.png
+_pkgdown.yml
