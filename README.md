@@ -5,10 +5,12 @@
 [![codecov.io](http://codecov.io/github/rformassspectrometry/MsFeatures/coverage.svg?branch=master)](http://codecov.io/github/rformassspectrometry/MsFeatures?branch=master)
 [![license](https://img.shields.io/badge/license-Artistic--2.0-brightgreen.svg)](https://opensource.org/licenses/Artistic-2.0)
 
-[![years in bioc](http://bioconductor.org/shields/years-in-bioc/MsCoreUtils.svg)](https://bioconductor.org/packages/release/bioc/html/MsCoreUtils.html)
-[![Ranking by downloads](http://bioconductor.org/shields/downloads/release/MsCoreUtils.svg)](https://bioconductor.org/packages/stats/bioc/MsCoreUtils/)
-Release: [![build release](http://bioconductor.org/shields/build/release/bioc/MsCoreUtils.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/MsCoreUtils/)
-Devel: [![build devel](http://bioconductor.org/shields/build/devel/bioc/MsCoreUtils.svg)](https://bioconductor.org/checkResults/devel/bioc-LATEST/MsCoreUtils/)
+[![years in bioc](http://bioconductor.org/shields/years-in-bioc/MsFeatures.svg)](https://bioconductor.org/packages/release/bioc/html/MsFeatures.html)
+[![Ranking by downloads](http://bioconductor.org/shields/downloads/release/MsFeatures.svg)](https://bioconductor.org/packages/stats/bioc/MsFeatures/)
+Release: [![build release](http://bioconductor.org/shields/build/release/bioc/MsFeatures.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/MsFeatures/)
+Devel: [![build devel](http://bioconductor.org/shields/build/devel/bioc/MsFeatures.svg)](https://bioconductor.org/checkResults/devel/bioc-LATEST/MsFeatures/)
+
+[![MsFeatures](man/figures/logo.png)]
 
 The `MsFeatures` package defines functionality for Mass Spectrometry (MS)
 features. These features are characterized by their specific mass-to-charge
