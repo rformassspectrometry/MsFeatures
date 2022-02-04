@@ -10,8 +10,6 @@
 Release: [![build release](http://bioconductor.org/shields/build/release/bioc/MsFeatures.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/MsFeatures/)
 Devel: [![build devel](http://bioconductor.org/shields/build/devel/bioc/MsFeatures.svg)](https://bioconductor.org/checkResults/devel/bioc-LATEST/MsFeatures/)
 
-[![MsFeatures](man/figures/logo.png)]
-
 The `MsFeatures` package defines functionality for Mass Spectrometry (MS)
 features. These features are characterized by their specific mass-to-charge
 ration m/z and eventually a retention time rt (for LC-MS features).
