@@ -1,6 +1,6 @@
 Package: MsFeatures
 Title: Functionality for Mass Spectrometry Features
-Version: 1.4.0
+Version: 1.5.0
 Description: The MsFeature package defines functionality for Mass Spectrometry
     features. This includes functions to group (LC-MS) features based on some
     of their properties, such as retention time (coeluting features), or
