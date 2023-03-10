@@ -23,7 +23,7 @@ groupSimilarityMatrix() for details.
 Additional settings for the groupFun and simFun functions can be passed
 to the parameter object  with the ... in the AbundanceSimilarityParam
 constructor function. Other additional parameters specific for the type
-of object can be passed via ... in the groupFeatures call.'><title>Group features based on abundance similarities across samples — groupFeatures-similar-abundance • MsFeatures</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Group features based on abundance similarities across samples — groupFeatures-similar-abundance"><meta property="og:description" content='Group features based on similar abundances (i.e. feature values) across
+of object can be passed via ... in the groupFeatures call.'><title>Group features based on abundance similarities across samples — groupFeatures-similar-abundance • MsFeatures</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Group features based on abundance similarities across samples — groupFeatures-similar-abundance"><meta property="og:description" content='Group features based on similar abundances (i.e. feature values) across
 samples. Parameter subset allows to define a sub set of samples on which
 the similarity calculation should be performed. It might for example be
 better to exclude QC samples from the analysis because feature values  are
@@ -58,7 +58,7 @@ of object can be passed via ... in the groupFeatures call.'><meta property="og:i
     
     <a class="navbar-brand me-2" href="../index.html">MsFeatures</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -126,20 +126,20 @@ of <code>object</code> can be passed <em>via</em> <code>...</code> in the <code>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">AbundanceSimilarityParam</span><span class="op">(</span>
-  threshold <span class="op">=</span> <span class="fl">0.9</span>,
-  simFun <span class="op">=</span> <span class="va">corRows</span>,
-  groupFun <span class="op">=</span> <span class="va">groupSimilarityMatrix</span>,
-  subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span>,
-  transform <span class="op">=</span> <span class="va">identity</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="co"># S4 method for matrix,AbundanceSimilarityParam</span>
-<span class="fu"><a href="groupFeatures.html">groupFeatures</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">param</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for SummarizedExperiment,AbundanceSimilarityParam</span>
-<span class="fu"><a href="groupFeatures.html">groupFeatures</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">param</span>, i <span class="op">=</span> <span class="fl">1L</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">AbundanceSimilarityParam</span><span class="op">(</span></span>
+<span>  threshold <span class="op">=</span> <span class="fl">0.9</span>,</span>
+<span>  simFun <span class="op">=</span> <span class="va">corRows</span>,</span>
+<span>  groupFun <span class="op">=</span> <span class="va">groupSimilarityMatrix</span>,</span>
+<span>  subset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  transform <span class="op">=</span> <span class="va">identity</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for matrix,AbundanceSimilarityParam</span></span>
+<span><span class="fu"><a href="groupFeatures.html">groupFeatures</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">param</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S4 method for SummarizedExperiment,AbundanceSimilarityParam</span></span>
+<span><span class="fu"><a href="groupFeatures.html">groupFeatures</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">param</span>, i <span class="op">=</span> <span class="fl">1L</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -148,43 +148,65 @@ of <code>object</code> can be passed <em>via</em> <code>...</code> in the <code>
 <dd><p><code>numeric(1)</code> defining the (similarity) threshold to be used
 for the feature grouping. This parameter is passed to the <code>groupFun</code>
 function.</p></dd>
+
+
 <dt>simFun</dt>
 <dd><p><code>function</code> to be used to calculate (pairwise)
 similarities (between <strong>rows</strong>). Defaults to <code>simFun = corRows</code>.
 See description or <code><a href="corRows.html">corRows()</a></code> for more details.</p></dd>
+
+
 <dt>groupFun</dt>
 <dd><p><code>function</code> to group features based on the calculated
 similarity matrix. Defaults to <code>groupFun = groupSimilarityMatrix</code>. See
 <code><a href="groupSimilarityMatrix.html">groupSimilarityMatrix()</a></code> for details.</p></dd>
+
+
 <dt>subset</dt>
 <dd><p><code>integer</code> or <code>logical</code> defining a subset of samples (at least
 2) on which the similarity calculation should be performed. By default
 the calculation is performed on all samples.</p></dd>
+
+
 <dt>transform</dt>
 <dd><p><code>function</code> to be used to transform feature abundances prior
 to the similarity calculation. Defaults to <code>transform = identity</code>.
 Alternatively, values could e.g. transformed into log2 scale with
 <code>transform = log2</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>for <code>AbundanceSimilarityParam</code>: optional parameters to be passed
 along to <code>simFun</code> and <code>groupFun</code>. For <code>groupFeatures</code>: optional
 parameters for the extraction/definition of the feature values from
 <code>object</code>.</p></dd>
+
+
 <dt>object</dt>
 <dd><p>object containing the feature abundances on which features
 should be grouped.</p></dd>
+
+
 <dt>param</dt>
 <dd><p><code>AbundanceSimilarityParam</code> defining the settings for the
 grouping based on feature values.</p></dd>
+
+
 <dt>i</dt>
 <dd><p>for <code>object</code> being a <code><a href="https://rdrr.io/pkg/SummarizedExperiment/man/RangedSummarizedExperiment-class.html" class="external-link">SummarizedExperiment()</a></code>: <code>integer(1)</code> or
 <code>character(1)</code> specifying either the index or name of the  the <em>assay</em>
 in <code>object</code> that contains the feature values that should be used. Use
 <code><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assayNames()</a></code> on <code>object</code> to list all available assays.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>for object being a <code>SummarizedExperiment</code>: a <code>SummarizedExperiment</code>with the grouping results added to a column <code>"feature_group"</code> in the
+    
+
+<p>for object being a <code>SummarizedExperiment</code>: a <code>SummarizedExperiment</code></p>
+
+
+<p>with the grouping results added to a column <code>"feature_group"</code> in the
 object's <code>rowData</code>. For object being a <code>matrix</code>: an <code>integer</code> of length
 equal to the number of rows with the group identifiers.</p>
     </div>
@@ -203,39 +225,39 @@ groups from a <code>SummarizedExperiment</code>.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"><span class="co">## Define a simple numeric matrix on which we want to group the rows</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">34</span>, <span class="fl">231</span>, <span class="fl">234</span>, <span class="fl">9</span>, <span class="fl">5</span>, <span class="fl">7</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">900</span>, <span class="fl">900</span>, <span class="fl">800</span>, <span class="fl">10</span>, <span class="fl">12</span>, <span class="fl">9</span>, <span class="fl">4</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">70</span>, <span class="fl">400</span>, <span class="fl">409</span>, <span class="fl">15</span>, <span class="fl">8</span>, <span class="fl">4</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">13</span>, <span class="fl">14</span>, <span class="fl">15</span>, <span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">18</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">36</span>, <span class="fl">240</span>, <span class="fl">239</span>, <span class="fl">12</span>, <span class="fl">7</span>, <span class="fl">8</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">103</span>, <span class="fl">80</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Group rows based on similarity calculated with Pearson's correlation</span></span>
-<span class="r-in"><span class="co">## on the actual data values (without transforming them).</span></span>
-<span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="groupFeatures.html">groupFeatures</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu">AbundanceSimilarityParam</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">res</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Define a simple numeric matrix on which we want to group the rows</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">34</span>, <span class="fl">231</span>, <span class="fl">234</span>, <span class="fl">9</span>, <span class="fl">5</span>, <span class="fl">7</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">900</span>, <span class="fl">900</span>, <span class="fl">800</span>, <span class="fl">10</span>, <span class="fl">12</span>, <span class="fl">9</span>, <span class="fl">4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">70</span>, <span class="fl">400</span>, <span class="fl">409</span>, <span class="fl">15</span>, <span class="fl">8</span>, <span class="fl">4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">13</span>, <span class="fl">14</span>, <span class="fl">15</span>, <span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">18</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>, <span class="fl">36</span>, <span class="fl">240</span>, <span class="fl">239</span>, <span class="fl">12</span>, <span class="fl">7</span>, <span class="fl">8</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">103</span>, <span class="fl">80</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Group rows based on similarity calculated with Pearson's correlation</span></span></span>
+<span class="r-in"><span><span class="co">## on the actual data values (without transforming them).</span></span></span>
+<span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="groupFeatures.html">groupFeatures</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu">AbundanceSimilarityParam</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">res</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 2 1 3 1 2</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Use Spearman's rho to correlate rows of the log2 transformed x matrix</span></span>
-<span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="groupFeatures.html">groupFeatures</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu">AbundanceSimilarityParam</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"spearman"</span>,</span>
-<span class="r-in">    transform <span class="op">=</span> <span class="va">log2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">res</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Use Spearman's rho to correlate rows of the log2 transformed x matrix</span></span></span>
+<span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="groupFeatures.html">groupFeatures</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu">AbundanceSimilarityParam</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"spearman"</span>,</span></span>
+<span class="r-in"><span>    transform <span class="op">=</span> <span class="va">log2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">res</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 1 2 3 2 1</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Perform the grouping on a SummarizedExperiment</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/SummarizedExperiment" class="external-link">SummarizedExperiment</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Group features based on log2 transformed feature values in the first</span></span>
-<span class="r-in"><span class="co">## assay of the SummarizedExperiment</span></span>
-<span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="groupFeatures.html">groupFeatures</a></span><span class="op">(</span><span class="va">se</span>, param <span class="op">=</span> <span class="fu">AbundanceSimilarityParam</span><span class="op">(</span>threshold <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span class="r-in">    transform <span class="op">=</span> <span class="va">log2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Perform the grouping on a SummarizedExperiment</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/SummarizedExperiment" class="external-link">SummarizedExperiment</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Group features based on log2 transformed feature values in the first</span></span></span>
+<span class="r-in"><span><span class="co">## assay of the SummarizedExperiment</span></span></span>
+<span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="groupFeatures.html">groupFeatures</a></span><span class="op">(</span><span class="va">se</span>, param <span class="op">=</span> <span class="fu">AbundanceSimilarityParam</span><span class="op">(</span>threshold <span class="op">=</span> <span class="fl">0.7</span>,</span></span>
+<span class="r-in"><span>    transform <span class="op">=</span> <span class="va">log2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "FG.001" "FG.017" "FG.001" "FG.002" "FG.041" "FG.003" "FG.037" "FG.021"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [9] "FG.021" "FG.021" "FG.028" "FG.045" "FG.017" "FG.002" "FG.014" "FG.026"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [17] "FG.048" "FG.027" "FG.008" "FG.007" "FG.008" "FG.017" "FG.002" "FG.033"</span>
@@ -265,12 +287,12 @@ groups from a <code>SummarizedExperiment</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [209] "FG.013" "FG.022" "FG.022" "FG.005" "FG.010" "FG.019" "FG.029" "FG.017"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [217] "FG.002" "FG.033" "FG.009" "FG.020" "FG.020" "FG.018" "FG.009" "FG.020"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [225] "FG.020"</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Perform feature grouping only on a subset of rows/features:</span></span>
-<span class="r-in"><span class="fu"><a href="featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NA_character_</span></span>
-<span class="r-in"><span class="fu"><a href="featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">[</span><span class="fl">40</span><span class="op">:</span><span class="fl">80</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"FG"</span></span>
-<span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="groupFeatures.html">groupFeatures</a></span><span class="op">(</span><span class="va">res</span>, <span class="fu">AbundanceSimilarityParam</span><span class="op">(</span>transform <span class="op">=</span> <span class="va">log2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Perform feature grouping only on a subset of rows/features:</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NA_character_</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">[</span><span class="fl">40</span><span class="op">:</span><span class="fl">80</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"FG"</span></span></span>
+<span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="groupFeatures.html">groupFeatures</a></span><span class="op">(</span><span class="va">res</span>, <span class="fu">AbundanceSimilarityParam</span><span class="op">(</span>transform <span class="op">=</span> <span class="va">log2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="featureGroups.html">featureGroups</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1] NA       NA       NA       NA       NA       NA       NA       NA      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [9] NA       NA       NA       NA       NA       NA       NA       NA      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [17] NA       NA       NA       NA       NA       NA       NA       NA      </span>
@@ -311,7 +333,7 @@ groups from a <code>SummarizedExperiment</code>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
 </div>
 
     </footer></div>
