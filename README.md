@@ -2,7 +2,7 @@
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![R-CMD-check-bioc](https://github.com/RforMassSpectrometry/MsFeatures/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/RforMassSpectrometry/MsFeatures/actions?query=workflow%3AR-CMD-check-bioc)
-[![codecov](https://codecov.io/gh/rformassspectrometry/MsFeatures/branch/devel/graph/badge.svg?token=zUtxxzOqMT)](https://codecov.io/gh/rformassspectrometry/MsFeatures)
+[![codecov](https://codecov.io/gh/rformassspectrometry/MsFeatures/branch/main/graph/badge.svg?token=zUtxxzOqMT)](https://codecov.io/gh/rformassspectrometry/MsFeatures)
 [![license](https://img.shields.io/badge/license-Artistic--2.0-brightgreen.svg)](https://opensource.org/licenses/Artistic-2.0)
 [![years in bioc](http://bioconductor.org/shields/years-in-bioc/MsFeatures.svg)](https://bioconductor.org/packages/release/bioc/html/MsFeatures.html)
 [![Ranking by downloads](http://bioconductor.org/shields/downloads/release/MsFeatures.svg)](https://bioconductor.org/packages/stats/bioc/MsFeatures/)
@@ -26,6 +26,16 @@ respective packages.
 
 See the package [homepage](https://rformassspectrometry.github.io/MsFeatures)
 for more information.
+
+
+# Installation
+
+The package can be installed with
+
+```r
+install.packages("BiocManager")
+BiocManager::install("MsFeatures")
+```
 
 
 # Contributions
