@@ -39,11 +39,13 @@ x <- c(1.1, 1.5, 1.7, 2.3, 2.7, 4.3, 4.4, 4.9, 5.2, 5.4, 5.8, 6, 7,
     9, 9.5, 15)
 
 groupClosest(x)
+
 }
 \seealso{
 Other grouping operations: 
 \code{\link{groupConsecutive}()},
-\code{\link{groupSimilarityMatrix}()}
+\code{\link{groupSimilarityMatrix}()},
+\code{\link{groupSimilarityMatrixTree}()}
 }
 \author{
 Johannes Rainer
