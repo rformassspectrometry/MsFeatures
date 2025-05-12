@@ -335,7 +335,7 @@ get_cluster_members <- function(hc, cluster_index) {
 #' tree. If the node qualifies,#' all members are added as a group to the groups
 #' vector and all following child nodes are skipped.
 #'
-#' @param dist_matrix is a matrix object with pairwise retention time distances.
+#' @param dists is a matrix object with pairwise retention time distances.
 #'
 #' @param maxDiff is the maximum pairwise distance between members of a group.
 #'
@@ -343,7 +343,7 @@ get_cluster_members <- function(hc, cluster_index) {
 #' Should be of the same length as the feature definitions.
 #'
 #' @author Johan Lassen
-#'
+#' @importFrom stats hclust
 #' @family grouping operations
 groupSimilarityMatrixTree <- function(dists, maxDiff) {
 

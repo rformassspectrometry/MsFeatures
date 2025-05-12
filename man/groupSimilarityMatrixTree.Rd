@@ -7,9 +7,9 @@
 groupSimilarityMatrixTree(dists, maxDiff)
 }
 \arguments{
-\item{maxDiff}{is the maximum pairwise distance between members of a group.}
+\item{dists}{is a matrix object with pairwise retention time distances.}
 
-\item{dist_matrix}{is a matrix object with pairwise retention time distances.}
+\item{maxDiff}{is the maximum pairwise distance between members of a group.}
 }
 \value{
 \code{integers} representing groups of peaks based on retention times.
