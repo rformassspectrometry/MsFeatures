@@ -287,6 +287,88 @@ groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE, ...) {
     res
 }
 
+
+#' @title Finds all leaves of a cluster in a tree data structure.
+#'
+#' @description
+#' Auxillary function for `groupSimilarityMatrixTree()` that searches through a
+#' complete clustering tree for branches with internal distances less
+#' than maxDiff.
+#'
+#' @details
+#'
+#' The algorithm recursively seeks the tree for the members of a cluster.
+#'
+#' @param hc is a hclust object.
+#'
+#' @param cluster_index is The index of the cluster in the hclust object.
+#'
+#' @return `integers` representing all leafs (retention time indexes) of a given
+#'  node (and sub-nodes) in the tree
+#'
+#' @author Johan Lassen
+#'
+#' @family grouping operations
+get_cluster_members <- function(hc, cluster_index) {
+  #' Recursively gets the members of a cluster in an hclust object.
+  if (cluster_index < 0) {
+    return(-cluster_index)
+  } else {
+    merge_row <- hc$merge[cluster_index, ]
+    left_members <- get_cluster_members(hc, merge_row[1])
+    right_members <- get_cluster_members(hc, merge_row[2])
+    return(c(left_members, right_members))
+  }
+}
+
+#' @title Identifies groups with intragroup pairwise distances less than maxDiff
+#'
+#' @description
+#' Searches through a complete clustering tree for branches with internal
+#' distances less than maxDiff.
+#'
+#' @details
+#'
+#' The search is performed top-down so that every node is evaluated for
+#'  qualifying as a group.
+#' If the node does not qualify the algorithm iterates to the next node in the
+#' tree. If the node qualifies,#' all members are added as a group to the groups
+#' vector and all following child nodes are skipped.
+#'
+#' @param dists is a matrix object with pairwise retention time distances.
+#'
+#' @param maxDiff is the maximum pairwise distance between members of a group.
+#'
+#' @return `integers` representing groups of peaks based on retention times.
+#' Should be of the same length as the feature definitions.
+#'
+#' @author Johan Lassen
+#' @importFrom stats hclust
+#' @family grouping operations
+groupSimilarityMatrixTree <- function(dists, maxDiff) {
+
+  hc       <- hclust(dists, method = "complete")
+
+  # Convert dist object to vector
+  dist_matrix     <- as.matrix(dists)
+  n_clusters      <- nrow(hc$merge)
+  already_grouped <- c()
+
+  groups <- 1:nrow(dist_matrix)
+  for(i in rev(1:n_clusters)){
+    # Extract cluster members (top-down approach)
+    members           <- get_cluster_members(hc, i)
+    if (max(dist_matrix[members, members]) > maxDiff) next
+    if (any(members %in% already_grouped)) next
+
+    # Save grouped members
+    groups[members] <- min(groups[members])
+    already_grouped <- c(already_grouped, members)
+    if (length(already_grouped) == nrow(dist_matrix)) break
+  }
+  return(groups)
+}
+
 #' @title Group values with differences below threshold
 #'
 #' @description
@@ -329,7 +411,10 @@ groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE, ...) {
 #'     9, 9.5, 15)
 #'
 #' groupClosest(x)
+#'
+
 groupClosest <- function(x, maxDiff = 1) {
-    dists <- as.matrix(dist(x, method = "manhattan"))
-    groupSimilarityMatrix(-dists, threshold = -maxDiff, full = TRUE)
+  dists <- dist(x, method = "manhattan")
+  groupSimilarityMatrixTree(dists, maxDiff)
 }
+

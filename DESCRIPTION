@@ -38,7 +38,7 @@ LazyData: no
 BugReports: https://github.com/RforMassSpectrometry/MsFeatures/issues
 URL: https://github.com/RforMassSpectrometry/MsFeatures
 biocViews: Infrastructure, MassSpectrometry, Metabolomics
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.2
 Roxygen: list(markdown=TRUE)
 VignetteBuilder: knitr
 Collate:
