@@ -75,7 +75,8 @@ groupConsecutive(a, maxDiff = 0.3)
 \seealso{
 Other grouping operations: 
 \code{\link{groupClosest}()},
-\code{\link{groupSimilarityMatrix}()}
+\code{\link{groupSimilarityMatrix}()},
+\code{\link{groupSimilarityMatrixTree}()}
 }
 \author{
 Johannes Rainer

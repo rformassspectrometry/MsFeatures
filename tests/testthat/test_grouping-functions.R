@@ -91,3 +91,39 @@ test_that("groupClosest works", {
     }
     expect_true(all(vapply(resl, comp_fun, logical(1))))
 })
+
+
+test_that("groupSimilarityMatrixTree works", {
+  data(se)
+  rts <- rowData(se)$rtmed
+
+  # Make distances
+  dists <- dist(rts, method = "manhattan")
+
+  # Check if all groups are clustered if maxdiff is equal to the maximum distance
+  res <- groupSimilarityMatrixTree(dists, maxDiff = max(dists))
+  expect_true(length(unique(res)) == 1)
+
+  # Some features in the rts have the exact same rt. Check if these are clustered.
+  res <- groupSimilarityMatrixTree(dists, maxDiff = min(dists))
+  zero_distance_groups <- names(table(res)[table(res)>1])
+  expect_true(all(vapply(zero_distance_groups, function(x) {
+    all(as.matrix(dists)[res == x, res == x] == 0)},
+    logical(1))))
+
+
+  # Check if groups are clustered correctly
+  rts <- c(1, 1.5, 2,   # group 1
+           3, 3.1, 3.2, # group 2
+           6, 7, 8      # group 3
+  )
+  dists <- dist(rts, method = "manhattan")
+  res <- groupSimilarityMatrixTree(dists, maxDiff = 2)
+  expect_equal(as.factor(as.character(res)), as.factor(c(1, 1, 1, 4, 4, 4, 7, 7, 7)))
+
+  # Ensure that it is a one dimensional vector (and that euclidean and manhattan gives the same result)
+  res1 <- groupSimilarityMatrixTree(dist(rts, method = "manhattan"), maxDiff = 2)
+  res2 <- groupSimilarityMatrixTree(dist(rts, method = "euclidean"), maxDiff = 2)
+  expect_equal(res1, res2)
+})
+
