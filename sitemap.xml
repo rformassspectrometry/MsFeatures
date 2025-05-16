@@ -1,54 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/404.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/articles/MsFeatures.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/reference/corRows.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/reference/featureGroups.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/reference/groupClosest.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/reference/groupConsecutive.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/reference/groupFeatures-similar-abundance.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/reference/groupFeatures-similar-rtime.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/reference/groupFeatures.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/reference/groupSimilarityMatrix.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/reference/hidden_aliases.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rformassspectrometry.github.io/MsFeatures/reference/se.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/404.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/articles/MsFeatures.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/articles/index.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/authors.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/index.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/news/index.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/reference/corRows.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/reference/featureGroups.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/reference/groupClosest.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/reference/groupConsecutive.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/reference/groupFeatures-similar-abundance.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/reference/groupFeatures-similar-rtime.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/reference/groupFeatures.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/reference/groupSimilarityMatrix.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/reference/hidden_aliases.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/reference/index.html</loc></url>
+<url><loc>https://rformassspectrometry.github.io/MsFeatures/reference/se.html</loc></url>
 </urlset>
+

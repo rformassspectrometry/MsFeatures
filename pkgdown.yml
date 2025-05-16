@@ -1,10 +1,9 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7.9000
-pkgdown_sha: c354aa7e5ea1f9936692494c28c89e5bdd31fc68
+pandoc: 3.6.4
+pkgdown: 2.1.2.9000
+pkgdown_sha: 99457e7fa7f36696ae743b06aca59c0fdd97a7d6
 articles:
   MsFeatures: MsFeatures.html
-last_built: 2023-04-13T08:35Z
+last_built: 2025-05-16T12:34Z
 urls:
   reference: https://rformassspectrometry.github.io/MsFeatures/reference
   article: https://rformassspectrometry.github.io/MsFeatures/articles
-
