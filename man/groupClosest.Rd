@@ -4,13 +4,16 @@
 \alias{groupClosest}
 \title{Group values with differences below threshold}
 \usage{
-groupClosest(x, maxDiff = 1)
+groupClosest(x, maxDiff = 1, FUN = groupSimilarityMatrixTree)
 }
 \arguments{
 \item{x}{\code{numeric} of values that should be grouped.}
 
 \item{maxDiff}{\code{numeric(1)} defining the threshold for difference between
 values in \code{x} to be grouped into the same group.}
+
+\item{FUN}{supported similarity calculation function. Can be either
+\code{\link[=groupSimilarityMatrixTree]{groupSimilarityMatrixTree()}} (the default) or \code{\link[=groupSimilarityMatrix]{groupSimilarityMatrix()}}.}
 }
 \value{
 \code{integer} with the group assignment (values grouped together have
@@ -43,6 +46,7 @@ groupClosest(x)
 }
 \seealso{
 Other grouping operations: 
+\code{\link{get_cluster_members}()},
 \code{\link{groupConsecutive}()},
 \code{\link{groupSimilarityMatrix}()},
 \code{\link{groupSimilarityMatrixTree}()}

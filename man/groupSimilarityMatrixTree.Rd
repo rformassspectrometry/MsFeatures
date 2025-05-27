@@ -23,11 +23,12 @@ distances less than maxDiff.
 The search is performed top-down so that every node is evaluated for
 qualifying as a group.
 If the node does not qualify the algorithm iterates to the next node in the
-tree. If the node qualifies,#' all members are added as a group to the groups
-vector and all following child nodes are skipped.
+tree. If the node qualifies, all members are added as a group to the \emph{groups
+vector} and all following child nodes are skipped.
 }
 \seealso{
 Other grouping operations: 
+\code{\link{get_cluster_members}()},
 \code{\link{groupClosest}()},
 \code{\link{groupConsecutive}()},
 \code{\link{groupSimilarityMatrix}()}

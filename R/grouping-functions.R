@@ -309,6 +309,7 @@ groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE, ...) {
 #' @author Johan Lassen
 #'
 #' @family grouping operations
+#' @noRd
 get_cluster_members <- function(hc, cluster_index) {
   #' Recursively gets the members of a cluster in an hclust object.
   if (cluster_index < 0) {
@@ -332,8 +333,8 @@ get_cluster_members <- function(hc, cluster_index) {
 #' The search is performed top-down so that every node is evaluated for
 #'  qualifying as a group.
 #' If the node does not qualify the algorithm iterates to the next node in the
-#' tree. If the node qualifies,#' all members are added as a group to the groups
-#' vector and all following child nodes are skipped.
+#' tree. If the node qualifies, all members are added as a group to the *groups
+#' vector* and all following child nodes are skipped.
 #'
 #' @param dists is a matrix object with pairwise retention time distances.
 #'
@@ -346,21 +347,17 @@ get_cluster_members <- function(hc, cluster_index) {
 #' @importFrom stats hclust
 #' @family grouping operations
 groupSimilarityMatrixTree <- function(dists, maxDiff) {
-
-  hc       <- hclust(dists, method = "complete")
-
+  hc <- hclust(as.dist(dists), method = "complete")
   # Convert dist object to vector
-  dist_matrix     <- as.matrix(dists)
-  n_clusters      <- nrow(hc$merge)
+  dist_matrix <- as.matrix(dists)
+  n_clusters <- nrow(hc$merge)
   already_grouped <- c()
-
-  groups <- 1:nrow(dist_matrix)
-  for(i in rev(1:n_clusters)){
+  groups <- seq_len(nrow(dist_matrix))
+  for(i in rev(seq_len(n_clusters))){
     # Extract cluster members (top-down approach)
-    members           <- get_cluster_members(hc, i)
+    members <- get_cluster_members(hc, i)
     if (max(dist_matrix[members, members]) > maxDiff) next
     if (any(members %in% already_grouped)) next
-
     # Save grouped members
     groups[members] <- min(groups[members])
     already_grouped <- c(already_grouped, members)
@@ -386,6 +383,9 @@ groupSimilarityMatrixTree <- function(dists, maxDiff) {
 #' @param maxDiff `numeric(1)` defining the threshold for difference between
 #'     values in `x` to be grouped into the same group.
 #'
+#' @param FUN supported similarity calculation function. Can be either
+#'     [groupSimilarityMatrixTree()] (the default) or [groupSimilarityMatrix()].
+#'
 #' @return `integer` with the group assignment (values grouped together have
 #'     the same return value).
 #'
@@ -396,6 +396,7 @@ groupSimilarityMatrixTree <- function(dists, maxDiff) {
 #' @export
 #'
 #' @importFrom stats dist
+#' @importFrom stats as.dist
 #'
 #' @examples
 #'
@@ -412,9 +413,7 @@ groupSimilarityMatrixTree <- function(dists, maxDiff) {
 #'
 #' groupClosest(x)
 #'
-
-groupClosest <- function(x, maxDiff = 1) {
-  dists <- dist(x, method = "manhattan")
-  groupSimilarityMatrixTree(dists, maxDiff)
+groupClosest <- function(x, maxDiff = 1, FUN = groupSimilarityMatrixTree) {
+  dists <- as.matrix(dist(x, method = "manhattan"))
+  FUN(dists, maxDiff)
 }
-

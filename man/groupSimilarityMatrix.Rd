@@ -85,6 +85,7 @@ groupSimilarityMatrix(x, threshold = 0.9) ## Don't break previous cluster!
 }
 \seealso{
 Other grouping operations: 
+\code{\link{get_cluster_members}()},
 \code{\link{groupClosest}()},
 \code{\link{groupConsecutive}()},
 \code{\link{groupSimilarityMatrixTree}()}

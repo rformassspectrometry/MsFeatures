@@ -23,8 +23,14 @@ than maxDiff.
 \details{
 The algorithm recursively seeks the tree for the members of a cluster.
 }
+\seealso{
+Other grouping operations: 
+\code{\link{groupClosest}()},
+\code{\link{groupConsecutive}()},
+\code{\link{groupSimilarityMatrix}()},
+\code{\link{groupSimilarityMatrixTree}()}
+}
 \author{
 Johan Lassen
 }
-\concept{grouping operations
-Recursively gets the members of a cluster in an hclust object.}
+\concept{grouping operations}
