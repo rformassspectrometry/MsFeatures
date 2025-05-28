@@ -413,7 +413,6 @@ groupSimilarityMatrixTree <- function(dists, maxDiff) {
 #'     9, 9.5, 15)
 #'
 #' groupClosest(x)
-#'
 groupClosest <- function(x, maxDiff = 1, FUN = groupSimilarityMatrixTree) {
   dists <- as.matrix(dist(x, method = "manhattan"))
   FUN(dists, maxDiff)
