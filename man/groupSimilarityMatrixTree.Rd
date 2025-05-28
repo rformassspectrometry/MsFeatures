@@ -28,7 +28,6 @@ vector} and all following child nodes are skipped.
 }
 \seealso{
 Other grouping operations: 
-\code{\link{get_cluster_members}()},
 \code{\link{groupClosest}()},
 \code{\link{groupConsecutive}()},
 \code{\link{groupSimilarityMatrix}()}

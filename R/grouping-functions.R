@@ -311,7 +311,7 @@ groupSimilarityMatrix <- function(x, threshold = 0.9, full = TRUE, ...) {
 #' @family grouping operations
 #' @noRd
 get_cluster_members <- function(hc, cluster_index) {
-  #' Recursively gets the members of a cluster in an hclust object.
+  # Recursively gets the members of a cluster in an hclust object.
   if (cluster_index < 0) {
     return(-cluster_index)
   } else {
