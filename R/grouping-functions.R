@@ -390,6 +390,7 @@ groupSimilarityMatrixTree <- function(dists, maxDiff) {
 #'     the same return value).
 #'
 #' @author Johannes Rainer
+#' @author Johan Lassen
 #'
 #' @family grouping operations
 #'
