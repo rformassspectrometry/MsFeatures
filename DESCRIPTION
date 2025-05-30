@@ -16,7 +16,11 @@ Description: The MsFeature package defines functionality for Mass Spectrometry
 Authors@R: c(person(given = "Johannes", family = "Rainer",
                     email = "Johannes.Rainer@eurac.edu",
                     comment = c(ORCID = "0000-0002-6977-7147"),
-                    role = c("aut", "cre")))
+                    role = c("aut", "cre")),
+             person(given = "Johan", family = "Lassen",
+                    email = "johan.lassen@forens.au.dk",
+                    role = c("ctb"),
+                    comment = c(ORCID = "0000-0002-0452-566X")))
 Depends:
     R (>= 4.0)
 Imports:
@@ -50,3 +54,4 @@ Collate:
     'SimilarRtimeParam.R'
     'featureGroups.R'
     'se.R'
+
