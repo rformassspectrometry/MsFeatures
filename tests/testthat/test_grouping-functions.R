@@ -73,7 +73,7 @@ test_that("groupClosest works", {
     data(se)
     rts <- rowData(se)$rtmed
     ## Check that all differences within each group are below threshold!
-    res <- groupClosest(rts, 10)
+    res <- groupClosest(rts, 10, FUN = groupSimilarityMatrixTree)
     resl <- split(rts, res)
     comp_fun <- function(z) {
         if (length(z) == 1)
@@ -82,8 +82,26 @@ test_that("groupClosest works", {
     }
     expect_true(all(vapply(resl, comp_fun, logical(1))))
 
-    res <- groupClosest(rts, 60)
+    res_2 <- groupClosest(rts, 10, FUN = groupSimilarityMatrix)
+    resl <- split(rts, res_2)
+    comp_fun <- function(z) {
+        if (length(z) == 1)
+            TRUE
+        else all(diff(z) <= 10)
+    }
+    expect_true(all(vapply(resl, comp_fun, logical(1))))
+
+    res <- groupClosest(rts, 60, FUN = groupSimilarityMatrixTree)
     resl <- split(rts, res)
+    comp_fun <- function(z) {
+        if (length(z) == 1)
+            TRUE
+        else all(diff(z) <= 60)
+    }
+    expect_true(all(vapply(resl, comp_fun, logical(1))))
+
+    res_2 <- groupClosest(rts, 60, FUN = groupSimilarityMatrix)
+    resl <- split(rts, res_2)
     comp_fun <- function(z) {
         if (length(z) == 1)
             TRUE
@@ -126,4 +144,3 @@ test_that("groupSimilarityMatrixTree works", {
   res2 <- groupSimilarityMatrixTree(dist(rts, method = "euclidean"), maxDiff = 2)
   expect_equal(res1, res2)
 })
-

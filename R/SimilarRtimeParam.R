@@ -12,7 +12,8 @@
 #' difference in their retention time which is `<=` parameter `diffRt` of the
 #' parameter object are grouped together.
 #'
-#' If `object` is a [SummarizedExperiment()]: if a column `"feature_group"` is
+#' If `object` is a [SummarizedExperiment::SummarizedExperiment()]: if a
+#' column `"feature_group"` is
 #' found in [SummarizedExperiment::colData()] feature groups defined in that
 #' column are further sub-grouped with this method. See [groupFeatures()] for
 #' the general concept of this feature grouping.
@@ -65,7 +66,8 @@
 #'     grouped. The `MsFeatures` package defines a method for `object` being
 #'     either a `numeric` or a `SummarizedExperiment`.
 #'
-#' @param rtime for `object` being a [SummarizedExperiment()]: `character(1)`
+#' @param rtime for `object` being a
+#'     [SummarizedExperiment::SummarizedExperiment()]: `character(1)`
 #'     specifying the column in `rowData(object)` that contains the retention
 #'     time values.
 #'

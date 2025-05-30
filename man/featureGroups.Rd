@@ -30,8 +30,8 @@ the same length as there are features in \code{object.}
 \description{
 \code{featureGroups} and \verb{featureGroups<-} allow to extract or set the feature
 definitions from the input object. The implementations for
-\code{\link[=SummarizedExperiment]{SummarizedExperiment()}} get or set the content of a column named
-\code{"feature_group"} in the object's \code{rowData}.
+\code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment::SummarizedExperiment()}} get or set the content of
+a column named \code{"feature_group"} in the object's \code{rowData}.
 
 This method should be implemented for all other object for which a
 \code{\link[=groupFeatures]{groupFeatures()}} method is defined.

@@ -4,7 +4,7 @@
 \alias{groupClosest}
 \title{Group values with differences below threshold}
 \usage{
-groupClosest(x, maxDiff = 1, FUN = groupSimilarityMatrixTree)
+groupClosest(x, maxDiff = 1, FUN = groupSimilarityMatrix, ...)
 }
 \arguments{
 \item{x}{\code{numeric} of values that should be grouped.}
@@ -13,7 +13,10 @@ groupClosest(x, maxDiff = 1, FUN = groupSimilarityMatrixTree)
 values in \code{x} to be grouped into the same group.}
 
 \item{FUN}{supported similarity calculation function. Can be either
-\code{\link[=groupSimilarityMatrixTree]{groupSimilarityMatrixTree()}} (the default) or \code{\link[=groupSimilarityMatrix]{groupSimilarityMatrix()}}.}
+\link{groupSimilarityMatrix} (the default) or \link{groupSimilarityMatrixTree},
+the latter being faster and less memory demanding.}
+
+\item{...}{additional parameters passed to \code{FUN}.}
 }
 \value{
 \code{integer} with the group assignment (values grouped together have
@@ -21,12 +24,12 @@ the same return value).
 }
 \description{
 Group values with a difference between them being smaller than a user
-defined threshold. This function uses the \code{\link[=groupSimilarityMatrix]{groupSimilarityMatrix()}} function
-to create groups with smallest differences between its members. Differences
-between \strong{all} members of one group are below the user defined threshold
-\code{maxDiff}. This is a more stringent grouping than what \code{\link[=groupConsecutive]{groupConsecutive()}}
-performs leading thus to smaller groups (with smaller differences between
-its members).
+defined threshold. This function uses the \code{\link[=groupSimilarityMatrix]{groupSimilarityMatrix()}} or the
+\code{\link[=groupSimilarityMatrixTree]{groupSimilarityMatrixTree()}} function to create groups with smallest
+differences between its members. Differences between \strong{all} members of
+one group are below the user defined threshold \code{maxDiff}. This is a more
+stringent grouping than what \code{\link[=groupConsecutive]{groupConsecutive()}} performs leading thus to
+smaller groups (with smaller differences between its members).
 }
 \examples{
 
@@ -50,8 +53,6 @@ Other grouping operations:
 \code{\link{groupSimilarityMatrixTree}()}
 }
 \author{
-Johannes Rainer
-
-Johan Lassen
+Johannes Rainer, Johan Lassen
 }
 \concept{grouping operations}

@@ -30,7 +30,8 @@ either a \code{numeric} or a \code{SummarizedExperiment}.}
 
 \item{...}{additional parameters passed to the \code{groupFun} function.}
 
-\item{rtime}{for \code{object} being a \code{\link[=SummarizedExperiment]{SummarizedExperiment()}}: \code{character(1)}
+\item{rtime}{for \code{object} being a
+\code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment::SummarizedExperiment()}}: \code{character(1)}
 specifying the column in \code{rowData(object)} that contains the retention
 time values.}
 }
@@ -51,7 +52,8 @@ retention time of all their chromatographic peaks. All features with a
 difference in their retention time which is \code{<=} parameter \code{diffRt} of the
 parameter object are grouped together.
 
-If \code{object} is a \code{\link[=SummarizedExperiment]{SummarizedExperiment()}}: if a column \code{"feature_group"} is
+If \code{object} is a \code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment::SummarizedExperiment()}}: if a
+column \code{"feature_group"} is
 found in \code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment::colData()}} feature groups defined in that
 column are further sub-grouped with this method. See \code{\link[=groupFeatures]{groupFeatures()}} for
 the general concept of this feature grouping.

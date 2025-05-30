@@ -4,7 +4,8 @@
 \alias{se}
 \title{Quantified LC-MS preprocessing result test data}
 \description{
-The \code{se} variable is a \code{\link[=SummarizedExperiment]{SummarizedExperiment()}} object representing the
+The \code{se} variable is a \code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment::SummarizedExperiment()}}
+object representing the
 results from a \code{xcms}-based pre-processing of an LC-MS untargeted
 metabolomics data set. The raw data files are provided in the \code{faahKO}
 package. The pre-processing of this data set is described in detail in

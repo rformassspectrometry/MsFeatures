@@ -4,12 +4,14 @@
 \alias{groupSimilarityMatrixTree}
 \title{Identifies groups with intragroup pairwise distances less than maxDiff}
 \usage{
-groupSimilarityMatrixTree(dists, maxDiff)
+groupSimilarityMatrixTree(dists, maxDiff = 1)
 }
 \arguments{
-\item{dists}{is a matrix object with pairwise retention time distances.}
+\item{dists}{a \emph{distance} object such as returned by a call to \code{dist()} with
+the pairwise retention time distances.}
 
-\item{maxDiff}{is the maximum pairwise distance between members of a group.}
+\item{maxDiff}{\code{numeric(1)} with the maximum pairwise distance between
+members of a group.}
 }
 \value{
 \code{integers} representing groups of peaks based on retention times.
@@ -17,7 +19,7 @@ Should be of the same length as the feature definitions.
 }
 \description{
 Searches through a complete clustering tree for branches with internal
-distances less than maxDiff.
+distances less than \code{maxDiff}.
 }
 \details{
 The search is performed top-down so that every node is evaluated for

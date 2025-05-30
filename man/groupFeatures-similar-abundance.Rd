@@ -54,10 +54,12 @@ should be grouped.}
 \item{param}{\code{AbundanceSimilarityParam} defining the settings for the
 grouping based on feature values.}
 
-\item{i}{for \code{object} being a \code{\link[=SummarizedExperiment]{SummarizedExperiment()}}: \code{integer(1)} or
+\item{i}{for \code{object} being a
+\code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment::SummarizedExperiment()}}: \code{integer(1)} or
 \code{character(1)} specifying either the index or name of the  the \emph{assay}
 in \code{object} that contains the feature values that should be used. Use
-\code{\link[=assayNames]{assayNames()}} on \code{object} to list all available assays.}
+\code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment::assayNames()}} on \code{object} to list all available
+assays.}
 }
 \value{
 for object being a \code{SummarizedExperiment}: a \code{SummarizedExperiment}
@@ -82,7 +84,8 @@ similarities between rows in \code{object} but any function that calculates
 similarities between rows and that returns a (symmetric) numeric similarity
 matrix can be used.
 
-If \code{object} is a \code{\link[=SummarizedExperiment]{SummarizedExperiment()}}: if a column \code{"feature_group"} is
+If \code{object} is a \code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment::SummarizedExperiment()}}: if a
+column \code{"feature_group"} is
 found in \code{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment::colData()}} feature groups defined in that
 column are further sub-grouped with this method. See \code{\link[=groupFeatures]{groupFeatures()}} for
 the general concept of this feature grouping.

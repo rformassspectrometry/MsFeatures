@@ -24,7 +24,8 @@
 #' similarities between rows and that returns a (symmetric) numeric similarity
 #' matrix can be used.
 #'
-#' If `object` is a [SummarizedExperiment()]: if a column `"feature_group"` is
+#' If `object` is a [SummarizedExperiment::SummarizedExperiment()]: if a
+#' column `"feature_group"` is
 #' found in [SummarizedExperiment::colData()] feature groups defined in that
 #' column are further sub-grouped with this method. See [groupFeatures()] for
 #' the general concept of this feature grouping.
@@ -42,10 +43,12 @@
 #'     similarity matrix. Defaults to `groupFun = groupSimilarityMatrix`. See
 #'     [groupSimilarityMatrix()] for details.
 #'
-#' @param i for `object` being a [SummarizedExperiment()]: `integer(1)` or
+#' @param i for `object` being a
+#'     [SummarizedExperiment::SummarizedExperiment()]: `integer(1)` or
 #'     `character(1)` specifying either the index or name of the  the *assay*
 #'     in `object` that contains the feature values that should be used. Use
-#'     [assayNames()] on `object` to list all available assays.
+#'     [SummarizedExperiment::assayNames()] on `object` to list all available
+#'     assays.
 #'
 #' @param object object containing the feature abundances on which features
 #'     should be grouped.

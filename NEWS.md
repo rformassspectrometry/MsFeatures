@@ -1,3 +1,10 @@
+# MsFeatures 1.17
+
+## MsFeatures 1.17.1
+
+- Add new `groupSimilarityMatrixTree()` function.
+
+
 # MsFeatures 0.0
 
 ## MsFeatures 0.0.4

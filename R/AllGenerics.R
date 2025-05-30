@@ -95,8 +95,8 @@ setGeneric("groupFeatures", function(object, param, ...)
 #'
 #' `featureGroups` and `featureGroups<-` allow to extract or set the feature
 #' definitions from the input object. The implementations for
-#' [SummarizedExperiment()] get or set the content of a column named
-#' `"feature_group"` in the object's `rowData`.
+#' [SummarizedExperiment::SummarizedExperiment()] get or set the content of
+#' a column named `"feature_group"` in the object's `rowData`.
 #'
 #' This method should be implemented for all other object for which a
 #' [groupFeatures()] method is defined.
