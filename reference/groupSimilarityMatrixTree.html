@@ -9,7 +9,7 @@ distances less than maxDiff."><meta property="og:image" content="https://rformas
 
     <a class="navbar-brand me-2" href="../index.html">MsFeatures</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.17.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.17.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,12 +37,12 @@ distances less than maxDiff."><meta property="og:image" content="https://rformas
 
     <div class="ref-description section level2">
     <p>Searches through a complete clustering tree for branches with internal
-distances less than maxDiff.</p>
+distances less than <code>maxDiff</code>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">groupSimilarityMatrixTree</span><span class="op">(</span><span class="va">dists</span>, <span class="va">maxDiff</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">groupSimilarityMatrixTree</span><span class="op">(</span><span class="va">dists</span>, maxDiff <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -50,11 +50,13 @@ distances less than maxDiff.</p>
 
 
 <dl><dt id="arg-dists">dists<a class="anchor" aria-label="anchor" href="#arg-dists"></a></dt>
-<dd><p>is a matrix object with pairwise retention time distances.</p></dd>
+<dd><p>a <em>distance</em> object such as returned by a call to <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist()</a></code> with
+the pairwise retention time distances.</p></dd>
 
 
 <dt id="arg-maxdiff">maxDiff<a class="anchor" aria-label="anchor" href="#arg-maxdiff"></a></dt>
-<dd><p>is the maximum pairwise distance between members of a group.</p></dd>
+<dd><p><code>numeric(1)</code> with the maximum pairwise distance between
+members of a group.</p></dd>
 
 </dl></div>
     <div class="section level2">

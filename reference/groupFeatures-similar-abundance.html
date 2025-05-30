@@ -13,7 +13,8 @@ transform). simFun defaults to a function that uses cor to calculate
 similarities between rows in object but any function that calculates
 similarities between rows and that returns a (symmetric) numeric similarity
 matrix can be used.
-If object is a SummarizedExperiment(): if a column "feature_group" is
+If object is a SummarizedExperiment::SummarizedExperiment(): if a
+column "feature_group" is
 found in SummarizedExperiment::colData() feature groups defined in that
 column are further sub-grouped with this method. See groupFeatures() for
 the general concept of this feature grouping.
@@ -37,7 +38,8 @@ transform). simFun defaults to a function that uses cor to calculate
 similarities between rows in object but any function that calculates
 similarities between rows and that returns a (symmetric) numeric similarity
 matrix can be used.
-If object is a SummarizedExperiment(): if a column "feature_group" is
+If object is a SummarizedExperiment::SummarizedExperiment(): if a
+column "feature_group" is
 found in SummarizedExperiment::colData() feature groups defined in that
 column are further sub-grouped with this method. See groupFeatures() for
 the general concept of this feature grouping.
@@ -55,7 +57,7 @@ of object can be passed via ... in the groupFeatures call.'><meta property="og:i
 
     <a class="navbar-brand me-2" href="../index.html">MsFeatures</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.17.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.17.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,7 +98,8 @@ values (eventually transformed by the function specified with parameter
 similarities between rows in <code>object</code> but any function that calculates
 similarities between rows and that returns a (symmetric) numeric similarity
 matrix can be used.</p>
-<p>If <code>object</code> is a <code><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">SummarizedExperiment()</a></code>: if a column <code>"feature_group"</code> is
+<p>If <code>object</code> is a <code><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">SummarizedExperiment::SummarizedExperiment()</a></code>: if a
+column <code>"feature_group"</code> is
 found in <code><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">SummarizedExperiment::colData()</a></code> feature groups defined in that
 column are further sub-grouped with this method. See <code><a href="groupFeatures.html">groupFeatures()</a></code> for
 the general concept of this feature grouping.</p>
@@ -180,10 +183,12 @@ grouping based on feature values.</p></dd>
 
 
 <dt id="arg-i">i<a class="anchor" aria-label="anchor" href="#arg-i"></a></dt>
-<dd><p>for <code>object</code> being a <code><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">SummarizedExperiment()</a></code>: <code>integer(1)</code> or
+<dd><p>for <code>object</code> being a
+<code><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">SummarizedExperiment::SummarizedExperiment()</a></code>: <code>integer(1)</code> or
 <code>character(1)</code> specifying either the index or name of the  the <em>assay</em>
 in <code>object</code> that contains the feature values that should be used. Use
-<code><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assayNames()</a></code> on <code>object</code> to list all available assays.</p></dd>
+<code><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">SummarizedExperiment::assayNames()</a></code> on <code>object</code> to list all available
+assays.</p></dd>
 
 </dl></div>
     <div class="section level2">
